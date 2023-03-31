@@ -67,7 +67,7 @@ class Login extends Component {
     render() {
         return (
             <>
-                Hello Login....Nhom 3
+                Hello Login. Nhom 3
             </>
         )
     }
