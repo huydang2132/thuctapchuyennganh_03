@@ -1,0 +1,154 @@
+//reset slick slider css
+.slick-prev {
+    border: 2px solid #d7d7d7 !important;
+    left: -25px !important;
+    z-index: 1000;
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    opacity: 0.6;
+
+    &:hover {
+        background-color: #efeeee !important;
+    }
+}
+
+.slick-prev::before {
+    content: "\2BC7" !important;
+    color: black !important;
+}
+
+.slick-next::before {
+    content: "\2BC8" !important;
+    color: black !important;
+}
+
+.slick-next {
+    border: 2px solid #d7d7d7 !important;
+    right: -25px !important;
+    z-index: 1000;
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    opacity: 0.6;
+
+    &:hover {
+        background-color: #efeeee !important;
+    }
+}
+
+.slick-disabled {
+    display: none !important;
+}
+
+.section-share {
+    &.section-specialty {
+        background-color: #f5f5f5;
+    }
+
+    &.secion-outstanding-teacher {
+        background-color: #f5f5f5;
+    }
+
+    .section-body {
+        .section-customize {
+            padding: 0 8px;
+
+            .bg-image {
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: #eee;
+                width: 300px;
+                height: 180px;
+
+                &.bg-specialty {
+                    background-image: url('../../assets/specialty/math.jpg');
+                }
+
+                &.bg-center {
+                    background-image: url('../../assets/teaching-center/math-center.jpg');
+                }
+
+                &.secion-outstanding-teacher {
+                    // background-image: url('../../assets/outstanding-teacher/avatar.jpg');
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                }
+
+                &.section-handbook {
+                    background-image: url('../../assets/handbook/handbook.jpg');
+                }
+            }
+        }
+    }
+}
+
+.section-share {
+    height: 360px;
+
+    .section-container {
+        margin: 0 130px;
+        display: flex;
+        flex-direction: column;
+
+        .section-header {
+            height: 60px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+
+            .title-section {
+                font-size: 22px;
+                font-weight: 600;
+                padding-left: 8px;
+            }
+
+            .btn-section {
+                float: right;
+                display: block;
+                outline: none;
+                border: none;
+                padding: 10px 15px;
+                background: #ebebeb;
+                color: black;
+                font-size: 13px;
+                margin-right: 10px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #f7d800;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.secion-outstanding-teacher {
+    .outer-bg {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .customize-border {
+        border: 1px solid #cacaca;
+        padding: 18px;
+        height: 250px;
+        cursor: pointer;
+
+        &:hover {
+            color: #49bce2;
+        }
+    }
+}
+
+.home-footer {
+    text-align: center;
+    padding-top: 8px;
+    height: 80px;
+    border: 2px solid gray;
+}
