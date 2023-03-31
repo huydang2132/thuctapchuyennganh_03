@@ -12,62 +12,16 @@ class Login extends Component {
         super(props);
         this.btnLogin = React.createRef();
         this.state = {
-            username: '',
-            password: '',
-            isShowPassword: false,
-            errMessage: ''
+
         }
     }
-    handleShowHidePassword = () => {
-        this.setState({
-            isShowPassword: !this.state.isShowPassword
-        })
-    }
-    handleOnChangeUsername = (event) => {
-        this.setState({
-            username: event.target.value,
-        })
-    }
-    handleOnChangePassword = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-    handleLogin = async () => {
-        this.setState({
-            errMessage: ''
-        })
-        try {
-            let data = await handleLoginApi(this.state.username, this.state.password);
-            if (data && data.errCode !== 0) {
-                this.setState({
-                    errMessage: data.errMessage
-                })
-            }
-            if (data && data.errCode === 0) {
-                this.props.userLoginSuccess(data.userInfo)
-            }
-        }
-        catch (error) {
-            console.log(error.response)
-            if (error.response) {
-                if (error.response.data) {
-                    this.setState({
-                        errMessage: error.response.data.errMessage
-                    })
-                }
-            }
-        }
-    }
-    handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            this.handleLogin();
-        }
-    }
+
     render() {
         return (
             <>
-                Hello Login. Nhom 3
+                <div className='login-container'>
+                    Hello Login.
+                </div>
             </>
         )
     }
