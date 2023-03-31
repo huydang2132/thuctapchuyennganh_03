@@ -1,0 +1,26 @@
+{
+    "home-header": {
+        "subject": "Môn học",
+        "search-teacher": "Tìm giáo viên theo môn học",
+        "center": "Trung tâm",
+        "center-teaching": "Chọn trung tâm giảng dạy",
+        "teacher": "Giáo viên",
+        "select-teacher": "Chọn giáo viên giỏi",
+        "course": "Khóa học",
+        "course-learning": "Học theo khóa học",
+        "account": "Tài khoản",
+        "welcome": "Xin chào, "
+    },
+    "homepage": {
+        "outstanding-teacher": "Giáo viên nổi bật",
+        "more-info": "Xem thêm"
+    },
+    "banner": {
+        "title1": "NỀN TẢNG GIÁO DỤC",
+        "title2": "HỌC HÔM NAY ĐỂ NGÀY MAI TỐT HƠN",
+        "child1": "Học chuyên môn",
+        "child2": "Học tổ hợp",
+        "child3": "Luyện đề",
+        "child4": "Khóa học"
+    }
+}
