@@ -23,9 +23,9 @@ class HomaPage extends Component {
             <>
                 <HomeHeader isShowBanner={true} />
                 <Specialty settings={settings} />
-                {/* <TeachingCenter settings={settings} /> */}
+                <TeachingCenter settings={settings} />
                 {/* <OutStandingTeacher settings={settings} /> */}
-                {/* <HandBook settings={settings} /> */}
+                <HandBook settings={settings} />
                 <HomeFooter />
             </>
         );

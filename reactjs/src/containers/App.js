@@ -13,8 +13,7 @@ import HomePage from './HomePage/HomePage.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import DetailTeacher from './UserPage/Teacher/DetailTeacher';
 import Teacher from '../routes/Teacher';
-import Scrollbars from 'react-custom-scrollbars';
-import '../styles/grid.scss';
+import './App.scss';
 
 class App extends Component {
 
@@ -42,16 +41,14 @@ class App extends Component {
         <Router history={history}>
           <div className="main-container">
             <div className="content-container">
-              <Scrollbars style={{ height: "100vh", width: "100%" }}>
-                <Switch>
-                  <Route path={path.HOME} exact component={(Home)} />
-                  <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                  <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                  <Route path={'/teacher/'} component={userIsAuthenticated(Teacher)} />
-                  <Route path={path.HOMEPAGE} component={HomePage} />
-                  <Route path={path.DETAIL_TEACHER} component={DetailTeacher} />
-                </Switch>
-              </Scrollbars>
+              <Switch>
+                <Route path={path.HOME} exact component={(Home)} />
+                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                <Route path={'/teacher/'} component={userIsAuthenticated(Teacher)} />
+                <Route path={path.HOMEPAGE} component={HomePage} />
+                <Route path={path.DETAIL_TEACHER} component={DetailTeacher} />
+              </Switch>
             </div>
 
             <ToastContainer
