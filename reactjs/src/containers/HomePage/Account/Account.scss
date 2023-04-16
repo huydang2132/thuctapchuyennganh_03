@@ -1,0 +1,192 @@
+.account-form {
+    .form-row {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        font-size: 1.2rem;
+        padding: 8px 0;
+
+        .form-col {
+            display: flex;
+            flex-direction: column;
+            min-width: 23rem;
+
+            .form-input {
+                margin-top: 5px;
+                height: 2rem;
+                outline: none;
+                border: 1px solid #dbdbdb;
+                width: 100%;
+                padding: 5px 10px;
+            }
+
+            .form-select {
+                margin-top: 5px;
+                height: 2.8rem;
+                outline: none;
+                border: 1px solid #dbdbdb;
+                width: calc(100% + 1.6rem);
+                padding: 5px 10px;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+
+    .form-col {
+        display: flex;
+        flex-direction: column;
+
+        .form-input {
+            margin-top: 5px;
+            padding: 5px 10px;
+            height: 2rem;
+            outline: none;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+        }
+    }
+
+
+
+    a {
+        text-decoration: none;
+        color: #a1a1a1;
+        cursor: pointer;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 15px;
+            outline: none;
+            border: none;
+            background-color: #f05d40;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &.no-cursor {
+                cursor: no-drop;
+            }
+        }
+    }
+}
+
+.account__container {
+    height: 100%;
+    background-color: #f1f1f1;
+
+    section {
+        background-color: #fff;
+        box-shadow: 0px 10px 15px #eee;
+
+        .account__content {
+            margin: 20px 0;
+            padding: 30px 0;
+
+            .account__header {
+                .title {
+                    text-align: center;
+                    font-size: 1.6rem;
+                    color: #333333;
+                }
+
+                .account__header--avatar {
+                    padding-top: 20px;
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+
+                    img {
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+
+                        &:hover {}
+                    }
+
+
+
+                    .chane-avatar {
+
+                        cursor: pointer;
+                        position: absolute;
+                        width: 150px;
+                        height: 150px;
+                        background-color: transparent;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            i {
+                                display: block;
+                            }
+
+                            background-color: rgba(0, 0, 0, 0.5);
+
+                        }
+
+                        i {
+                            display: none;
+                            color: #fff;
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+            }
+
+            .account__body {
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                padding-top: 20px;
+
+                @extend .account-form;
+            }
+        }
+    }
+}
+
+.changePassword__container {
+    min-height: 100vh;
+    background-color: #f1f1f1;
+
+    section {
+        background-color: #fff;
+        box-shadow: 0px 10px 15px #eee;
+
+        .changePassword__content {
+            margin: 20px 0;
+            padding: 35px 0;
+
+            .changePassword__header {
+                .title {
+                    text-align: center;
+                    font-size: 1.6rem;
+                    color: #333333;
+                }
+            }
+
+            .changePassword__body {
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                padding-top: 20px;
+
+                @extend .account-form;
+            }
+        }
+
+
+    }
+}

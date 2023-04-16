@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeHeader from './HomeHeader.jsx';
-import Specialty from './Section/Specialty.jsx';
-import TeachingCenter from './Section/TeachingCenter.jsx';
-import OutStandingTeacher from './Section/OutStandingTeacher.jsx';
-import HandBook from './Section/HandBook.jsx';
-import HomeFooter from './Section/HomeFooter.jsx';
+import HomeHeader from './HomeHeader';
+import Specialty from './Section/Specialty';
+import TeachingCenter from './Section/TeachingCenter';
+import OutStandingTeacher from './Section/OutStandingTeacher';
+import HandBook from './Section/HandBook';
+import HomeFooter from './HomeFooter';
 import './HomePage.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -24,7 +24,7 @@ class HomaPage extends Component {
                 <HomeHeader isShowBanner={true} />
                 <Specialty settings={settings} />
                 <TeachingCenter settings={settings} />
-                {/* <OutStandingTeacher settings={settings} /> */}
+                <OutStandingTeacher settings={settings} />
                 <HandBook settings={settings} />
                 <HomeFooter />
             </>

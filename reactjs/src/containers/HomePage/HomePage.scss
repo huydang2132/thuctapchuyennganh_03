@@ -136,9 +136,11 @@
 
     .customize-border {
         border: 1px solid #cacaca;
-        padding: 18px;
-        height: 250px;
+        padding: 15px;
+        height: 210px;
         cursor: pointer;
+        margin-right: 18px;
+        text-align: center;
 
         &:hover {
             color: #49bce2;

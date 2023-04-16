@@ -2,9 +2,12 @@ export const path = {
     HOME: '/',
     HOMEPAGE: '/home',
     LOGIN: '/login',
+    RESGISTER: '/register',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    DETAIL_TEACHER: '/detail-teacher/:id'
+    DETAIL_TEACHER: '/detail-teacher/:id',
+    ACCOUNT: '/account/profile',
+    CHANGE_PASSWORD: '/account/change-password'
 };
 
 export const LANGUAGES = {

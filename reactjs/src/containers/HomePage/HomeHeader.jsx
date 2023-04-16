@@ -5,17 +5,38 @@ import './HomeHeader.scss';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
 import { withRouter } from 'react-router';
+import * as actions from "../../store/actions";
 
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+    componentDidMount() {
+
+    }
     handleChangeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
     }
     returnHome = () => {
         this.props.history.push(`/home`);
     }
+    settingAccount = () => {
+        this.props.history.push('/account/profile');
+    }
+    changePassword = () => {
+        this.props.history.push('/account/change-password')
+    }
+    logIn = () => {
+        this.props.history.push('/login');
+    }
+    logOut = () => {
+        this.props.processLogout();
+    }
     render() {
-        let language = this.props.language;
-
+        const { language, userInfo, isLoggedIn } = this.props;
         return (
             <>
                 <div className='home-header-container'>
@@ -58,6 +79,17 @@ class HomeHeader extends Component {
                             </div>
                             <div className='account'>
                                 <i className="fas fa-user"></i><FormattedMessage id="home-header.account" />
+                                <ul className='setting-account'>
+                                    {isLoggedIn === false ? <li onClick={() => this.logIn()}>Đăng nhập</li>
+                                        :
+                                        <>
+                                            <li onClick={() => this.settingAccount()}>Tài khoản của tôi</li>
+                                            <li onClick={() => this.changePassword()}>Đổi mật khẩu</li>
+                                            <li onClick={() => this.logOut()}>Đăng xuất</li>
+                                        </>
+                                    }
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -119,6 +151,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        processLogout: () => dispatch(actions.processLogout()),
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };

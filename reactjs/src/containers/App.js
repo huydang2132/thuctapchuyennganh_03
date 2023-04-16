@@ -14,6 +14,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import DetailTeacher from './UserPage/Teacher/DetailTeacher';
 import Teacher from '../routes/Teacher';
 import './App.scss';
+import Register from './Auth/Register';
+import Account from './HomePage/Account/Account';
+import ChangePassword from './HomePage/Account/ChangePassword';
 
 class App extends Component {
 
@@ -43,7 +46,10 @@ class App extends Component {
             <div className="content-container">
               <Switch>
                 <Route path={path.HOME} exact component={(Home)} />
+                <Route path={path.ACCOUNT} exact component={(Account)} />
+                <Route path={path.CHANGE_PASSWORD} exact component={(ChangePassword)} />
                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                <Route path={path.RESGISTER} component={Register} />
                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                 <Route path={'/teacher/'} component={userIsAuthenticated(Teacher)} />
                 <Route path={path.HOMEPAGE} component={HomePage} />
