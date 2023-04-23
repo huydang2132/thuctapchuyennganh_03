@@ -12,9 +12,9 @@ class Teacher extends Component {
                 {isLoggedIn && <Header />}
                 <div className="system-container">
                     <div className="system-list">
-                        <Switch>
+                        {/* <Switch>
                             <Route path="/teacher/manage-schedule" component={ManageSchedule} />
-                        </Switch>
+                        </Switch> */}
                     </div>
                 </div>
             </>

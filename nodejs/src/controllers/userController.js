@@ -31,6 +31,19 @@ let handleRegister = async (req, res) => {
         })
     }
 }
+const handleChangePassword = async (req, res) => {
+    try {
+        let data = await userService.handleChangePassword(req.body);
+        return res.status(200).json(data);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
 let handleGetAllUser = async (req, res) => {
     let id = req.query.id; //ALL or SINGGLE
     let users = await userService.GetAllUser(id);
@@ -79,6 +92,19 @@ let getAllCode = async (req, res) => {
         })
     }
 }
+const getRoleId = async (req, res) => {
+    try {
+        let data = await userService.getRoleIdService(req.query.email);
+        return res.status(200).json(data);
+    }
+    catch (e) {
+        console.log('Get roleId Err: ', e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Err from server'
+        })
+    }
+}
 module.exports = {
     handleLogin: handleLogin,
     handleRegister: handleRegister,
@@ -87,4 +113,6 @@ module.exports = {
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
     getAllCode: getAllCode,
+    handleChangePassword: handleChangePassword,
+    getRoleId: getRoleId
 }

@@ -1,0 +1,149 @@
+.home-footer-container {
+    width: 100vw;
+    height: 260px;
+    color: #fff;
+
+    .home-footer-section {
+        padding-top: 30px;
+        height: 80%;
+        width: 100%;
+        background-color: #a3b6df;
+        display: flex;
+        justify-content: space-around;
+        font-size: 1.1rem;
+
+        h3 {
+            padding-bottom: 10px;
+        }
+
+        .home-footer-about {
+
+
+            width: 15%;
+            text-align: justify;
+            line-height: 1.8rem;
+        }
+
+        .home-footer-technology {
+            ul {
+                li {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    cursor: default;
+                    gap: 10px;
+
+                    &.react {
+                        &:hover {
+                            i {
+                                background-color: #57d3f5;
+                            }
+                        }
+                    }
+
+                    &.node {
+                        &:hover {
+                            i {
+                                background-color: #7fc728;
+                            }
+                        }
+                    }
+
+                    &.sql {
+                        &:hover {
+                            i {
+                                background-color: #f7bb07;
+                            }
+                        }
+                    }
+
+                    i {
+                        border: 1px solid #ccc;
+                        height: 40px;
+                        width: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        margin: 5px 0;
+                        list-style: none;
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+        }
+
+        .home-footer-social {
+            ul {
+                li {
+                    border: 1px solid #ccc;
+                    height: 40px;
+                    width: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    margin: 10px 0;
+                    list-style: none;
+                    font-size: 1.8rem;
+                    box-shadow: 0 1px 3px #aaa;
+
+                    a {
+                        color: #fff;
+                        text-decoration: none;
+                        display: block;
+                        padding: 5px;
+                    }
+
+                    &:hover {
+                        animation: social .2s ease;
+                    }
+
+                    &.facebook {
+                        &:hover {
+                            background-color: #3b5998;
+                        }
+                    }
+
+                    &.instagram {
+                        &:hover {
+                            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                        }
+                    }
+
+                    &.github {
+                        &:hover {
+                            background-color: #333;
+                        }
+                    }
+
+                    @keyframes social {
+                        0% {
+                            rotate: 10deg;
+                        }
+
+                        50% {
+                            rotate: -10deg;
+                        }
+
+                        100% {
+                            rotate: 0deg;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        height: 20%;
+        width: 100%;
+        background-color: #939fbb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+}

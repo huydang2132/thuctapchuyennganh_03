@@ -1,0 +1,43 @@
+.user-manage-sidebar {
+    padding: 20px 0;
+    width: 20%;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .sidebar-item {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &.active {
+            background-color: #6e00ff;
+            color: #fff;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+
+        &:hover {
+            color: #6e00ff;
+        }
+
+        i {
+            font-size: 2rem;
+        }
+
+        span {
+            padding-top: 10px;
+            font-size: 1rem;
+        }
+    }
+}

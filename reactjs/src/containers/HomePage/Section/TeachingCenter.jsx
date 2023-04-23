@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
+import { withRouter } from 'react-router';
 
 class TeachingCenter extends Component {
-
+    nextPage = (id) => {
+        this.props.history.push(`/user/${id}`);
+    }
     render() {
         return (
             <>
@@ -12,7 +15,7 @@ class TeachingCenter extends Component {
                     <div className='section-container'>
                         <div className='section-header'>
                             <span className='title-section'>Trung tâm giảng dạy nổi bật</span>
-                            <button className='btn-section'>Xem thêm</button>
+                            <button className='btn-section' onClick={() => this.nextPage('center')}>Xem thêm</button>
                         </div>
                         <div className='section-body'>
                             <Slider {...this.props.settings}>
@@ -61,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeachingCenter);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TeachingCenter));

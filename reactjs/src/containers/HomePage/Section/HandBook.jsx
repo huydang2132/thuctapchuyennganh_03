@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
-
+import { withRouter } from 'react-router';
 
 class HandBook extends Component {
+    nextPage = (id) => {
+        this.props.history.push(`/user/${id}`);
+    }
     render() {
-
         return (
             <>
                 <div className='section-share section-handbook'>
                     <div className='section-container'>
                         <div className='section-header'>
                             <span className='title-section'>Cẩm nang</span>
-                            <button className='btn-section'>Xem thêm</button>
+                            <button className='btn-section' onClick={() => this.nextPage('handbook')}>Xem thêm</button>
                         </div>
                         <div className='section-body'>
                             <Slider {...this.props.settings}>
@@ -54,7 +55,6 @@ class HandBook extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
     };
 };
 
@@ -64,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HandBook);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HandBook));

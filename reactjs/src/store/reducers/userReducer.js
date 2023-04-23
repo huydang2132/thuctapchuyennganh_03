@@ -2,7 +2,8 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isLoggedIn: false,
-    userInfo: null
+    userInfo: null,
+    dataUser: {}
 }
 
 const appReducer = (state = initialState, action) => {
@@ -24,6 +25,17 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 userInfo: null
+            }
+        case actionTypes.GET_ROLE_ID_SUCCESS:
+            return {
+                ...state,
+                dataUser: action.dataUser
+
+            }
+        case actionTypes.GET_ROLE_ID_FAILED:
+            return {
+                ...state,
+                dataUser: {}
             }
         default:
             return state;

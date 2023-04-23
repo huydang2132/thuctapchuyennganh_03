@@ -11,7 +11,7 @@ let handleUserLogin = (email, password) => {
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['id', 'email', 'roleId', 'password', 'firstName', 'lastName'],
+                    attributes: ['email', 'password', 'firstName', 'lastName'],
                     where: { email: email },
                     raw: true
                 });
@@ -44,7 +44,7 @@ let handleUserLogin = (email, password) => {
         }
     })
 }
-let checkUserEmail = (userEmail) => {
+const checkUserEmail = (userEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
@@ -88,7 +88,7 @@ let GetAllUser = (userId) => {
         }
     })
 }
-let hashUserPassword = (password) => {
+const hashUserPassword = (password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let hashPassword = bcrypt.hashSync(password, salt);
@@ -122,6 +122,45 @@ const handleRegister = (data) => {
                     errCode: 0,
                     errMessage: 'Register success'
                 })
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+const handleChangePassword = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.prevPassword || !data.newPassword) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter'
+                })
+            }
+            else {
+                let user = await db.User.findOne({
+                    where: { id: data.id },
+                    raw: false
+                })
+                if (user) {
+                    let check = await bcrypt.compareSync(data.prevPassword, user.password);
+                    let hashPasswordBcrypt = await hashUserPassword(data.newPassword);
+                    if (check) {
+                        user.password = hashPasswordBcrypt;
+                        await user.save();
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Change password success'
+                        })
+                    }
+                    else {
+                        resolve({
+                            errCode: 2,
+                            errMessage: 'Password wrong'
+                        })
+                    }
+                }
             }
         }
         catch (e) {
@@ -257,6 +296,33 @@ let getAllCodeService = (type) => {
         }
     })
 }
+const getRoleIdService = (email) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {}
+            if (!email) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter'
+                })
+            }
+            else {
+                let data = await db.User.findOne({
+                    attributes: ['id', 'email', 'roleId', 'image', 'firstName', 'lastName'],
+                    where: { email: email },
+                    raw: true
+                })
+                res.errCode = 0
+                res.data = data
+                res.errMessage = 'Success...'
+                resolve(res);
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     handleUserLogin: handleUserLogin,
     handleRegister: handleRegister,
@@ -264,5 +330,7 @@ module.exports = {
     CreateUser: CreateUser,
     EditUser: EditUser,
     DeleteUser: DeleteUser,
-    getAllCodeService: getAllCodeService
+    getAllCodeService: getAllCodeService,
+    handleChangePassword: handleChangePassword,
+    getRoleIdService: getRoleIdService,
 }

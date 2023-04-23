@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
-import { LANGUAGES } from "../../../utils";
 import { withRouter } from 'react-router';
 
 class OutStandingTeacher extends Component {
@@ -26,23 +24,23 @@ class OutStandingTeacher extends Component {
     handleViewDetailTeacher = (teacher) => {
         this.props.history.push(`/detail-teacher/${teacher.id}`);
     }
+    nextPage = (id) => {
+        this.props.history.push(`/user/${id}`);
+    }
     render() {
         let arrTeacher = this.state.arrTeacher;
-        let { language } = this.props;
         return (
             <>
                 <div className='section-share secion-outstanding-teacher'>
                     <div className='section-container'>
                         <div className='section-header'>
-                            <span className='title-section'><FormattedMessage id="homepage.outstanding-teacher" /></span>
-                            <button className='btn-section'><FormattedMessage id="homepage.more-info" /></button>
+                            <span className='title-section'>Giáo viên nổi bật</span>
+                            <button className='btn-section' onClick={() => this.nextPage('teacher')}>Xem thêm</button>
                         </div>
                         <div className='section-body'>
                             <Slider {...this.props.settings}>
                                 {arrTeacher && arrTeacher.length > 0 &&
                                     arrTeacher.map((item, index) => {
-                                        let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
-                                        let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                                         let imageBase64 = '';
                                         if (item.image) {
                                             imageBase64 = new Buffer(item.image, 'base64').toString('binary');
@@ -56,7 +54,7 @@ class OutStandingTeacher extends Component {
                                                         />
                                                     </div>
                                                     <div className='position text-center'>
-                                                        <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                                        <div>{item.positionData.valueVi}, {item.lastName} {item.firstName}</div>
                                                         <div>Ngoại ngữ Anh 1</div>
                                                     </div>
                                                 </div>
@@ -75,7 +73,6 @@ class OutStandingTeacher extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language,
         isLoggedIn: state.user.isLoggedIn,
         topTeacher: state.admin.topTeacher,
     };

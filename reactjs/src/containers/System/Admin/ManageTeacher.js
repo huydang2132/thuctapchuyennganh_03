@@ -28,7 +28,6 @@ class ManageTeacher extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language,
     };
 };
 

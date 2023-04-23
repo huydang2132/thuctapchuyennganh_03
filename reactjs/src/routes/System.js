@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
-import UserManage from '../containers/System/UserManage';
+import AdminPage from '../containers/System/AdminPage';
 import UserRedux from '../containers/System/Admin/UserRedux';
-import Header from '../containers/Header/Header';
 import ManageTeacher from '../containers/System/Admin/ManageTeacher';
 
 class System extends Component {
+    async componentDidMount() {
+
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+    }
     render() {
-        const { systemMenuPath, isLoggedIn } = this.props
+        const { systemMenuPath } = this.props
         return (
             <>
-                {isLoggedIn && <Header />}
                 <div className="system-container">
                     <div className="system-list">
                         <Switch>
-                            <Route path="/system/manage" component={UserManage} />
+                            <Route path="/system/manage" component={AdminPage} />
                             <Route path="/system/user-redux" component={UserRedux} />
                             <Route path="/system/manage-teacher" component={ManageTeacher} />
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
@@ -30,7 +34,8 @@ class System extends Component {
 const mapStateToProps = state => {
     return {
         systemMenuPath: state.app.systemMenuPath,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.app.userInfo
     };
 };
 

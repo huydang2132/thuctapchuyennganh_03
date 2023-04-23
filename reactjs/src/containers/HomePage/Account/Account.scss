@@ -84,7 +84,7 @@
     height: 100%;
     background-color: #f1f1f1;
 
-    section {
+    .account-section {
         background-color: #fff;
         box-shadow: 0px 10px 15px #eee;
 
@@ -109,11 +109,14 @@
                         width: 150px;
                         height: 150px;
                         border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid #dbdbdb;
 
-                        &:hover {}
+                        &alt {
+                            text-align: center;
+                            color: red;
+                        }
                     }
-
-
 
                     .chane-avatar {
 
@@ -143,6 +146,17 @@
                         }
                     }
                 }
+
+                .account__header--email {
+                    margin-top: 20px;
+                    text-align: center;
+
+                    p {
+                        color: #a1a1a1;
+                        font-weight: 600;
+                        cursor: default;
+                    }
+                }
             }
 
             .account__body {
@@ -158,10 +172,10 @@
 }
 
 .changePassword__container {
-    min-height: 100vh;
+    height: 100%;
     background-color: #f1f1f1;
 
-    section {
+    .changePassword-section {
         background-color: #fff;
         box-shadow: 0px 10px 15px #eee;
 
@@ -186,7 +200,5 @@
                 @extend .account-form;
             }
         }
-
-
     }
 }

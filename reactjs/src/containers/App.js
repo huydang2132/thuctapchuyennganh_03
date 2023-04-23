@@ -17,6 +17,7 @@ import './App.scss';
 import Register from './Auth/Register';
 import Account from './HomePage/Account/Account';
 import ChangePassword from './HomePage/Account/ChangePassword';
+import UserPage from './UserPage/UserPage';
 
 class App extends Component {
 
@@ -50,10 +51,11 @@ class App extends Component {
                 <Route path={path.CHANGE_PASSWORD} exact component={(ChangePassword)} />
                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                 <Route path={path.RESGISTER} component={Register} />
+                <Route path={path.USER_PAGE} component={UserPage} />
                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                 <Route path={'/teacher/'} component={userIsAuthenticated(Teacher)} />
                 <Route path={path.HOMEPAGE} component={HomePage} />
-                <Route path={path.DETAIL_TEACHER} component={DetailTeacher} />
+                {/* <Route path={path.DETAIL_TEACHER} component={DetailTeacher} /> */}
               </Switch>
             </div>
 

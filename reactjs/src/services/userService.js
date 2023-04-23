@@ -46,6 +46,12 @@ const getScheduleTeacherByDateService = (teacherId, date) => {
 const getExtraInfoTeacherByIdService = (teacherId) => {
     return axios.get(`/api/get-extra-info-teacher-by-id?teacherId=${teacherId}`);
 }
+const handleChangePasswordService = (data) => {
+    return axios.put('/api/account/change-password', data);
+}
+const getRoleIdService = (email) => {
+    return axios.get('/api/get-roleid', { params: { email } });
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
     createNewUserService, deleteUserService,
@@ -53,5 +59,6 @@ export {
     getTopTeacherService, getAllTeachers,
     saveDetailTeacherService, getDetailteacherService,
     postScheduleTeacherService, getScheduleTeacherByDateService,
-    getExtraInfoTeacherByIdService
+    getExtraInfoTeacherByIdService, handleChangePasswordService,
+    getRoleIdService,
 };

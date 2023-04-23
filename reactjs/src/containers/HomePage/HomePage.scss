@@ -2,7 +2,7 @@
 .slick-prev {
     border: 2px solid #d7d7d7 !important;
     left: -25px !important;
-    z-index: 1000;
+    z-index: 10 !important;
     width: 45px !important;
     height: 45px !important;
     background: #fff !important;
@@ -27,7 +27,7 @@
 .slick-next {
     border: 2px solid #d7d7d7 !important;
     right: -25px !important;
-    z-index: 1000;
+    z-index: 10 !important;
     width: 45px !important;
     height: 45px !important;
     background: #fff !important;
@@ -146,11 +146,4 @@
             color: #49bce2;
         }
     }
-}
-
-.home-footer {
-    text-align: center;
-    padding-top: 8px;
-    height: 80px;
-    border: 2px solid gray;
 }

@@ -9,6 +9,8 @@ import HomeFooter from './HomeFooter';
 import './HomePage.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import * as actions from '../../store/actions';
+import Banner from './Banner';
 
 class HomaPage extends Component {
     render() {
@@ -21,7 +23,8 @@ class HomaPage extends Component {
         };
         return (
             <>
-                <HomeHeader isShowBanner={true} />
+                <HomeHeader />
+                <Banner />
                 <Specialty settings={settings} />
                 <TeachingCenter settings={settings} />
                 <OutStandingTeacher settings={settings} />
@@ -35,7 +38,7 @@ class HomaPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
     };
 };
 

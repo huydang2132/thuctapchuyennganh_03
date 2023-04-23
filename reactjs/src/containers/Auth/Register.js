@@ -96,6 +96,11 @@ class Register extends Component {
             console.log('Error register: ', e);
         }
     }
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.handleRegister();
+        }
+    }
     render() {
         let { isShowPassword1, isShowPassword2, userName, password1, password2,
             firstName, lastName } = this.state;
@@ -141,7 +146,8 @@ class Register extends Component {
                                 ></i>
                                 <input type={isShowPassword2 === false ? 'password' : 'text'}
                                     className={_.isEmpty(password2) ? '' : 'top'}
-                                    onChange={(event) => this.handleOnchange(event, 'password2')} />
+                                    onChange={(event) => this.handleOnchange(event, 'password2')}
+                                    onKeyPress={(event) => this.handleKeyPress(event)} />
                                 <label htmlFor="">Xác nhận mật khẩu</label>
                             </div>
                             <div className="forget">
@@ -163,7 +169,6 @@ class Register extends Component {
 
 const mapStateToProps = state => {
     return {
-        lang: state.app.language,
     };
 };
 

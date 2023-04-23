@@ -4,7 +4,6 @@ import { push } from "connected-react-router";
 import _ from 'lodash';
 import * as actions from "../../store/actions";
 import './Login.scss';
-import { FormattedMessage } from 'react-intl';
 import { handleLoginApi } from '../../services/userService';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -60,6 +59,11 @@ class Login extends Component {
             console.log('Error login: ', e);
         }
     }
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.handleLogin();
+        }
+    }
     render() {
         let { isShowPassword, userName, password } = this.state;
         return (
@@ -81,7 +85,8 @@ class Login extends Component {
                                 ></i>
                                 <input type={isShowPassword === false ? 'password' : 'text'}
                                     className={_.isEmpty(password) ? '' : 'top'}
-                                    onChange={(event) => this.handleOnchange(event, 'password')} />
+                                    onChange={(event) => this.handleOnchange(event, 'password')}
+                                    onKeyPress={(event) => this.handleKeyPress(event)} />
                                 <label htmlFor="">Mật khẩu</label>
                             </div>
                             <div className="forget">
@@ -103,7 +108,6 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        lang: state.app.language,
     };
 };
 

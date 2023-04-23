@@ -1,6 +1,7 @@
 export const path = {
     HOME: '/',
     HOMEPAGE: '/home',
+    USER_PAGE: '/user',
     LOGIN: '/login',
     RESGISTER: '/register',
     LOG_OUT: '/logout',
@@ -8,11 +9,6 @@ export const path = {
     DETAIL_TEACHER: '/detail-teacher/:id',
     ACCOUNT: '/account/profile',
     CHANGE_PASSWORD: '/account/change-password'
-};
-
-export const LANGUAGES = {
-    VI: 'vi',
-    EN: 'en'
 };
 
 export const CRUD_ACTIONS = {

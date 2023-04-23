@@ -4,9 +4,9 @@ import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu, teacherMenu } from './menuApp';
 import './Header.scss';
-import { LANGUAGES, USER_ROLE } from '../../utils';
-import { FormattedMessage } from 'react-intl';
+import { USER_ROLE } from '../../utils';
 import _ from 'lodash';
+import { withRouter } from 'react-router';
 
 class Header extends Component {
     constructor(props) {
@@ -14,9 +14,6 @@ class Header extends Component {
         this.state = {
             menuApp: []
         }
-    }
-    handleChangeLanguage = (language) => {
-        this.props.changeLanguageAppRedux(language);
     }
     componentDidMount() {
         let { userInfo } = this.props;
@@ -29,13 +26,16 @@ class Header extends Component {
             if (role === USER_ROLE.TERACHER) {
                 menu = teacherMenu;
             }
+            if (role === USER_ROLE.STUDENT) {
+                this.props.history.push('/home');
+            }
         }
         this.setState({
             menuApp: menu
         })
     }
     render() {
-        const { processLogout, language } = this.props;
+        const { processLogout } = this.props;
         let userInfo = this.props.userInfo;
         return (
             <div className="header-container">
@@ -45,15 +45,7 @@ class Header extends Component {
                 </div>
 
                 <div className='header-right'>
-                    <div className='language'>
-                        <span
-                            className={language && language === LANGUAGES.VI ? 'flag flag-vn active' : 'flag flag-vn'}
-                            onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}></span>
-                        <span
-                            className={language && language === LANGUAGES.EN ? 'flag flag-en active' : 'flag flag-en'}
-                            onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}></span>
-                    </div>
-                    <span className='welcome'><FormattedMessage id="home-header.welcome" />
+                    <span className='welcome'>welcome
                         {userInfo && userInfo.firstName ? userInfo.firstName : 'null'}
                     </span>
                     {/* nút logout */}
@@ -69,7 +61,6 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
         userInfo: state.user.userInfo,
     };
 };
@@ -77,8 +68,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         processLogout: () => dispatch(actions.processLogout()),
-        changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
