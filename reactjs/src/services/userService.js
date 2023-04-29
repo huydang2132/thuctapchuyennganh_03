@@ -13,14 +13,14 @@ const createNewUserService = (data) => {
     return axios.post('/api/create-new-user', data);
 }
 const deleteUserService = (userId) => {
-    return axios.delete('/api-delete-user', {
+    return axios.delete('/api/delete-user', {
         data: {
             id: userId
         }
     })
 }
 const editUserService = (data) => {
-    return axios.put('/api-edit-user', data)
+    return axios.put('/api/edit-user', data)
 }
 const getAllCodeService = (type) => {
     return axios.get(`/allcode?type=${type}`);
@@ -52,6 +52,18 @@ const handleChangePasswordService = (data) => {
 const getRoleIdService = (email) => {
     return axios.get('/api/get-roleid', { params: { email } });
 }
+const postNewCourseService = (data) => {
+    return axios.post('/api/post-new-course', data);
+}
+const getAllCourseService = (id) => {
+    return axios.get('/api/get-all-course', { params: { id } });
+}
+const deleteCourseService = (id) => {
+    return axios.delete('/api/delete-course', { params: { id } });
+}
+const editCourseService = (data) => {
+    return axios.put('/api/edit-course', data);
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
     createNewUserService, deleteUserService,
@@ -60,5 +72,6 @@ export {
     saveDetailTeacherService, getDetailteacherService,
     postScheduleTeacherService, getScheduleTeacherByDateService,
     getExtraInfoTeacherByIdService, handleChangePasswordService,
-    getRoleIdService,
+    getRoleIdService, postNewCourseService, getAllCourseService,
+    deleteCourseService, editCourseService
 };

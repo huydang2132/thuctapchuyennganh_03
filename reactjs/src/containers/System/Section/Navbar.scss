@@ -17,6 +17,7 @@
         color: #333;
         border-radius: 20px;
         cursor: pointer;
+        user-select: none;
 
         &.active {
             background-color: #6e00ff;

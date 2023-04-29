@@ -16,8 +16,8 @@ let getTopTeacher = (limit) => {
                     exclude: ['password']
                 },
                 include: [
-                    { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
-                    { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
+                    { model: db.Allcode, as: 'positionData', attributes: ['value'] },
+                    { model: db.Allcode, as: 'genderData', attributes: ['value'] }
                 ],
                 raw: true,
                 nest: true
@@ -146,12 +146,12 @@ let getDetailTeacherById = (id) => {
                                 exclude: ['id', 'teacherId']
                             },
                             include: [
-                                { model: db.Allcode, as: 'priceData', attributes: ['valueVi', 'valueEn'] },
-                                { model: db.Allcode, as: 'paymentData', attributes: ['valueVi', 'valueEn'] },
-                                { model: db.Allcode, as: 'provinceData', attributes: ['valueVi', 'valueEn'] }
+                                { model: db.Allcode, as: 'priceData', attributes: ['value'] },
+                                { model: db.Allcode, as: 'paymentData', attributes: ['value'] },
+                                { model: db.Allcode, as: 'provinceData', attributes: ['value'] }
                             ]
                         },
-                        { model: db.Allcode, as: 'positionData', attributes: ['valueVi', 'valueEn'] }
+                        { model: db.Allcode, as: 'positionData', attributes: ['value'] }
                     ],
                     raw: true,
                     nest: true
@@ -235,7 +235,7 @@ let getScheduleByDate = (teacherId, date) => {
                         date: date
                     },
                     include: [
-                        { model: db.Allcode, as: 'dateTypeData', attributes: ['valueVi', 'valueEn'] }
+                        { model: db.Allcode, as: 'dateTypeData', attributes: ['value', ''] }
                     ],
                     raw: true,
                     nest: true
@@ -270,9 +270,9 @@ let getExtraInfoTeacher = (teacherId) => {
                         exclude: ['id', 'teacherId']
                     },
                     include: [
-                        { model: db.Allcode, as: 'priceData', attributes: ['valueVi', 'valueEn'] },
-                        { model: db.Allcode, as: 'paymentData', attributes: ['valueVi', 'valueEn'] },
-                        { model: db.Allcode, as: 'provinceData', attributes: ['valueVi', 'valueEn'] }
+                        { model: db.Allcode, as: 'priceData', attributes: ['value', ''] },
+                        { model: db.Allcode, as: 'paymentData', attributes: ['value', ''] },
+                        { model: db.Allcode, as: 'provinceData', attributes: ['value', ''] }
                     ],
                     raw: false,
                     nest: true
@@ -311,12 +311,12 @@ let getProfileTeacher = (teacherId) => {
                                 exclude: ['id', 'teacherId']
                             },
                             include: [
-                                { model: db.Allcode, as: 'priceData', attributes: ['valueVi', 'valueEn'] },
-                                { model: db.Allcode, as: 'paymentData', attributes: ['valueVi', 'valueEn'] },
-                                { model: db.Allcode, as: 'provinceData', attributes: ['valueVi', 'valueEn'] }
+                                { model: db.Allcode, as: 'priceData', attributes: ['value', ''] },
+                                { model: db.Allcode, as: 'paymentData', attributes: ['value', ''] },
+                                { model: db.Allcode, as: 'provinceData', attributes: ['value', ''] }
                             ]
                         },
-                        { model: db.Allcode, as: 'positionData', attributes: ['valueVi', 'valueEn'] }
+                        { model: db.Allcode, as: 'positionData', attributes: ['value', ''] }
                     ],
                     raw: true,
                     nest: true

@@ -1,0 +1,141 @@
+.add-user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .add-user-content {
+        background-color: #fff;
+        width: 800px;
+        border-radius: 10px;
+
+        .line {
+            margin: 0 25px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        .add-user-header {
+            .add-user-header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+
+                .add-user-header-title {
+                    color: #333;
+                }
+
+                .add-user-header-close {
+                    width: 30px;
+                    height: 30px;
+                    background-color: #fff;
+                    border: none;
+                    cursor: pointer;
+
+                    i {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+
+
+        }
+
+        .add-user-main {
+            .add-user-main-head {
+                .add-user-avatar {
+                    padding-top: 15px;
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+
+                    img {
+                        width: 110px;
+                        height: 110px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid #dbdbdb;
+
+                        &alt {
+                            text-align: center;
+                            color: red;
+                        }
+                    }
+
+                    .chane-avatar {
+
+                        cursor: pointer;
+                        position: absolute;
+                        width: 110px;
+                        height: 110px;
+                        background-color: transparent;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            i {
+                                display: block;
+                            }
+
+                            background-color: rgba(0, 0, 0, 0.5);
+
+                        }
+
+                        i {
+                            display: none;
+                            color: #fff;
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+            }
+
+            .add-user-form {
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+
+                .account-form {
+                    margin-left: -20px;
+
+                    .form-input {
+                        height: 1.8rem;
+                    }
+                }
+            }
+
+            margin-bottom: 15px;
+        }
+
+        .add-user-footer {
+            button {
+                padding: 15px 25px;
+                outline: none;
+                border: none;
+                border-radius: 30px;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+
+            .add-user-footer-content {
+                float: right;
+                padding: 15px 40px;
+                display: flex;
+                gap: 20px;
+
+                .btn-add {
+                    background-color: #16e60b;
+                }
+            }
+        }
+    }
+
+
+}

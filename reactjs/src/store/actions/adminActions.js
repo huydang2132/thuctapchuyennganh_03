@@ -3,7 +3,8 @@ import {
     getAllCodeService, createNewUserService,
     getAllUserService, deleteUserService,
     editUserService, getTopTeacherService,
-    getAllTeachers, saveDetailTeacherService
+    getAllTeachers, saveDetailTeacherService,
+    getAllCourseService, editCourseService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -104,10 +105,13 @@ export const createNewUser = (data) => {
             let res = await createNewUserService(data);
             if (res && res.errCode === 0) {
                 dispatch(saveUserSuccess());
+                toast.success('Thêm mới người dùng thành công!');
                 dispatch(fetchAllUsersStart());
-                toast.success('Create a new user success!');
             }
             else {
+                if (res && res.errCode === 1) {
+                    toast.error('Email đã tồn tại!');
+                }
                 dispatch(saveUserFailed());
             }
         }
@@ -161,10 +165,10 @@ export const deleteUser = (userId) => {
             if (res && res.errCode === 0) {
                 dispatch(deleteUserSuccess());
                 dispatch(fetchAllUsersStart());
-                toast.success('Delete the user success!');
+                toast.success('Xóa tài khoản thành công!');
             }
             else {
-                toast.error('Delete the user error!');
+                toast.error('Lỗi không thể xóa tài khoản!');
                 dispatch(deleteUserFailed());
             }
         }
@@ -190,10 +194,10 @@ export const editUser = (data) => {
             if (res && res.errCode === 0) {
                 dispatch(editUserSuccess());
                 dispatch(fetchAllUsersStart());
-                toast.success('Edit the user success!');
+                toast.success('Cập nhật thông tin thành công!');
             }
             else {
-                toast.error('Edit the user error!');
+                toast.error('Đã xảy ra lỗi, cập nhật không thành công!');
                 dispatch(editUserFailed());
             }
         }
@@ -353,3 +357,56 @@ export const fetchTeacherInfoSuccess = (data) => ({
 export const fetchTeacherInfoFailed = () => ({
     type: actionTypes.FETCH_TEACHER_INFO_FAILED
 })
+
+export const fetchAllCourse = () => {
+    return async (dispatch, getState) => {
+        try {
+            let resCourse = await getAllCourseService("ALL");
+            if (resCourse && resCourse.errCode === 0) {
+                let data = resCourse.data
+                dispatch({
+                    type: actionTypes.FETCH_ALL_COURSE_SUCCESS,
+                    data: data
+                });
+            }
+            else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_COURSE_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_COURSE_FAILED
+            });
+            console.log('fetchAllCourse error', e);
+        }
+    }
+}
+
+export const fetchEditCourse = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let resCourse = await editCourseService(data);
+            if (resCourse && resCourse.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_EDIT_COURSE_SUCCESS,
+                });
+                toast.success('Cập nhật khóa học thành công!');
+                dispatch(fetchAllCourse());
+            }
+            else {
+                toast.error('Đã xảy ra lỗi, cập nhật thất bại!');
+                dispatch({
+                    type: actionTypes.FETCH_EDIT_COURSE_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_EDIT_COURSE_FAILED
+            });
+            console.log('fetchEditCourse error', e);
+        }
+    }
+}

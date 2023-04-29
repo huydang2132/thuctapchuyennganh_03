@@ -54,7 +54,7 @@ class OutStandingTeacher extends Component {
                                                         />
                                                     </div>
                                                     <div className='position text-center'>
-                                                        <div>{item.positionData.valueVi}, {item.lastName} {item.firstName}</div>
+                                                        <div>{item.positionData.value}, {item.lastName} {item.firstName}</div>
                                                         <div>Ngoại ngữ Anh 1</div>
                                                     </div>
                                                 </div>

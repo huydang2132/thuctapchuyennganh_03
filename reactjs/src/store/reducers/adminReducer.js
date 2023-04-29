@@ -11,6 +11,8 @@ const initialState = {
     scheduleTeacher: [],
 
     allTeacherInfo: [],
+
+    allCourse: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -102,6 +104,16 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_TEACHER_INFO_FAILED:
             state.allRequiredTeacherInfo = []
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_COURSE_SUCCESS:
+            state.allCourse = action.data
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_COURSE_FAILED:
+            state.allCourse = []
             return {
                 ...state,
             }

@@ -4,7 +4,6 @@ import { push } from "connected-react-router";
 import _ from 'lodash';
 import * as actions from "../../store/actions";
 import './Register.scss';
-import { FormattedMessage } from 'react-intl';
 import { handleRegisterApi } from '../../services/userService';
 import { Link } from 'react-router-dom';
 import { path } from '../../utils';

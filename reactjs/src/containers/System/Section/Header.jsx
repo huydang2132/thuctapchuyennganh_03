@@ -1,39 +1,69 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import './AdminPage.scss';
-import DigitalClock from './Section/DigitalClock';
-import Avatar from '../../assets/images/avatar.png';
-import Navbar from './Section/Navbar';
-import * as actions from '../../store/actions';
-import { getRoleIdService } from '../../services/userService';
+import './Header.scss';
+import Avatar from '../../../assets/images/avatar.png';
+import { withRouter } from 'react-router';
+import * as actions from '../../../store/actions';
 
-class AdminPage extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            avatar: Avatar,
         }
     }
-    async componentDidMount() {
-        let { userInfo } = this.props;
-        if (userInfo && userInfo.roleId === 'R3') {
-            this.props.history.push('/home');
+    componentDidMount() {
+        let { userInfo, dataUser, isLoggedIn } = this.props;
+        let imageBase64 = '';
+        if (userInfo) {
+            this.props.getRoleId(userInfo.email);
+        }
+        if (dataUser) {
+            if (dataUser.image) {
+                imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+            }
+            this.setState({
+                avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
+            })
         }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let { userInfo } = this.props;
-        if (prevProps.userInfo && this.props.userInfo) {
-            if (userInfo && userInfo.roleId === 'R3') {
-                this.props.history.push('/home');
+        let { userInfo, dataUser, isLoggedIn } = this.props;
+        let imageBase64 = '';
+        if (prevProps.userInfo !== userInfo) {
+            if (userInfo) {
+                this.props.getRoleId(userInfo.email);
+            }
+        }
+        if (prevProps.dataUser !== dataUser) {
+            if (dataUser) {
+                if (dataUser.image) {
+                    imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                }
+                this.setState({
+                    avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
+                })
             }
         }
     }
     returnHome = () => {
+        this.props.history.push('/system/manage');
+    }
+    settingAccount = () => {
+        this.props.history.push('/account/profile');
+    }
+    changePassword = () => {
+        this.props.history.push('/account/change-password')
+    }
+    userPage = () => {
         this.props.history.push('/home');
     }
+    logOut = () => {
+        this.props.processLogout();
+    }
     render() {
-        let { userInfo } = this.props;
+        let { dataUser, isLoggedIn } = this.props;
+        let { avatar } = this.state;
         return (
             <>
                 <header className='user-mange-header'>
@@ -53,11 +83,23 @@ class AdminPage extends Component {
                     <div className='header-right'>
                         <div className='header-right-content'>
                             <div className='header-avatar'>
-                                <img src={Avatar} alt='' />
+                                <img src={avatar} alt='' />
                             </div>
                             <span className='header-name'>
-                                {userInfo.lastName} {userInfo.firstName}
+                                {dataUser && dataUser.firstName && dataUser.lastName ?
+                                    dataUser.lastName + ' ' + dataUser.firstName : 'Loading...'}
                             </span>
+                            <ul className='setting-account'>
+                                {isLoggedIn === false ? ''
+                                    :
+                                    <>
+                                        <li onClick={() => this.userPage()}>Trang chủ người dùng</li>
+                                        <li onClick={() => this.settingAccount()}>Tài khoản của tôi</li>
+                                        <li onClick={() => this.changePassword()}>Đổi mật khẩu</li>
+                                        <li onClick={() => this.logOut()}>Đăng xuất</li>
+                                    </>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </header>
@@ -69,13 +111,17 @@ class AdminPage extends Component {
 
 const mapStateToProps = state => {
     return {
+        isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
+        dataUser: state.user.dataUser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        processLogout: () => dispatch(actions.processLogout()),
+        getRoleId: (email) => dispatch(actions.getRoleId(email))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

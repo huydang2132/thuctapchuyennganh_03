@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Allcode.hasMany(models.User, { foreignKey: 'positionId', as: 'positionData' })
             Allcode.hasMany(models.User, { foreignKey: 'gender', as: 'genderData' })
+            Allcode.hasMany(models.User, { foreignKey: 'roleId', as: 'roleData' })
             Allcode.hasMany(models.Schedule, { foreignKey: 'dateType', as: 'dateTypeData' })
 
             Allcode.hasMany(models.Teacher_Info, { foreignKey: 'priceId', as: 'priceData' })
@@ -22,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     Allcode.init({
         keyMap: DataTypes.STRING,
         type: DataTypes.STRING,
-        valueEn: DataTypes.STRING,
-        valueVi: DataTypes.STRING,
+        value: DataTypes.STRING,
     }, {
         sequelize,
         modelName: 'Allcode',

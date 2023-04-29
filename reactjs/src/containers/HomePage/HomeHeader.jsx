@@ -70,7 +70,7 @@ class HomeHeader extends Component {
     render() {
         const { dataUser, isLoggedIn } = this.props;
         let { avatar } = this.state;
-        let nameUser = dataUser && dataUser.lastName && dataUser.firstName ? dataUser.lastName + ' ' + dataUser.firstName : '';
+        let nameUser = dataUser && dataUser.lastName && dataUser.firstName ? dataUser.lastName + ' ' + dataUser.firstName : 'Loading...';
         return (
             <>
                 <div className='home-header-container'>
@@ -102,19 +102,13 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className='right-content'>
-                            <div className='account'>
+                            <div className='account' onClick={isLoggedIn === false ? (() => this.logIn()) : undefined}>
                                 <div className='account-avatar'>
                                     <img src={avatar} alt='Avatar' />
                                 </div>
-                                {isLoggedIn === false ?
-                                    <span className='account-name' onClick={() => this.logIn()}>
-                                        Đăng nhập
-                                    </span>
-                                    :
-                                    <span className='account-name'>
-                                        {nameUser}
-                                    </span>
-                                }
+                                <span className='account-name'>
+                                    {isLoggedIn === false ? 'Đăng nhập' : nameUser}
+                                </span>
                                 <ul className='setting-account'>
                                     {isLoggedIn === false ? ''
                                         :

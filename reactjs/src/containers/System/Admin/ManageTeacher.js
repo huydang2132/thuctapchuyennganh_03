@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
-import 'react-markdown-editor-lite/lib/index.css';
 import './ManageTeacher.scss';
+import Header from '../Section/Header';
+import Navbar from '../Section/Navbar';
 
 
 class ManageTeacher extends Component {
@@ -19,7 +19,18 @@ class ManageTeacher extends Component {
     render() {
         return (
             <div className='manage-teacher-container'>
-                ManageTeacher
+                <header>
+                    <Header />
+                </header>
+                <main className='manage-teacher-main'>
+                    <Navbar />
+                    <section className='manage-teacher-section'>
+
+                    </section>
+                </main>
+                <footer className='system-footer'>
+                    <p>&#169; 2023 Copyright: Đặng Đình Huy</p>
+                </footer>
             </div>
         );
     }

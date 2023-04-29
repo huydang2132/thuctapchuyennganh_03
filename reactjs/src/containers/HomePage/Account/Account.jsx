@@ -28,9 +28,9 @@ class Account extends Component {
     }
     async componentDidMount() {
         this.props.getGenderStart();
-        let { userInfo, dataUser } = this.props;
+        let { dataUser } = this.props;
         let imageBase64 = '';
-        if (userInfo) {
+        if (dataUser) {
             let res = await getAllUserService(dataUser.id);
             if (res && res.users) {
                 if (res.users.image) {
@@ -55,9 +55,9 @@ class Account extends Component {
             }
         }
         if (prevProps.dataUser !== this.props.dataUser) {
-            let { userInfo, dataUser } = this.props;
+            let { dataUser } = this.props;
             let imageBase64 = '';
-            if (userInfo) {
+            if (dataUser) {
                 let res = await getAllUserService(dataUser.id);
                 if (res && res.users) {
                     if (res.users.image) {
@@ -141,7 +141,6 @@ class Account extends Component {
                                     </label>
                                     <input type="file" accept='image/*' id='avatar' hidden
                                         onChange={(e) => this.changeAvatar(e.target.files)} />
-
                                 </div>
                                 <div className='account__header--email'>
                                     <p>{email}</p>
@@ -179,7 +178,7 @@ class Account extends Component {
                                                     arrGenders.map((item, index) => {
                                                         return (
                                                             <option key={index} value={item.keyMap}>
-                                                                {item.valueVi}
+                                                                {item.value}
                                                             </option>
                                                         )
                                                     })

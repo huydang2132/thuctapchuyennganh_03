@@ -14,18 +14,15 @@ module.exports = {
             type: {
                 type: Sequelize.STRING
             },
-            valueEn: {
-                type: Sequelize.STRING
-            },
-            valueVi: {
+            value: {
                 type: Sequelize.STRING
             },
             createdAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });

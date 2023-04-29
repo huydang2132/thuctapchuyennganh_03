@@ -8,3 +8,63 @@ html {
     height: 100vh;
     overflow: hidden;
 }
+
+.paging {
+    float: right;
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        align-items: center;
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 600;
+            background-color: #6e00ff;
+            border: none;
+            margin: 12px 5px;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 3px;
+
+            a {
+                display: block;
+                padding: 10px;
+                outline: none;
+            }
+        }
+
+        .pageNumer {
+            @extend .button;
+        }
+
+        .disabled {
+            cursor: no-drop;
+        }
+
+        .previous {
+            @extend .button;
+        }
+
+        .next {
+            @extend .button;
+        }
+
+        .break-me {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .active {
+            @extend .button;
+            background-color: red;
+        }
+
+    }
+}
