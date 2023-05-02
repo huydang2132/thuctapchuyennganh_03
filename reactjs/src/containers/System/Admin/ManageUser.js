@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './ManageUser.scss';
 import Header from '../Section/Header';
@@ -15,7 +14,8 @@ class ManageUser extends Component {
         this.state = {
             editUser: false,
             createUser: false,
-            users: []
+            users: [],
+            dataUser: {}
         }
     }
 
@@ -24,7 +24,12 @@ class ManageUser extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        let { dataUser } = this.props;
+        if (prevProps.dataUser !== dataUser) {
+            this.setState({
+                dataUser: dataUser,
+            })
+        }
     }
     showEditUser = () => {
         this.setState({
@@ -37,9 +42,7 @@ class ManageUser extends Component {
         })
     }
     currentUser = (data) => {
-        this.setState({
-            users: data
-        })
+        this.props.fetchUserReduxById(data.id);
     }
     addNewUser = () => {
         this.setState({
@@ -52,7 +55,7 @@ class ManageUser extends Component {
         })
     }
     render() {
-        let { editUser, createUser, users } = this.state;
+        let { editUser, createUser, dataUser } = this.state;
         return (
             <>
                 <div className='manage-user-container'>
@@ -81,7 +84,7 @@ class ManageUser extends Component {
                     <EditUser
                         editUser={editUser}
                         hideEditUser={this.hideEditUser}
-                        currentUser={users}
+                        currentUser={dataUser}
                     />
                 </div>
             </>
@@ -91,12 +94,13 @@ class ManageUser extends Component {
 
 const mapStateToProps = state => {
     return {
+        dataUser: state.admin.userId
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        fetchUserReduxById: (id) => dispatch(actions.fetchUserById(id)),
     };
 };
 

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AdminPage from '../containers/System/AdminPage';
-import ManageTeacher from '../containers/System/Admin/ManageTeacher';
 import ManageUser from '../containers/System/Admin/ManageUser';
 import ManageCourse from '../containers/System/Admin/ManageCourse/ManageCourse';
+import MangeSchedule from '../containers/System/Teacher/MangeSchedule';
+import ManageTeacher from '../containers/System/Admin/ManageTeacher';
 
 class System extends Component {
     async componentDidMount() {
@@ -24,6 +25,7 @@ class System extends Component {
                             <Route path="/system/list-user" component={ManageUser} />
                             <Route path="/system/manage-teacher" component={ManageTeacher} />
                             <Route path="/system/manage-course" component={ManageCourse} />
+                            <Route path="/system/manage-schedule" component={MangeSchedule} />
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import './TableUser.scss';
 import * as actions from '../../../../store/actions';
-import 'react-markdown-editor-lite/lib/index.css';
 import moment from 'moment';
 import LoadingPage from '../../../LoadingPage/LoadingPage';
 import ReactPaginate from 'react-paginate';
+import { toast } from 'react-toastify';
 
 class TableUser extends Component {
     constructor(props) {
@@ -15,11 +14,11 @@ class TableUser extends Component {
             offset: 0, // Vị trí bắt đầu của trang hiện tại
             perPage: 8, // Số phần tử trên một trang
             currentPage: 0, // Trang hiện tại
-            pageCount: 0
+            pageCount: 0,
         }
     }
     componentDidMount() {
-        this.props.fetchUserRedux();
+        this.props.fetchUserRedux("ALL");
     }
     componentDidUpdate(prevProps, prevState) {
         let { listUsers } = this.props;
@@ -52,6 +51,17 @@ class TableUser extends Component {
         const offset = selected * this.state.perPage;
 
         this.setState({ currentPage: selected, offset });
+    }
+    timeOutUser = () => {
+        let { users } = this.state;
+        if (users && users.length > 0) {
+            return;
+        }
+        else {
+            this.props.addNewUser();
+            toast.error('Không có dữ liệu về người dùng!');
+            return;
+        }
     }
     render() {
         let { users, pageCount, perPage } = this.state;
@@ -124,7 +134,9 @@ class TableUser extends Component {
                             </div>
                         </>
                         :
-                        <LoadingPage />
+                        <LoadingPage
+                            timeOutLoading={this.timeOutUser}
+                        />
                 }
             </>
         );
@@ -140,7 +152,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
+        fetchUserRedux: (id) => dispatch(actions.fetchAllUsersStart(id)),
         deleteUserRedux: (id) => dispatch(actions.deleteUser(id)),
     };
 };

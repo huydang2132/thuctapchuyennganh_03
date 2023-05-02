@@ -52,20 +52,20 @@ class AdminPage extends Component {
                         <i className="fa-solid fa-calendar-days"></i>
                         <span>Lịch dạy</span>
                     </div>
-                    <div className={item === '/system/manage-subject' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-subject')}>
+                    <div className={item === '/system/manage-center' ? 'sidebar-item active' : 'sidebar-item'}
+                        onClick={() => this.handleClickNavbarItem('manage-center')}>
                         <i className="fas fa-school"></i>
-                        <span>Môn học</span>
+                        <span>Trung tâm</span>
                     </div>
                     <div className={item === '/system/manage-course' ? 'sidebar-item active' : 'sidebar-item'}
                         onClick={() => this.handleClickNavbarItem('manage-course')}>
                         <i className="fa-solid fa-chalkboard-user"></i>
                         <span>Khóa học</span>
                     </div>
-                    <div className={item === '/system/manage-example' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-example')}>
+                    <div className={item === '/system/manage-subject' ? 'sidebar-item active' : 'sidebar-item'}
+                        onClick={() => this.handleClickNavbarItem('manage-subject')}>
                         <i className="fas fa-book-open"></i>
-                        <span>Luyện đề</span>
+                        <span>Môn học</span>
                     </div>
                     <div className={item === '/system/manage-handbook' ? 'sidebar-item active' : 'sidebar-item'}
                         onClick={() => this.handleClickNavbarItem('manage-handbook')}>

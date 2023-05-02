@@ -16,7 +16,7 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING
             },
-            provinceId: {
+            description: {
                 allowNull: false,
                 type: Sequelize.STRING
             },
@@ -24,13 +24,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING
             },
-            addressCenter: {
+            centerId: {
                 allowNull: false,
-                type: Sequelize.STRING
-            },
-            nameCenter: {
-                allowNull: false,
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             note: {
                 type: Sequelize.STRING

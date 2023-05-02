@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './LoadingPage.scss';
+import { toast } from 'react-toastify';
 
 class LoaddingPage extends Component {
     constructor(props) {
@@ -10,10 +11,11 @@ class LoaddingPage extends Component {
         }
     }
     componentDidMount() {
-
+        setTimeout(() => {
+            this.props.timeOutLoading();
+        }, 6000);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-
     }
     render() {
         return (

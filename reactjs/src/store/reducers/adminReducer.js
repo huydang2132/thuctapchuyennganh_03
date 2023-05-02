@@ -5,6 +5,7 @@ const initialState = {
     roles: [],
     positions: [],
     users: [],
+    userId: {},
     message: '',
     topTeacher: [],
     allTeacher: [],
@@ -60,6 +61,16 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_ALL_USERS_FAILED:
             state.users = []
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_USERS_BY_ID_SUCCESS:
+            state.userId = action.userId
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_USERS_BY_ID_FAILED:
+            state.userId = []
             return {
                 ...state,
             }

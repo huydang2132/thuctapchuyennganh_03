@@ -1,34 +1,20 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('markdowns', {
+        await queryInterface.createTable('teacher_subject', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            contentHTML: {
-                allowNull: false,
-                type: Sequelize.TEXT('long')
-            },
-            contentMarkdown: {
-                allowNull: false,
-                type: Sequelize.TEXT('long')
-            },
-            description: {
-                type: Sequelize.TEXT('long')
-            },
             teacherId: {
-                allowNull: true,
-                type: Sequelize.INTEGER
-            },
-            specialtyId: {
-                allowNull: true,
                 type: Sequelize.INTEGER
             },
             centerId: {
-                allowNull: true,
+                type: Sequelize.INTEGER
+            },
+            subjectId: {
                 type: Sequelize.INTEGER
             },
             createdAt: {
@@ -42,6 +28,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('markdowns');
+        await queryInterface.dropTable('teacher_subject');
     }
 };

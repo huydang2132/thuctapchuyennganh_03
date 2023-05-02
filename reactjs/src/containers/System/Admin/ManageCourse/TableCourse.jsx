@@ -16,7 +16,8 @@ class AddCourse extends Component {
             offset: 0,
             perPage: 8,
             currentPage: 0,
-            pageCount: 0
+            pageCount: 0,
+            timeOutData: true
         }
     }
 
@@ -58,6 +59,17 @@ class AddCourse extends Component {
         const { selected } = data;
         const offset = selected * this.state.perPage;
         this.setState({ currentPage: selected, offset });
+    }
+    timeOutCourse = () => {
+        let { courses } = this.state;
+        if (courses && courses.length > 0) {
+            return;
+        }
+        else {
+            this.props.showAddCourse();
+            toast.error('Không có dữ liệu về khóa học!');
+            return;
+        }
     }
     render() {
         let { courses, pageCount, perPage } = this.state;
@@ -130,7 +142,9 @@ class AddCourse extends Component {
                             </div>
                         </>
                         :
-                        <LoadingPage />
+                        <LoadingPage
+                            timeOutLoading={this.timeOutCourse}
+                        />
                 }
             </>
         )

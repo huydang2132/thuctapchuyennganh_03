@@ -1,6 +1,6 @@
 import teacherService from "../services/teacherService";
 
-let getTopTeacher = async (req, res) => {
+const getTopTeacher = async (req, res) => {
     let limit = req.query.limit;
     if (!limit) {
         limit = 10;
@@ -17,7 +17,7 @@ let getTopTeacher = async (req, res) => {
         })
     }
 }
-let getAllTeacher = async (req, res) => {
+const getAllTeacher = async (req, res) => {
     try {
         let teachers = await teacherService.getAllTeacher();
         return res.status(200).json(teachers)
@@ -30,7 +30,7 @@ let getAllTeacher = async (req, res) => {
         })
     }
 }
-let postInfoTeacher = async (req, res) => {
+const postInfoTeacher = async (req, res) => {
     try {
         let response = await teacherService.saveInfoTeacher(req.body);
         return res.status(200).json(response);
@@ -43,7 +43,7 @@ let postInfoTeacher = async (req, res) => {
         })
     }
 }
-let getDetailTeacherById = async (req, res) => {
+const getDetailTeacherById = async (req, res) => {
     try {
         let info = await teacherService.getDetailTeacherById(req.query.id);
         return res.status(200).json(info);
@@ -56,7 +56,7 @@ let getDetailTeacherById = async (req, res) => {
         })
     }
 }
-let bulkCreateSchedule = async (req, res) => {
+const bulkCreateSchedule = async (req, res) => {
     try {
         let info = await teacherService.bulkCreateSchedule(req.body);
         return res.status(200).json(info);
@@ -69,7 +69,7 @@ let bulkCreateSchedule = async (req, res) => {
         })
     }
 }
-let getScheduleByDate = async (req, res) => {
+const getScheduleByDate = async (req, res) => {
     try {
         let info = await teacherService.getScheduleByDate(req.query.teacherId, req.query.date);
         return res.status(200).json(info);
@@ -82,7 +82,7 @@ let getScheduleByDate = async (req, res) => {
         })
     }
 }
-let getExtraInfoTeacher = async (req, res) => {
+const getExtraInfoTeacher = async (req, res) => {
     try {
         let info = await teacherService.getExtraInfoTeacher(req.query.teacherId);
         return res.status(200).json(info);
@@ -95,9 +95,22 @@ let getExtraInfoTeacher = async (req, res) => {
         })
     }
 }
-let getProfileTeacher = async (req, res) => {
+const getProfileTeacher = async (req, res) => {
     try {
         let info = await teacherService.getProfileTeacher(req.query.teacherId);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
+const getCenterInfo = async (req, res) => {
+    try {
+        let info = await teacherService.getCenterInfo(req.query.centerId);
         return res.status(200).json(info);
     }
     catch (e) {
@@ -117,4 +130,5 @@ module.exports = {
     getScheduleByDate: getScheduleByDate,
     getExtraInfoTeacher: getExtraInfoTeacher,
     getProfileTeacher: getProfileTeacher,
+    getCenterInfo: getCenterInfo,
 }

@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Allcode, { foreignKey: 'positionId', targetKey: 'keyMap', as: 'positionData' })
       User.belongsTo(models.Allcode, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
       User.belongsTo(models.Allcode, { foreignKey: 'roleId', targetKey: 'keyMap', as: 'roleData' })
-      User.hasOne(models.Markdown, { foreignKey: 'teacherId' })
       User.hasOne(models.Teacher_Info, { foreignKey: 'teacherId' })
       User.hasMany(models.Course, { foreignKey: 'teacherId' })
     }

@@ -24,6 +24,7 @@ let initWebRoutes = (app) => {
     router.get('/api/get-schedule-teachers-by-date', teacherController.getScheduleByDate);
     router.get('/api/get-extra-info-teacher-by-id', teacherController.getExtraInfoTeacher);
     router.get('/api/get-profile-teacher-by-id', teacherController.getProfileTeacher);
+    router.get('/api/get-center-info', teacherController.getCenterInfo);
 
     router.post('/api/post-new-course', adminController.postNewCourse);
     router.get('/api/get-all-course', adminController.getAllCourse);

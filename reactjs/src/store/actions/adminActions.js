@@ -4,7 +4,8 @@ import {
     getAllUserService, deleteUserService,
     editUserService, getTopTeacherService,
     getAllTeachers, saveDetailTeacherService,
-    getAllCourseService, editCourseService
+    getAllCourseService, editCourseService,
+    getCenterInfoService,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -157,7 +158,31 @@ export const fetchAllUsersSuccess = (data, message) => ({
 export const fetchAllUsersFailed = () => ({
     type: actionTypes.FETCH_ALL_USERS_FAILED
 })
+export const fetchUserById = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllUserService(id);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_USERS_BY_ID_SUCCESS,
+                    userId: res.users
+                });
+            }
+            else {
+                dispatch({
+                    type: actionTypes.FETCH_USERS_BY_ID_FAILED,
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_USERS_BY_ID_FAILED,
+            });
+            console.log('fetchUserById error', e);
+        }
+    }
 
+}
 export const deleteUser = (userId) => {
     return async (dispatch, getState) => {
         try {
@@ -271,13 +296,15 @@ export const saveDetailTeacher = (data) => {
         try {
             let res = await saveDetailTeacherService(data);
             if (res && res.errCode === 0) {
-                toast.success("Save detail teacher success!");
+                toast.success("Lưu thông tin giáo viên thành công!");
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_TEACHER_SUCCESS,
                 });
             }
             else {
-                toast.error("Save detail teacher error!");
+                if (res && res.errCode === 1) {
+                    toast.error("Vui lòng nhập đủ thông tin!");
+                }
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_TEACHER_FAILED
                 });
@@ -327,13 +354,16 @@ export const getTeacherInfo = () => {
             let resPrice = await getAllCodeService("PRICE");
             let resPayment = await getAllCodeService("PAYMENT");
             let resProvince = await getAllCodeService("PROVINCE");
+            let resCenter = await getCenterInfoService("ALL");
             if (resPrice && resPrice.errCode === 0
                 && resPayment && resPayment.errCode === 0
-                && resProvince && resProvince.errCode === 0) {
+                && resProvince && resProvince.errCode === 0
+                && resCenter && resCenter.errCode === 0) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
-                    resProvince: resProvince.data
+                    resProvince: resProvince.data,
+                    resCenter: resCenter.data,
                 }
                 dispatch(fetchTeacherInfoSuccess(data));
             }
@@ -343,7 +373,7 @@ export const getTeacherInfo = () => {
         }
         catch (e) {
             dispatch(fetchTeacherInfoFailed());
-            console.log('fetchGenderStart error', e);
+            console.log('getTeacherInfo error', e);
         }
     }
 

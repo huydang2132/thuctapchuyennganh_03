@@ -54,36 +54,15 @@ let getAllTeacher = () => {
 let saveInfoTeacher = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.teacherId || !data.contentHTML || !data.contentMarkdown || !data.action ||
-                !data.selectedPrice || !data.selectedPayment || !data.selectedProvince ||
-                !data.nameCenter || !data.addressCenter || !data.note) {
+            if (!data.teacherId || !data.description ||
+                !data.selectedPrice || !data.selectedPayment ||
+                !data.selectedCenter || !data.note) {
                 resolve({
                     errCode: 1,
                     errMesage: 'Missing parameter'
                 })
             }
             else {
-                //Mark down
-                if (data.action === 'CREATE') {
-                    await db.Markdown.create({
-                        contentHTML: data.contentHTML,
-                        contentMarkdown: data.contentMarkdown,
-                        description: data.description,
-                        teacherId: data.teacherId
-                    })
-                }
-                else if (data.action === 'EDIT') {
-                    let teacherMarkdown = await db.Markdown.findOne({
-                        where: { teacherId: data.teacherId },
-                        raw: false
-                    })
-                    if (teacherMarkdown) {
-                        teacherMarkdown.contentHTML = data.contentHTML;
-                        teacherMarkdown.contentMarkdown = data.contentMarkdown;
-                        teacherMarkdown.description = data.description;
-                        await teacherMarkdown.save();
-                    }
-                }
                 //Teacher info
                 let teacherInfo = await db.Teacher_Info.findOne({
                     where: { teacherId: data.teacherId, },
@@ -91,21 +70,19 @@ let saveInfoTeacher = (data) => {
                 })
                 if (teacherInfo) {
                     teacherInfo.priceId = data.selectedPrice;
+                    teacherInfo.description = data.description;
                     teacherInfo.paymentId = data.selectedPayment;
-                    teacherInfo.provinceId = data.selectedProvince;
-                    teacherInfo.nameCenter = data.nameCenter;
-                    teacherInfo.addressCenter = data.addressCenter;
+                    teacherInfo.centerId = data.selectedCenter;
                     teacherInfo.note = data.note;
                     await teacherInfo.save();
                 }
                 else {
                     await db.Teacher_Info.create({
-                        teacherId: data.teacherId,
                         priceId: data.selectedPrice,
+                        teacherId: data.teacherId,
+                        description: data.description,
                         paymentId: data.selectedPayment,
-                        provinceId: data.selectedProvince,
-                        nameCenter: data.nameCenter,
-                        addressCenter: data.addressCenter,
+                        centerId: data.selectedCenter,
                         note: data.note,
                     })
                 }
@@ -133,13 +110,9 @@ let getDetailTeacherById = (id) => {
                 let data = await db.User.findOne({
                     where: { id: id },
                     attributes: {
-                        exclude: ['password']
+                        exclude: ['password', 'image']
                     },
                     include: [
-                        {
-                            model: db.Markdown,
-                            attributes: ['description', 'contentHTML', 'contentMarkdown']
-                        },
                         {
                             model: db.Teacher_Info,
                             attributes: {
@@ -148,10 +121,11 @@ let getDetailTeacherById = (id) => {
                             include: [
                                 { model: db.Allcode, as: 'priceData', attributes: ['value'] },
                                 { model: db.Allcode, as: 'paymentData', attributes: ['value'] },
-                                { model: db.Allcode, as: 'provinceData', attributes: ['value'] }
+                                { model: db.Center, attributes: ['name'] }
                             ]
                         },
-                        { model: db.Allcode, as: 'positionData', attributes: ['value'] }
+                        { model: db.Allcode, as: 'positionData', attributes: ['value'] },
+
                     ],
                     raw: true,
                     nest: true
@@ -173,7 +147,42 @@ let getDetailTeacherById = (id) => {
         }
     })
 }
-let bulkCreateSchedule = (data) => {
+const getCenterInfo = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter'
+                })
+            }
+            else {
+                if (id === 'ALL') {
+                    let data = await db.Center.findAll()
+                    resolve({
+                        errCode: 0,
+                        errMesage: 'Success...',
+                        data: data
+                    })
+                }
+                else {
+                    let data = await db.Center.findOne({
+                        where: { id: id }
+                    })
+                    resolve({
+                        errCode: 0,
+                        errMesage: 'Success...',
+                        data: data
+                    })
+                }
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+const bulkCreateSchedule = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.arrSchedule || !data.teacherId || !data.date) {
@@ -272,7 +281,6 @@ let getExtraInfoTeacher = (teacherId) => {
                     include: [
                         { model: db.Allcode, as: 'priceData', attributes: ['value', ''] },
                         { model: db.Allcode, as: 'paymentData', attributes: ['value', ''] },
-                        { model: db.Allcode, as: 'provinceData', attributes: ['value', ''] }
                     ],
                     raw: false,
                     nest: true
@@ -313,7 +321,6 @@ let getProfileTeacher = (teacherId) => {
                             include: [
                                 { model: db.Allcode, as: 'priceData', attributes: ['value', ''] },
                                 { model: db.Allcode, as: 'paymentData', attributes: ['value', ''] },
-                                { model: db.Allcode, as: 'provinceData', attributes: ['value', ''] }
                             ]
                         },
                         { model: db.Allcode, as: 'positionData', attributes: ['value', ''] }
@@ -347,4 +354,5 @@ module.exports = {
     getScheduleByDate: getScheduleByDate,
     getExtraInfoTeacher: getExtraInfoTeacher,
     getProfileTeacher: getProfileTeacher,
+    getCenterInfo: getCenterInfo,
 }

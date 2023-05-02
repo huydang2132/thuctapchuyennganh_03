@@ -11,7 +11,7 @@ class HomeFooter extends Component {
                     <section className='home-footer-section'>
                         <div className='home-footer-about'>
                             <h3>Giới thiệu</h3>
-                            <p>Website Education được tạo ra bởi Nhóm 3 - IT6041.2, được sử dụng để
+                            <p>Website Education được tạo ra bởi Nhóm 3 - IT6041.2 - HaUI, được sử dụng để
                                 phục vụ cho đồ án môn Thực tập chuyên ngành kỹ thuật phần mềm.
                             </p>
                         </div>
