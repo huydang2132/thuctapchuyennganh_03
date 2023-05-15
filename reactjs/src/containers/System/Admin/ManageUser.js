@@ -81,11 +81,16 @@ class ManageUser extends Component {
                     <footer className='system-footer'>
                         <p>&#169; 2023 Copyright: Đặng Đình Huy</p>
                     </footer>
-                    <EditUser
-                        editUser={editUser}
-                        hideEditUser={this.hideEditUser}
-                        currentUser={dataUser}
-                    />
+                    {
+                        editUser === false ?
+                            undefined
+                            :
+                            <EditUser
+                                editUser={editUser}
+                                hideEditUser={this.hideEditUser}
+                                currentUser={dataUser}
+                            />
+                    }
                 </div>
             </>
         )

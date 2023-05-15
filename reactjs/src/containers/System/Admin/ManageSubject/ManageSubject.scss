@@ -1,0 +1,14 @@
+.manage-subject-container {
+    .manage-subject-main {
+        min-height: 600px;
+        display: flex;
+
+        .manage-subject-section {
+            width: 80%;
+            height: initial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

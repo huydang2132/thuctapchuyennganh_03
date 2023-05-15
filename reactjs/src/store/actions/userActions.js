@@ -13,10 +13,11 @@ export const userLoginFail = () => ({
 export const processLogout = () => ({
     type: actionTypes.PROCESS_LOGOUT
 })
-export const getRoleId = (email) => {
+export const getRoleId = (userInfo) => {
     return async (dispatch, getState) => {
         try {
-            let res = await getRoleIdService(email);
+            let decodeUserInfo = JSON.parse(window.atob(userInfo))
+            let res = await getRoleIdService(decodeUserInfo.email);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_ROLE_ID_SUCCESS,

@@ -67,6 +67,18 @@ const editCourseService = (data) => {
 const getCenterInfoService = (centerId) => {
     return axios.get('/api/get-center-info', { params: { centerId } });
 }
+const postNewCenterService = (data) => {
+    return axios.post('/api/post-new-center', data);
+}
+const getAllCenterService = (id) => {
+    return axios.get('/api/get-all-center', { params: { id } });
+}
+const deleteCenterService = (id) => {
+    return axios.delete('/api/delete-center', { params: { id } });
+}
+const editCenterService = (data) => {
+    return axios.put('/api/edit-center', data);
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
     createNewUserService, deleteUserService,
@@ -76,5 +88,7 @@ export {
     postScheduleTeacherService, getScheduleTeacherByDateService,
     getExtraInfoTeacherByIdService, handleChangePasswordService,
     getRoleIdService, postNewCourseService, getAllCourseService,
-    deleteCourseService, editCourseService, getCenterInfoService
+    deleteCourseService, editCourseService, getCenterInfoService,
+    postNewCenterService, getAllCenterService, deleteCenterService,
+    editCenterService,
 };

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './TableCourse.scss';
-import { deleteCourseService } from '../../../../services/userService';
+import './TableCenter.scss';
+import { deleteCenterService } from '../../../../services/userService';
 import * as actions from '../../../../store/actions';
 import { toast } from 'react-toastify';
 import LoadingPage from '../../../LoadingPage/LoadingPage';
 import moment from 'moment';
 import ReactPaginate from 'react-paginate';
 
-class AddCourse extends Component {
+class TableCenter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            courses: [],
+            centers: [],
             offset: 0,
             perPage: 8,
             currentPage: 0,
@@ -22,33 +22,33 @@ class AddCourse extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllCourse();
+        this.props.fetchAllCenter('ALL');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let { dataCourse } = this.props;
-        if (prevProps.dataCourse !== dataCourse) {
-            const pageCount = Math.ceil(dataCourse.length / this.state.perPage);
+        let { dataCenter } = this.props;
+        if (prevProps.dataCenter !== dataCenter) {
+            const pageCount = Math.ceil(dataCenter.resCenter.length / this.state.perPage);
             this.setState({
-                courses: dataCourse,
+                centers: dataCenter.resCenter,
                 pageCount: pageCount
             })
         }
     }
-    clickAddCourse = () => {
-        this.props.showAddCourse();
+    clickAddCenter = () => {
+        this.props.showAddCenter();
     }
-    handleEditCourse = (data) => {
-        this.props.showEditCourse();
-        this.props.currentCourse(data);
+    handleEditCenter = (data) => {
+        this.props.showEditCenter();
+        this.props.currentCenter(data);
     }
-    handleDeleteCourse = async (data) => {
-        let confirm = window.confirm(`Xác nhận xóa khóa học "${data.name}"`);
+    handleDeleteCenter = async (data) => {
+        let confirm = window.confirm(`Xác nhận xóa trung tâm "${data.name}"`);
         if (confirm) {
-            let res = await deleteCourseService(data.id);
+            let res = await deleteCenterService(data.id);
             if (res && res.errCode === 0) {
-                toast.success('Xóa khóa học thành công!');
-                this.props.getAllCourse();
+                toast.success('Xóa trung tâm thành công!');
+                this.props.fetchAllCenter('ALL');
             }
         }
         else {
@@ -61,60 +61,60 @@ class AddCourse extends Component {
         this.setState({ currentPage: selected, offset });
     }
     timeOutCourse = () => {
-        let { courses } = this.state;
-        if (courses && courses.length > 0) {
+        let { centers } = this.state;
+        if (centers && centers.length > 0) {
             return;
         }
         else {
-            this.props.showAddCourse();
+            this.props.showAddCenter();
             toast.error('Không có dữ liệu về khóa học!');
             return;
         }
     }
     render() {
-        let { courses, pageCount, perPage } = this.state;
+        let { centers, pageCount, perPage } = this.state;
         return (
             <>
                 {
-                    courses && courses.length > 0 ?
+                    centers && centers.length > 0 ?
                         <>
-                            <div className='manage-course-list'>
-                                <table className='manage-course-table'>
+                            <div className='manage-center-list'>
+                                <table className='manage-center-table'>
                                     <thead className='table-head'>
-                                        <tr className='tr-add-course'>
+                                        <tr className='tr-add-center'>
                                             <td>
-                                                <h2 className='title-table-center'>Danh sách khóa học</h2>
+                                                <h2 className='title-table-center'>Danh sách trung tâm</h2>
                                             </td>
                                             <td>
-                                                <button title='Thêm khóa học' className='btn-add-course'
-                                                    onClick={() => this.clickAddCourse()}>
+                                                <button title='Thêm khóa học' className='btn-add-center'
+                                                    onClick={() => this.clickAddCenter()}>
                                                     <i className="fa-solid fa-plus"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Tên khóa học</th>
-                                            <th>Mã khóa học</th>
-                                            <th>Người tạo</th>
-                                            <th>Ngày tạo</th>
+                                            <th>Tên trung tâm</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tỉnh/Thành phố</th>
+                                            <th>Ngày thêm</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody className='table-body'>
-                                        {courses && courses.length > 0 &&
-                                            courses.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
+                                        {centers && centers.length > 0 &&
+                                            centers.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
                                                 let day = moment(item.createdAt).format('Do/MM/YYYY, HH:mm:ss');
                                                 return (
                                                     <tr key={item.id}>
                                                         <td className='course-full-with'>{item.name}</td>
-                                                        <td className='course-full-with'>{item.listId}</td>
-                                                        <td>{item.User.lastName} {item.User.firstName}</td>
+                                                        <td className='course-full-with'>{item.address}</td>
+                                                        <td>{item.provinceData.value}</td>
                                                         <td>{day}</td>
                                                         <td>
-                                                            <button title='Sửa khóa học' className='btn-edit' onClick={() => this.handleEditCourse(item)}>
+                                                            <button title='Sửa khóa học' className='btn-edit' onClick={() => this.handleEditCenter(item)}>
                                                                 <i className="fas fa-pencil-alt"></i>
                                                             </button>
-                                                            <button title='Xóa khóa học' className='btn-delete' onClick={() => this.handleDeleteCourse(item)}>
+                                                            <button title='Xóa khóa học' className='btn-delete' onClick={() => this.handleDeleteCenter(item)}>
                                                                 <i className="fas fa-trash-alt"></i>
                                                             </button>
                                                         </td>
@@ -154,15 +154,15 @@ const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
         dataUser: state.user.dataUser,
-        dataCourse: state.admin.allCourse
+        dataCenter: state.admin.allCenter
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         getRoleId: (email) => dispatch(actions.getRoleId(email)),
-        getAllCourse: () => dispatch(actions.fetchAllCourse())
+        fetchAllCenter: (id) => dispatch(actions.fetchAllCenter(id))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCourse);
+export default connect(mapStateToProps, mapDispatchToProps)(TableCenter);

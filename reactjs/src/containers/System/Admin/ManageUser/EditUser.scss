@@ -1,6 +1,6 @@
 .edit-user-container {
     position: absolute;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     top: 0;
@@ -11,7 +11,9 @@
     z-index: 2;
 
     &.show {
-        display: flex;
+        .edit-user-content {
+            animation: slipDown .6s ease;
+        }
     }
 
     @keyframes slipDown {
@@ -31,7 +33,6 @@
         width: 800px;
         height: 600px;
         border-radius: 10px;
-        animation: slipDown .6s ease;
 
         .line {
             margin: 0 25px;

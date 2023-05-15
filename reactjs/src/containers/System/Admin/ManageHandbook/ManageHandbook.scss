@@ -1,0 +1,14 @@
+.manage-handbook-container {
+    .manage-handbook-main {
+        min-height: 600px;
+        display: flex;
+
+        .manage-handbook-section {
+            width: 80%;
+            height: initial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

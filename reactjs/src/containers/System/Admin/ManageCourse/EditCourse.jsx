@@ -16,25 +16,22 @@ class EditCourse extends Component {
         }
     }
     componentDidMount() {
-        let { userInfo } = this.props;
-        if (userInfo) {
-            this.props.getRoleId(userInfo.email);
-        }
+        let { currentCourse } = this.props;
+        this.setState({
+            id: currentCourse.id ? currentCourse.id : '',
+            nameCourse: currentCourse.name ? currentCourse.name : '',
+            listId: currentCourse.listId ? currentCourse.listId : '',
+        })
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         let { linkCourse, listId } = this.state;
-        let { userInfo, currentCourse } = this.props;
+        let { currentCourse } = this.props;
         if (prevProps.currentCourse !== currentCourse) {
             this.setState({
                 id: currentCourse.id ? currentCourse.id : '',
                 nameCourse: currentCourse.name ? currentCourse.name : '',
                 listId: currentCourse.listId ? currentCourse.listId : '',
             })
-        }
-        if (prevProps.userInfo !== userInfo) {
-            if (userInfo) {
-                this.props.getRoleId(userInfo.email);
-            }
         }
         if (prevState.linkCourse !== this.state.linkCourse) {
             this.setState({
@@ -118,13 +115,11 @@ class EditCourse extends Component {
 const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
-        dataUser: state.user.dataUser,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getRoleId: (email) => dispatch(actions.getRoleId(email)),
         editCourseRedux: (data) => dispatch(actions.fetchEditCourse(data))
     };
 };

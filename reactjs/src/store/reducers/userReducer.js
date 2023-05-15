@@ -11,7 +11,7 @@ const appReducer = (state = initialState, action) => {
         case actionTypes.USER_LOGIN_SUCCESS:
             return {
                 ...state,
-                userInfo: action.userInfo,
+                userInfo: window.btoa(JSON.stringify(action.userInfo)),
                 isLoggedIn: true
             }
         case actionTypes.USER_LOGIN_FAIL:

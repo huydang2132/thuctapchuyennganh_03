@@ -17,13 +17,10 @@ class AdminPage extends Component {
     componentDidMount() {
         let { userInfo, dataUser, isLoggedIn } = this.props;
         if (userInfo) {
-            this.props.getRoleId(userInfo.email);
+            this.props.getRoleId(userInfo);
         }
         let imageBase64 = '';
         if (dataUser) {
-            if (dataUser.roleId === 'R3') {
-                this.props.history.push('/home');
-            }
             if (dataUser.image) {
                 imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
             }
@@ -37,14 +34,14 @@ class AdminPage extends Component {
         let imageBase64 = '';
         if (prevProps.userInfo !== userInfo) {
             if (userInfo) {
-                this.props.getRoleId(userInfo.email);
+                this.props.getRoleId(userInfo);
             }
+            this.setState({
+                encodedUserInfo: btoa(JSON.stringify(userInfo))
+            })
         }
         if (prevProps.dataUser !== dataUser) {
             if (dataUser) {
-                if (dataUser.roleId === 'R3') {
-                    this.props.history.push('/home');
-                }
                 if (dataUser.image) {
                     imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
                 }

@@ -5,7 +5,8 @@ import {
     editUserService, getTopTeacherService,
     getAllTeachers, saveDetailTeacherService,
     getAllCourseService, editCourseService,
-    getCenterInfoService,
+    getCenterInfoService, postNewCenterService,
+    getAllCenterService, editCenterService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -437,6 +438,95 @@ export const fetchEditCourse = (data) => {
                 type: actionTypes.FETCH_EDIT_COURSE_FAILED
             });
             console.log('fetchEditCourse error', e);
+        }
+    }
+}
+export const fetchAllCenter = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            let resCenter = await getAllCenterService(id);
+            let resProvince = await getAllCodeService("PROVINCE");
+            if (resCenter && resCenter.errCode === 0
+                && resProvince && resProvince.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CENTER_SUCCESS,
+                    data: {
+                        resCenter: resCenter.data,
+                        resProvince: resProvince.data
+                    },
+                });
+
+            }
+            else {
+                toast.error('Đã xảy ra lỗi, không thể lấy danh sách trung tâm!');
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CENTER_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_CENTER_FAILED
+            });
+            console.log('adminActions error', e);
+        }
+    }
+}
+export const fetchCreateCenter = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let resCenter = await postNewCenterService(data);
+            if (resCenter && resCenter.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_CREATE_CENTER_SUCCESS,
+                });
+                toast.success('Thêm mới trung tâm thành công!');
+                dispatch(fetchAllCenter('ALL'));
+            }
+            else if (resCenter && resCenter.errCode === 2) {
+                toast.error('Trung tâm đã tồn tại!');
+                dispatch({
+                    type: actionTypes.FETCH_CREATE_CENTER_FAILED
+                });
+            }
+            else {
+                toast.error('Đã xảy ra lỗi, thêm mới thất bại!');
+                dispatch({
+                    type: actionTypes.FETCH_CREATE_CENTER_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_CREATE_CENTER_FAILED
+            });
+            console.log('adminActions error', e);
+        }
+    }
+}
+export const fetchEditCenter = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let resCenter = await editCenterService(data);
+            if (resCenter && resCenter.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_EDIT_CENTER_SUCCESS,
+                });
+                toast.success('Cập nhật trung tâm thành công!');
+                dispatch(fetchAllCenter('ALL'));
+            }
+            else {
+                toast.error('Đã xảy ra lỗi, cập nhật thất bại!');
+                dispatch({
+                    type: actionTypes.FETCH_EDIT_CENTER_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_EDIT_CENTER_FAILED
+            });
+            console.log('adminActions error', e);
         }
     }
 }

@@ -15,7 +15,7 @@ class HomeHeader extends Component {
     componentDidMount() {
         let { userInfo, dataUser, isLoggedIn } = this.props
         if (userInfo) {
-            this.props.getRoleId(userInfo.email);
+            this.props.getRoleId(userInfo);
         }
         let imageBase64 = '';
         if (dataUser) {
@@ -31,7 +31,7 @@ class HomeHeader extends Component {
         let { userInfo, dataUser, isLoggedIn } = this.props
         if (prevProps.userInfo !== userInfo) {
             if (userInfo) {
-                this.props.getRoleId(userInfo.email);
+                this.props.getRoleId(userInfo);
             }
         }
         if (prevProps.dataUser !== dataUser || prevProps.isLoggedIn !== isLoggedIn) {
@@ -113,15 +113,15 @@ class HomeHeader extends Component {
                                     {isLoggedIn === false ? ''
                                         :
                                         <>
-                                            {dataUser && dataUser.roleId === 'R1' ?
+                                            {dataUser && dataUser.roleId === 'R3' ?
                                                 <>
-                                                    <li onClick={() => this.adminSystem()}>Hệ thống quản trị</li>
                                                     <li onClick={() => this.settingAccount()}>Tài khoản của tôi</li>
                                                     <li onClick={() => this.changePassword()}>Đổi mật khẩu</li>
                                                     <li onClick={() => this.logOut()}>Đăng xuất</li>
                                                 </>
                                                 :
                                                 <>
+                                                    <li onClick={() => this.adminSystem()}>Hệ thống quản trị</li>
                                                     <li onClick={() => this.settingAccount()}>Tài khoản của tôi</li>
                                                     <li onClick={() => this.changePassword()}>Đổi mật khẩu</li>
                                                     <li onClick={() => this.logOut()}>Đăng xuất</li>

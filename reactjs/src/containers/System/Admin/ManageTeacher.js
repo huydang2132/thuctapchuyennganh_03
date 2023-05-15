@@ -80,7 +80,7 @@ class ManageTeacher extends Component {
             if (type === 'CENTER') {
                 data.map((item, index) => {
                     let object = {};
-                    object.label = item.name;
+                    object.label = `${item.name} - ${item.provinceData.value}`;
                     object.value = item.id;
                     result.push(object);
                 })

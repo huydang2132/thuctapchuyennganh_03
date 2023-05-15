@@ -1,20 +1,17 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('centers', {
+        await queryInterface.createTable('handbooks', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            name: {
+            title: {
                 type: Sequelize.STRING
             },
-            provinceId: {
-                type: Sequelize.STRING
-            },
-            address: {
+            content: {
                 type: Sequelize.STRING
             },
             description: {
@@ -24,16 +21,16 @@ module.exports = {
                 type: Sequelize.BLOB('long')
             },
             createdAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE
             }
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('centers');
+        await queryInterface.dropTable('handbooks');
     }
 };

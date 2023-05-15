@@ -1,5 +1,5 @@
-.manage-course-list {
-    .manage-course-table {
+.manage-center-list {
+    .manage-center-table {
         border-collapse: collapse;
         background-color: #f8f8f8;
         border-radius: 10px;
@@ -25,7 +25,7 @@
                 border-top: 1px solid #ddd;
             }
 
-            .tr-add-course {
+            .tr-add-center {
                 height: 60px;
                 position: relative;
 
@@ -37,7 +37,7 @@
                     font-size: 1.6rem;
                 }
 
-                .btn-add-course {
+                .btn-add-center {
                     position: absolute;
                     background-color: #6e00ff;
                     width: 45px;
@@ -48,6 +48,28 @@
                     transform: translateY(-50%);
                     color: #fff;
                     font-size: 1rem;
+                }
+
+                .search-center {
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 20px;
+                    padding: 5px 10px;
+                    margin: 10px;
+                    right: 15px;
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        outline: none;
+                        padding: 5px 10px;
+                        border: none;
+                    }
+
+                    i {
+                        color: #999;
+                    }
                 }
             }
         }

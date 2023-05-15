@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Center.hasMany(models.Teacher_Info, { foreignKey: 'centerId' })
+            Center.belongsTo(models.Allcode, { foreignKey: 'provinceId', targetKey: 'keyMap', as: 'provinceData' })
         }
     };
     Center.init({
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         provinceId: DataTypes.STRING,
         address: DataTypes.STRING,
         description: DataTypes.TEXT,
-        image: DataTypes.STRING
+        image: DataTypes.BLOB('long')
     }, {
         sequelize,
         modelName: 'Center',

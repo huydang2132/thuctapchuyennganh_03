@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
+import * as actions from '../store/actions';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 import { path } from '../utils'
 import Home from '../routes/Home';
@@ -38,7 +39,6 @@ class App extends Component {
   componentDidMount() {
     this.handlePersistorState();
   }
-
   render() {
     return (
       <Fragment>
@@ -81,6 +81,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     started: state.app.started,
+    userInfo: state.app.userInfo,
   };
 };
 

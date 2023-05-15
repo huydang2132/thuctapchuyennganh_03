@@ -30,6 +30,10 @@ let initWebRoutes = (app) => {
     router.get('/api/get-all-course', adminController.getAllCourse);
     router.put('/api/edit-course', adminController.editCourse);
     router.delete('/api/delete-course', adminController.deleteCourse);
+    router.post('/api/post-new-center', adminController.postNewCenter);
+    router.get('/api/get-all-center', adminController.getAllCenter);
+    router.put('/api/edit-center', adminController.editCenter);
+    router.delete('/api/delete-center', adminController.deleteCenter);
 
     return app.use("/", router);
 }

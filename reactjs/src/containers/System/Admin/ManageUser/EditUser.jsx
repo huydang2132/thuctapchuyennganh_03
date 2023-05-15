@@ -130,7 +130,7 @@ class EditUser extends Component {
             roleId, position } = this.state;
         let { editUser } = this.props;
         return (
-            <div className={editUser === false ? 'edit-user-container' : 'edit-user-container show'}>
+            <div className={`edit-user-container ${editUser === false ? '' : 'show'}`}>
                 <div className='edit-user-content'>
                     <header className='edit-user-header'>
                         <div className='edit-user-header-content'>

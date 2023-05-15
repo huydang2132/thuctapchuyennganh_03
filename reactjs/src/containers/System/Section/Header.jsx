@@ -16,7 +16,7 @@ class Header extends Component {
         let { userInfo, dataUser, isLoggedIn } = this.props;
         let imageBase64 = '';
         if (userInfo) {
-            this.props.getRoleId(userInfo.email);
+            this.props.getRoleId(userInfo);
         }
         if (dataUser) {
             if (dataUser.image) {
@@ -32,7 +32,7 @@ class Header extends Component {
         let imageBase64 = '';
         if (prevProps.userInfo !== userInfo) {
             if (userInfo) {
-                this.props.getRoleId(userInfo.email);
+                this.props.getRoleId(userInfo);
             }
         }
         if (prevProps.dataUser !== dataUser) {

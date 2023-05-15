@@ -66,11 +66,16 @@ class MangeCourse extends Component {
                     <footer className='system-footer'>
                         <p>&#169; 2023 Copyright: Đặng Đình Huy</p>
                     </footer>
-                    <EditCourse
-                        editCourse={editCourse}
-                        showEditCourse={this.showEditCourse}
-                        currentCourse={courses}
-                    />
+                    {
+                        editCourse === false ?
+                            undefined
+                            :
+                            <EditCourse
+                                editCourse={editCourse}
+                                showEditCourse={this.showEditCourse}
+                                currentCourse={courses}
+                            />
+                    }
                 </div >
             </>
         )

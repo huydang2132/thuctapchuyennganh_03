@@ -158,7 +158,13 @@ const getCenterInfo = (id) => {
             }
             else {
                 if (id === 'ALL') {
-                    let data = await db.Center.findAll()
+                    let data = await db.Center.findAll({
+                        include: [
+                            { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
+                        ],
+                        raw: true,
+                        nest: true
+                    })
                     resolve({
                         errCode: 0,
                         errMesage: 'Success...',
@@ -167,7 +173,12 @@ const getCenterInfo = (id) => {
                 }
                 else {
                     let data = await db.Center.findOne({
-                        where: { id: id }
+                        where: { id: id },
+                        include: [
+                            { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
+                        ],
+                        raw: true,
+                        nest: true
                     })
                     resolve({
                         errCode: 0,

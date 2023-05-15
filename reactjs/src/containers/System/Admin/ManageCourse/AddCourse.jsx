@@ -19,7 +19,7 @@ class AddCourse extends Component {
     componentDidMount() {
         let { userInfo } = this.props;
         if (userInfo) {
-            this.props.getRoleId(userInfo.email);
+            this.props.getRoleId(userInfo);
         }
     }
 
@@ -28,7 +28,7 @@ class AddCourse extends Component {
         let { userInfo } = this.props;
         if (prevProps.userInfo !== userInfo) {
             if (userInfo) {
-                this.props.getRoleId(userInfo.email);
+                this.props.getRoleId(userInfo);
             }
         }
         if (prevState.linkCourse !== this.state.linkCourse) {
