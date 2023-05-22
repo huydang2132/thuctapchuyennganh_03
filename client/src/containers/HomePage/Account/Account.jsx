@@ -137,7 +137,7 @@ class Account extends Component {
                                 <div className='account__header--avatar'>
                                     <img src={img} alt='' />
                                     <label htmlFor="avatar" className='chane-avatar'>
-                                        <i className="fa-solid fa-pencil"></i>
+                                        <i className="fa-solid fa-camera"></i>
                                     </label>
                                     <input type="file" accept='image/*' id='avatar' hidden
                                         onChange={(e) => this.changeAvatar(e.target.files)} />
@@ -200,7 +200,7 @@ class Account extends Component {
                         </div>
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Đặng Đình Huy"} />
                     </footer>
                 </div>
             </>

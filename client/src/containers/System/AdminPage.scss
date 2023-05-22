@@ -8,72 +8,10 @@
             width: 80%;
             height: initial;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-around;
             user-select: none;
-
-            .digital-clock {
-                height: 250px;
-                width: 450px;
-                border-radius: 10px;
-                background-color: #3d3e45;
-                box-shadow: 5px 5px 10px #6e00ff;
-
-                .clock-content {
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: default;
-
-                    .time-clock {
-                        display: flex;
-                        padding-left: 15px;
-
-                        .hours {
-                            font-size: 8rem;
-                            color: #fde721;
-                            text-shadow: 0 0 10px #fde721, 0 0 20px #fde721;
-                        }
-
-                        .minutes {
-                            font-size: 8rem;
-                            padding-right: 20px;
-                            color: #2db932;
-                            text-shadow: 0 0 10px #2db932, 0 0 20px #2db932;
-                        }
-
-                        .seconds {
-                            display: flex;
-                            align-items: end;
-                            margin-bottom: 22px;
-                            font-size: 1.6rem;
-                            color: #eb0b56;
-                            text-shadow: 0 0 10px #eb0b56, 0 0 20px #eb0b56;
-                        }
-
-                        span {
-                            font-size: 3rem;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 0 15px;
-                            font-weight: 600;
-                            color: #fff;
-                            text-shadow: 0 0 10px #fff, 0 0 20px #fff;
-                        }
-                    }
-
-                    .date-clock {
-                        font-size: 1.6rem;
-                        margin-top: 20px;
-                        text-transform: capitalize;
-                        color: #fff;
-                        text-shadow: 0 0 10px #fff, 0 0 20px #fff;
-                    }
-                }
-            }
+            gap: 20px;
+            padding-top: 20px;
         }
     }
 

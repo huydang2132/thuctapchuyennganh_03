@@ -1,4 +1,5 @@
 import db from '../models/index';
+import sequelize from 'sequelize';
 
 const postNewCourse = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -300,6 +301,71 @@ const deleteCenter = (id) => {
         }
     })
 }
+const getTotal = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter...'
+                })
+            }
+            else {
+                let total
+                if (id === 'Center') {
+                    total = await db.Center.count();
+                }
+                else if (id === 'User') {
+                    total = await db.User.count();
+                }
+                else if (id === 'Course') {
+                    total = await db.Course.count();
+                }
+                if (total) {
+                    resolve({
+                        errCode: 0,
+                        errMesage: 'Success...',
+                        total: total
+                    })
+                }
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+
+const getTotalUserByMonth = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter...'
+                })
+            }
+            else {
+                let dataUser = await db.User.findAll({
+                    where: { roleId: id },
+                    attributes: [
+                        [sequelize.fn('COUNT', sequelize.literal('id')), 'userCount'],
+                        [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month']
+                    ],
+                    group: sequelize.fn('MONTH', sequelize.col('createdAt')),
+                })
+                resolve({
+                    errCode: 0,
+                    errMesage: 'Success...',
+                    dataUser
+                })
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     postNewCourse: postNewCourse,
     getAllCourse: getAllCourse,
@@ -309,4 +375,6 @@ module.exports = {
     getAllCenter: getAllCenter,
     editCenter: editCenter,
     deleteCenter: deleteCenter,
+    getTotal: getTotal,
+    getTotalUserByMonth: getTotalUserByMonth
 }

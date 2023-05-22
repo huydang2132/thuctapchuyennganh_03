@@ -30,7 +30,7 @@ class Teacher extends Component {
                         Giáo viên
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Đặng Đình Huy"} />
                     </footer>
                 </div>
             </>

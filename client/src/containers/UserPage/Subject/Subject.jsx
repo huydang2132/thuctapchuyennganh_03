@@ -30,7 +30,7 @@ class Subject extends Component {
                         Giao diện môn học
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Phạm Văn Nhất"} />
                     </footer>
                 </div>
             </>

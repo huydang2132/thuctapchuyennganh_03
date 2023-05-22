@@ -103,7 +103,7 @@ class AddCourse extends Component {
                                     <tbody className='table-body'>
                                         {courses && courses.length > 0 &&
                                             courses.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
-                                                let day = moment(item.createdAt).format('Do/MM/YYYY, HH:mm:ss');
+                                                let day = moment(item.createdAt).format('DD/MM/YYYY, HH:mm:ss');
                                                 return (
                                                     <tr key={item.id}>
                                                         <td className='course-full-with'>{item.name}</td>

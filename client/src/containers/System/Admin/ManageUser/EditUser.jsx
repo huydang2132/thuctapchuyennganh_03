@@ -28,13 +28,14 @@ class EditUser extends Component {
             arrRoles: []
         }
     }
-    componentDidMount() {
+    async componentDidMount() {
         this.props.getGenderStart();
         this.props.getPosition();
         this.props.getRole();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         let user = this.props.currentUser;
+        console.log('did update', user)
         if (prevProps.currentUser !== user) {
             let imageBase64 = '';
             if (user && !_.isEmpty(user)) {
@@ -59,21 +60,18 @@ class EditUser extends Component {
             let arrGenders = this.props.genderRedux;
             this.setState({
                 arrGenders: arrGenders,
-                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
             })
         }
         if (prevProps.positionRedux !== this.props.positionRedux) {
             let arrPositions = this.props.positionRedux;
             this.setState({
                 arrPositions: arrPositions,
-                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
             })
         }
         if (prevProps.roleRedux !== this.props.roleRedux) {
             let arrRoles = this.props.roleRedux;
             this.setState({
                 arrRoles: arrRoles,
-                roleId: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
             })
         }
     }
@@ -148,7 +146,7 @@ class EditUser extends Component {
                             <div className='edit-user-avatar'>
                                 <img src={img} alt='' />
                                 <label htmlFor="avatar" className='chane-avatar'>
-                                    <i className="fa-solid fa-pencil"></i>
+                                    <i className="fa-solid fa-camera"></i>
                                 </label>
                                 <input type="file" accept='image/*' id='avatar' hidden
                                     onChange={(e) => this.changeAvatar(e.target.files)} />

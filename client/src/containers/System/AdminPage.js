@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AdminPage.scss';
-import DigitalClock from './Section/DigitalClock';
 import Avatar from '../../assets/images/avatar.png';
 import Navbar from './Section/Navbar';
 import * as actions from '../../store/actions';
 import Header from './Section/Header';
+import Statistic from './Section/Statistic';
 
 class AdminPage extends Component {
     constructor(props) {
@@ -36,9 +36,6 @@ class AdminPage extends Component {
             if (userInfo) {
                 this.props.getRoleId(userInfo);
             }
-            this.setState({
-                encodedUserInfo: btoa(JSON.stringify(userInfo))
-            })
         }
         if (prevProps.dataUser !== dataUser) {
             if (dataUser) {
@@ -60,8 +57,8 @@ class AdminPage extends Component {
                     <main className='admin-page-main'>
                         <Navbar getRoleId={this.getRoleId} />
                         <section className='admin-page-section'>
-                            <div className='digital-clock'>
-                                <DigitalClock />
+                            <div className='statistic'>
+                                <Statistic />
                             </div>
                         </section>
                     </main>

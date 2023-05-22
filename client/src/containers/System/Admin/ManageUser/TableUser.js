@@ -96,7 +96,7 @@ class TableUser extends Component {
                                 <tbody className='table-body'>
                                     {users && users.length > 0 &&
                                         users.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
-                                            let day = moment(item.createdAt).format('Do/MM/YYYY, HH:mm:ss');
+                                            let day = moment(item.createdAt).format('DD/MM/YYYY, HH:mm:ss');
                                             return (
                                                 <tr key={item.id}>
                                                     <td>{item.lastName} {item.firstName}</td>

@@ -30,7 +30,7 @@ class MoreHandBook extends Component {
                         Cẩm nang
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Đặng Đình Huy"} />
                     </footer>
                 </div>
             </>

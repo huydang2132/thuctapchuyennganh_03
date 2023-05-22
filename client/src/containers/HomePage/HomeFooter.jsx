@@ -48,7 +48,7 @@ class HomeFooter extends Component {
                         </div>
                     </section>
                     <footer>
-                        <p>&#169; 2023 Copyright: Đặng Đình Huy</p>
+                        <p>&#169; 2023 Copyright: {this.props.author}</p>
                     </footer>
                 </div>
             </>

@@ -34,6 +34,8 @@ let initWebRoutes = (app) => {
     router.get('/api/get-all-center', adminController.getAllCenter);
     router.put('/api/edit-center', adminController.editCenter);
     router.delete('/api/delete-center', adminController.deleteCenter);
+    router.get('/api/get-total', adminController.getTotal);
+    router.get('/api/get-total-user-by-month', adminController.getTotalUserByMonth);
 
     return app.use("/", router);
 }

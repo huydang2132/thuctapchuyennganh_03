@@ -30,7 +30,7 @@ class ComboSubject extends Component {
                         Môn học tổ hợp
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Phạm Văn Nhất"} />
                     </footer>
                 </div>
             </>

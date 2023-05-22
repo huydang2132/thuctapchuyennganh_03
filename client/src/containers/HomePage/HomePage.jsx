@@ -29,7 +29,7 @@ class HomaPage extends Component {
                 <TeachingCenter settings={settings} />
                 <OutStandingTeacher settings={settings} />
                 <HandBook settings={settings} />
-                <HomeFooter />
+                <HomeFooter author={"Đặng Đình Huy"} />
             </>
         );
     }

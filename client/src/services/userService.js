@@ -79,6 +79,12 @@ const deleteCenterService = (id) => {
 const editCenterService = (data) => {
     return axios.put('/api/edit-center', data);
 }
+const getTotalService = (id) => {
+    return axios.get('/api/get-total', { params: { id } });
+}
+const getTotalUserByMonthService = (id) => {
+    return axios.get('/api/get-total-user-by-month', { params: { id } });
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
     createNewUserService, deleteUserService,
@@ -90,5 +96,5 @@ export {
     getRoleIdService, postNewCourseService, getAllCourseService,
     deleteCourseService, editCourseService, getCenterInfoService,
     postNewCenterService, getAllCenterService, deleteCenterService,
-    editCenterService,
+    editCenterService, getTotalService, getTotalUserByMonthService
 };

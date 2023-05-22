@@ -30,7 +30,7 @@ class Course extends Component {
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?controls=0&amp;list=PLncHg6Kn2JT6E38Z3kit9Hnif1xC_9VqI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Phạm Văn Nhất"} />
                     </footer>
                 </div>
             </>

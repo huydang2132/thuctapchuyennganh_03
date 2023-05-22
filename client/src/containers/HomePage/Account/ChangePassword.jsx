@@ -120,7 +120,7 @@ class ChangePassword extends Component {
                         </div>
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Đặng Đình Huy"} />
                     </footer>
                 </div>
             </>

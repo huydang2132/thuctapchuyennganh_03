@@ -104,6 +104,32 @@ const deleteCenter = async (req, res) => {
         })
     }
 }
+const getTotal = async (req, res) => {
+    try {
+        let info = await adminService.getTotal(req.query.id);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
+const getTotalUserByMonth = async (req, res) => {
+    try {
+        let info = await adminService.getTotalUserByMonth(req.query.id);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
 module.exports = {
     postNewCourse: postNewCourse,
     getAllCourse: getAllCourse,
@@ -112,5 +138,7 @@ module.exports = {
     postNewCenter: postNewCenter,
     getAllCenter: getAllCenter,
     editCenter: editCenter,
-    deleteCenter: deleteCenter
+    deleteCenter: deleteCenter,
+    getTotal: getTotal,
+    getTotalUserByMonth: getTotalUserByMonth,
 }

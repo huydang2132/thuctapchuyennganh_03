@@ -30,7 +30,7 @@ class Center extends Component {
                         Trung tâm giảng dạy
                     </section>
                     <footer>
-                        <HomeFooter />
+                        <HomeFooter author={"Phạm Văn Nhất"} />
                     </footer>
                 </div>
             </>

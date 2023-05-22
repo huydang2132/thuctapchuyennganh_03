@@ -86,7 +86,7 @@ class AddUser extends Component {
         if (this.checkValidateInput() === true) {
             this.props.createNewUserRedux({
                 email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, avatar
-            })
+            });
             this.props.viewUsers();
         }
         else {
@@ -119,7 +119,7 @@ class AddUser extends Component {
                                 <div className='add-user-avatar'>
                                     <img src={img} alt='' />
                                     <label htmlFor="avatar" className='chane-avatar'>
-                                        <i className="fa-solid fa-pencil"></i>
+                                        <i className="fa-solid fa-camera"></i>
                                     </label>
                                     <input type="file" accept='image/*' id='avatar' hidden
                                         onChange={(e) => this.changeAvatar(e.target.files)} />
