@@ -1,0 +1,182 @@
+.edit-user-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(51, 51, 51, 0.6);
+    z-index: 2;
+
+    &.show {
+        .edit-user-content {
+            animation: slipDown .6s ease;
+        }
+    }
+
+    @keyframes slipDown {
+        from {
+            transform: translateY(-150px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .edit-user-content {
+        background-color: #fff;
+        width: 800px;
+        height: 600px;
+        border-radius: 10px;
+
+        .line {
+            margin: 0 25px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        .edit-user-header {
+            .edit-user-header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+
+                .edit-user-header-title {
+                    color: #333;
+                }
+
+                .edit-user-header-close {
+                    width: 30px;
+                    height: 30px;
+                    background-color: #fff;
+                    border: none;
+                    cursor: pointer;
+
+                    i {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+
+
+        }
+
+        .edit-user-main {
+            .edit-user-main-head {
+                .edit-user-avatar {
+                    padding-top: 15px;
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+
+                    img {
+                        width: 110px;
+                        height: 110px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid #dbdbdb;
+
+                        &alt {
+                            text-align: center;
+                            color: red;
+                        }
+                    }
+
+                    .chane-avatar {
+
+                        cursor: pointer;
+                        position: absolute;
+                        width: 110px;
+                        height: 110px;
+                        background-color: transparent;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            i {
+                                display: block;
+                            }
+
+                            background-color: rgba(0, 0, 0, 0.5);
+
+                        }
+
+                        i {
+                            display: none;
+                            color: #fff;
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+
+                .edit-user-email {
+                    margin-top: 20px;
+                    text-align: center;
+
+                    p {
+                        color: #a1a1a1;
+                        font-weight: 600;
+                        cursor: default;
+                    }
+                }
+            }
+
+            .edit-user-form {
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+
+                .account-form {
+                    margin-left: -20px;
+
+                    .form-input {
+                        height: 1.8rem;
+                    }
+                }
+            }
+
+            margin-bottom: 15px;
+        }
+
+        .edit-user-footer {
+            button {
+                padding: 10px 20px;
+                outline: none;
+                border: none;
+                border-radius: 30px;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+
+            .edit-user-footer-content {
+                float: right;
+                padding: 15px 40px;
+                display: flex;
+                gap: 20px;
+
+                .btn-cancel {
+                    background-color: #eb9f34;
+                }
+
+                .btn-add {
+                    background-color: #16e60b;
+                }
+            }
+        }
+    }
+
+
+}

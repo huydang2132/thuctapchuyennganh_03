@@ -1,0 +1,29 @@
+.admin-page-container {
+
+    .admin-page-main {
+        min-height: 600px;
+        display: flex;
+
+        .admin-page-section {
+            width: 80%;
+            height: initial;
+            display: flex;
+            justify-content: space-around;
+            user-select: none;
+            gap: 20px;
+            padding-top: 20px;
+        }
+    }
+
+}
+
+.system-footer {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6e00ff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
