@@ -3,10 +3,15 @@ import axios from "../axios";
 const handleLoginApi = (userEmail, password) => {
     return axios.post('/api/login', { email: userEmail, password: password });
 }
+const validateToken = (token) => {
+    return axios.get('/api/validate-token', {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+}
 const handleRegisterApi = (data) => {
     return axios.post('/api/register', data);
 }
-const getAllUserService = (id) => {
+const getAllUserService = (id, token) => {
     return axios.get(`/api/get-all-users?id=${id}`);
 }
 const createNewUserService = (data) => {
@@ -41,7 +46,7 @@ const postScheduleTeacherService = (data) => {
     return axios.post(`/api/bulk-create-schedule`, data);
 }
 const getScheduleTeacherByDateService = (teacherId, date) => {
-    return axios.get(`/api/get-schedule-teachers-by-date?teacherId=${teacherId}&date=${date}`);
+    return axios.get(`/api/get-schedule-teachers-by-date`, { params: { teacherId, date } });
 }
 const getExtraInfoTeacherByIdService = (teacherId) => {
     return axios.get(`/api/get-extra-info-teacher-by-id?teacherId=${teacherId}`);
@@ -85,9 +90,12 @@ const getTotalService = (id) => {
 const getTotalUserByMonthService = (id) => {
     return axios.get('/api/get-total-user-by-month', { params: { id } });
 }
+const searchCourseService = (name) => {
+    return axios.get('/api/serach-course', { params: { name } });
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
-    createNewUserService, deleteUserService,
+    createNewUserService, deleteUserService, validateToken,
     editUserService, getAllCodeService,
     getTopTeacherService, getAllTeachers,
     saveDetailTeacherService, getDetailteacherService,
@@ -96,5 +104,6 @@ export {
     getRoleIdService, postNewCourseService, getAllCourseService,
     deleteCourseService, editCourseService, getCenterInfoService,
     postNewCenterService, getAllCenterService, deleteCenterService,
-    editCenterService, getTotalService, getTotalUserByMonthService
+    editCenterService, getTotalService, getTotalUserByMonthService,
+    searchCourseService
 };

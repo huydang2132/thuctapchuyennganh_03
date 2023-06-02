@@ -1,0 +1,59 @@
+.teacher-detail-container {
+    height: 500px;
+
+
+    .intro-teacher {
+        display: flex;
+        margin: 0 160px;
+
+        .content-left {
+            width: 15%;
+            padding: 5px 20px;
+
+            .detail-avatar-teacher {
+                width: 120px;
+                height: 120px;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                border-radius: 50%;
+            }
+        }
+
+        .content-right {
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 10px;
+
+            .title-teacher {
+                font-size: 20px;
+                font-weight: 600;
+                padding-top: 15px;
+            }
+
+            .description-teacher {
+                padding-top: 10px;
+            }
+        }
+    }
+
+    .schedule-teacher {
+        margin: 0 160px;
+        display: flex;
+        padding: 20px 10px;
+        min-height: 200px;
+
+        .schedule-left {
+            width: 60%;
+        }
+
+        .schedule-right {
+            width: 40%;
+        }
+    }
+
+    .line {
+        border-top: 1px solid #ccc;
+    }
+}

@@ -1,0 +1,26 @@
+.manage-tutor-container {
+
+    .manage-tutor-main {
+        min-height: 600px;
+        display: flex;
+
+        .manage-tutor-section {
+            width: 80%;
+            height: initial;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            .manage-tutor-title {
+                text-transform: uppercase;
+                margin-top: 25px;
+                margin-bottom: 15px;
+                font-weight: 600;
+                font-size: 1.6rem;
+                text-align: center;
+            }
+
+            .manage-tutor-content {}
+        }
+    }
+}

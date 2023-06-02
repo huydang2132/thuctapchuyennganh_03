@@ -26,7 +26,7 @@ class EditCourse extends Component {
         if (currentCenter) {
             let imageBase64 = '';
             if (currentCenter.image) {
-                imageBase64 = new Buffer(currentCenter.image, 'base64').toString('binary');
+                imageBase64 = Buffer.from(currentCenter.image, 'base64').toString('binary');
             }
             this.setState({
                 id: currentCenter.id,

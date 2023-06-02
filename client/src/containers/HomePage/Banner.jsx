@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actions from "../../store/actions";
+import { searchCourseService } from '../../services/userService';
 
 class Banner extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            showSearch: false,
+            listCourse: []
         }
     }
     componentDidMount() {
@@ -19,7 +21,25 @@ class Banner extends Component {
     nextPage = (id) => {
         this.props.history.push(`/user/${id}`);
     }
+    onChangeSearch = async (name) => {
+        if (name) {
+            let courses = await searchCourseService(name.trim());
+            this.setState({
+                listCourse: courses.data,
+                showSearch: true
+            })
+        }
+        else {
+            this.setState({
+                showSearch: false
+            })
+        }
+    }
+    onClickCourse = (course) => {
+        this.props.history.push(`/user/playlist/${course.id}`)
+    }
     render() {
+        let { showSearch, listCourse } = this.state;
         return (
             <>
                 <div className='home-header-banner'>
@@ -27,8 +47,26 @@ class Banner extends Component {
                         <div className='title1'>NỀN TẢNG GIÁO DỤC</div>
                         <div className='title2'>HỌC HÔM NAY ĐỂ NGÀY MAI TỐT HƠN</div>
                         <div className='search'>
-                            <i className="fas fa-search"></i>
-                            <input type='text' placeholder='Tìm kiếm'></input>
+                            <div className='search-input'>
+                                <i className="fas fa-search"></i>
+                                <input type='text' placeholder='Tìm kiếm khóa học'
+                                    onChange={(event) => this.onChangeSearch(event.target.value)}
+                                ></input>
+                                <ul className={`list-course scroll ${showSearch === true ? 'active' : ''}`}>
+                                    {
+                                        listCourse && listCourse.length > 0
+                                        && listCourse.map((item, index) => {
+                                            return (
+                                                <li className='course-item'
+                                                    key={item.id}
+                                                    onClick={() => this.onClickCourse(item)}>
+                                                    {item.name}
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div className='banner-content-down'>

@@ -16,3 +16,10 @@ export const userIsNotAuthenticated = connectedRouterRedirect({
     redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/',
     allowRedirectBack: false
 });
+
+export const userCheckRoleR3 = connectedRouterRedirect({
+    authenticatedSelector: state => !state.user.roleIdR3,
+    wrapperDisplayName: 'userCheckRoleR3',
+    redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/',
+    allowRedirectBack: false
+});

@@ -40,7 +40,7 @@ class EditUser extends Component {
             let imageBase64 = '';
             if (user && !_.isEmpty(user)) {
                 if (user.image) {
-                    imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+                    imageBase64 = Buffer.from(user.image, 'base64').toString('binary');
                 }
                 this.setState({
                     id: user.id ? user.id : '',

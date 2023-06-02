@@ -132,10 +132,10 @@ export const saveUserFailed = () => ({
     type: actionTypes.CREATE_USER_FAILED
 })
 
-export const fetchAllUsersStart = () => {
+export const fetchAllUsersStart = (token) => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllUserService("ALL");
+            let res = await getAllUserService("ALL", token);
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUsersSuccess(res.users));
             }
@@ -389,10 +389,10 @@ export const fetchTeacherInfoFailed = () => ({
     type: actionTypes.FETCH_TEACHER_INFO_FAILED
 })
 
-export const fetchAllCourse = () => {
+export const fetchAllCourse = (id) => {
     return async (dispatch, getState) => {
         try {
-            let resCourse = await getAllCourseService("ALL");
+            let resCourse = await getAllCourseService(id);
             if (resCourse && resCourse.errCode === 0) {
                 let data = resCourse.data
                 dispatch({

@@ -12,7 +12,7 @@ class Header extends Component {
             avatar: Avatar,
         }
     }
-    componentDidMount() {
+    async componentDidMount() {
         let { userInfo, dataUser, isLoggedIn } = this.props;
         let imageBase64 = '';
         if (userInfo) {
@@ -20,7 +20,7 @@ class Header extends Component {
         }
         if (dataUser) {
             if (dataUser.image) {
-                imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
             }
             this.setState({
                 avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
@@ -38,16 +38,13 @@ class Header extends Component {
         if (prevProps.dataUser !== dataUser) {
             if (dataUser) {
                 if (dataUser.image) {
-                    imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                    imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
                 }
                 this.setState({
                     avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
                 })
             }
         }
-    }
-    returnHome = () => {
-        this.props.history.push('/system/manage');
     }
     settingAccount = () => {
         this.props.history.push('/account/profile');
@@ -69,7 +66,7 @@ class Header extends Component {
                 <header className='user-mange-header'>
                     <div className='header-left'>
                         <div className='header-left-content'>
-                            <div className='header-logo' onClick={() => this.returnHome()}>
+                            <div className='header-logo'>
                                 <i className="fas fa-graduation-cap"></i>
                                 <div className='logo-title'>Education</div>
                             </div>

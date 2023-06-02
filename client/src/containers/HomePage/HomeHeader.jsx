@@ -4,12 +4,14 @@ import './HomeHeader.scss';
 import { withRouter } from 'react-router';
 import * as actions from "../../store/actions";
 import Avatar from '../../assets/images/avatar.png';
+import { validateToken } from '../../services/userService';
 
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            avatar: Avatar
+            avatar: Avatar,
+            roleId: ''
         }
     }
     componentDidMount() {
@@ -20,14 +22,15 @@ class HomeHeader extends Component {
         let imageBase64 = '';
         if (dataUser) {
             if (dataUser.image) {
-                imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
             }
             this.setState({
-                avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
+                avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar,
+                roleId: dataUser && dataUser.roleId
             })
         }
     }
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidUpdate(prevProps, prevState) {
         let { userInfo, dataUser, isLoggedIn } = this.props
         if (prevProps.userInfo !== userInfo) {
             if (userInfo) {
@@ -38,10 +41,11 @@ class HomeHeader extends Component {
             let imageBase64 = '';
             if (dataUser) {
                 if (dataUser.image) {
-                    imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                    imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
                 }
                 this.setState({
-                    avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
+                    avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar,
+                    roleId: dataUser && dataUser.roleId
                 })
             }
         }
@@ -62,7 +66,12 @@ class HomeHeader extends Component {
         this.props.processLogout();
     }
     adminSystem = () => {
-        this.props.history.push('/system/manage');
+        if (this.state.roleId === 'R1') {
+            this.props.history.push('/system/manage');
+        }
+        else if (this.state.roleId === 'R2') {
+            this.props.history.push('/teacher/manage');
+        }
     }
     nextPage = (id) => {
         this.props.history.push(`/user/${id}`);

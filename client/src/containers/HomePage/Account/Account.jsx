@@ -34,7 +34,7 @@ class Account extends Component {
             let res = await getAllUserService(dataUser.id);
             if (res && res.users) {
                 if (res.users.image) {
-                    imageBase64 = new Buffer(res.users.image, 'base64').toString('binary');
+                    imageBase64 = Buffer.from(res.users.image, 'base64').toString('binary');
                 }
                 this.setState({
                     img: imageBase64 ? imageBase64 : Avatar,
@@ -49,11 +49,6 @@ class Account extends Component {
         }
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-            if (this.props.isLoggedIn === false) {
-                this.props.history.push(`/login`);
-            }
-        }
         if (prevProps.dataUser !== this.props.dataUser) {
             let { dataUser } = this.props;
             let imageBase64 = '';
@@ -61,7 +56,7 @@ class Account extends Component {
                 let res = await getAllUserService(dataUser.id);
                 if (res && res.users) {
                     if (res.users.image) {
-                        imageBase64 = new Buffer(res.users.image, 'base64').toString('binary');
+                        imageBase64 = Buffer.from(res.users.image, 'base64').toString('binary');
                     }
                     this.setState({
                         img: imageBase64 ? imageBase64 : Avatar,

@@ -6,9 +6,11 @@ export const path = {
     RESGISTER: '/register',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
+    TEACHER: '/teacher',
     DETAIL_TEACHER: '/detail-teacher/:id',
     ACCOUNT: '/account/profile',
-    CHANGE_PASSWORD: '/account/change-password'
+    CHANGE_PASSWORD: '/account/change-password',
+    PAGE_NOT_FOUND: '/*'
 };
 
 export const CRUD_ACTIONS = {

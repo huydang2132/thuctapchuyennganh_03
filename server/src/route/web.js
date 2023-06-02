@@ -2,6 +2,8 @@ import express from "express";
 import userController from "../controllers/userController";
 import teacherController from "../controllers/teacherController";
 import adminController from "../controllers/adminController";
+import homePageService from "../controllers/homePageController";
+import { verifyToken, verifyRoleAdmin } from "../Middleware/verifyToken";
 
 let router = express.Router();
 
@@ -15,6 +17,8 @@ let initWebRoutes = (app) => {
     router.get('/allcode', userController.getAllCode);
     router.put('/api/account/change-password', userController.handleChangePassword);
     router.get('/api/get-roleid', userController.getRoleId);
+
+    router.get('/api/validate-token', verifyToken);
 
     router.get('/api/top-teacher-home', teacherController.getTopTeacher);
     router.get('/api/get-all-teachers', teacherController.getAllTeacher);
@@ -36,6 +40,8 @@ let initWebRoutes = (app) => {
     router.delete('/api/delete-center', adminController.deleteCenter);
     router.get('/api/get-total', adminController.getTotal);
     router.get('/api/get-total-user-by-month', adminController.getTotalUserByMonth);
+
+    router.get('/api/serach-course', homePageService.searchCourse);
 
     return app.use("/", router);
 }

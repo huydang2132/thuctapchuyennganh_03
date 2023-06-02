@@ -22,7 +22,7 @@ class AddCourse extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllCourse();
+        this.props.getAllCourse('ALL');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -161,7 +161,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getRoleId: (email) => dispatch(actions.getRoleId(email)),
-        getAllCourse: () => dispatch(actions.fetchAllCourse())
+        getAllCourse: (id) => dispatch(actions.fetchAllCourse(id))
     };
 };
 

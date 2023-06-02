@@ -24,54 +24,93 @@ class AdminPage extends Component {
             })
         }
     }
-    handleClickNavbarItem = (id) => {
-        this.props.history.push(`/system/${id}`);
+    handleClickNavbarItem = (pathName, id) => {
+        this.props.history.push(`/${pathName}/${id}`);
     }
     render() {
         let { item } = this.state;
+        let roleId = this.props.dataUser.roleId
         return (
             <>
                 <nav className='user-manage-sidebar'>
-                    <div className={item === '/system/manage' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage')}>
-                        <i className="fa-solid fa-house"></i>
-                        <span>Trang chủ</span>
-                    </div>
-                    <div className={item === '/system/list-user' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('list-user')}>
-                        <i className="fa-solid fa-users-gear"></i>
-                        <span>Người dùng</span>
-                    </div>
-                    <div className={item === '/system/manage-teacher' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-teacher')}>
-                        <i className="fa-solid fa-user-gear"></i>
-                        <span>Giáo viên</span>
-                    </div>
-                    <div className={item === '/system/manage-schedule' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-schedule')}>
-                        <i className="fa-solid fa-calendar-days"></i>
-                        <span>Lịch dạy</span>
-                    </div>
-                    <div className={item === '/system/manage-center' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-center')}>
-                        <i className="fas fa-school"></i>
-                        <span>Trung tâm</span>
-                    </div>
-                    <div className={item === '/system/manage-course' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-course')}>
-                        <i className="fa-solid fa-chalkboard-user"></i>
-                        <span>Khóa học</span>
-                    </div>
-                    <div className={item === '/system/manage-subject' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-subject')}>
-                        <i className="fas fa-book-open"></i>
-                        <span>Môn học</span>
-                    </div>
-                    <div className={item === '/system/manage-handbook' ? 'sidebar-item active' : 'sidebar-item'}
-                        onClick={() => this.handleClickNavbarItem('manage-handbook')}>
-                        <i className="fa-solid fa-address-card"></i>
-                        <span>Cẩm nang</span>
-                    </div>
+                    {
+                        roleId && roleId === 'R1' ?
+                            <>
+                                <div className={item === '/system/manage' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage')}>
+                                    <i className="fa-solid fa-house"></i>
+                                    <span>Trang chủ</span>
+                                </div>
+                                <div className={item === '/system/list-user' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'list-user')}>
+                                    <i className="fa-solid fa-users-gear"></i>
+                                    <span>Người dùng</span>
+                                </div>
+                                <div className={item === '/system/manage-teacher' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-teacher')}>
+                                    <i className="fa-solid fa-user-gear"></i>
+                                    <span>Giáo viên</span>
+                                </div>
+                                <div className={item === '/system/manage-schedule' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-schedule')}>
+                                    <i className="fa-solid fa-calendar-days"></i>
+                                    <span>Lịch dạy</span>
+                                </div>
+                                <div className={item === '/system/manage-center' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-center')}>
+                                    <i className="fas fa-school"></i>
+                                    <span>Trung tâm</span>
+                                </div>
+                                <div className={item === '/system/manage-course' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-course')}>
+                                    <i className="fa-solid fa-chalkboard-user"></i>
+                                    <span>Khóa học</span>
+                                </div>
+                                <div className={item === '/system/manage-subject' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-subject')}>
+                                    <i className="fas fa-book-open"></i>
+                                    <span>Môn học</span>
+                                </div>
+                                <div className={item === '/system/manage-handbook' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('system', 'manage-handbook')}>
+                                    <i className="fa-solid fa-address-card"></i>
+                                    <span>Cẩm nang</span>
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div className={item === '/teacher/manage' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage')}>
+                                    <i className="fa-solid fa-house"></i>
+                                    <span>Trang chủ</span>
+                                </div>
+                                <div className={item === '/teacher/manage-teacher' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage-teacher')}>
+                                    <i className="fa-solid fa-user-gear"></i>
+                                    <span>Giáo viên</span>
+                                </div>
+                                <div className={item === '/teacher/manage-tutor' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage-tutor')}>
+                                    <i className="fa-solid fa-graduation-cap"></i>
+                                    <span>Gia sư</span>
+                                </div>
+                                <div className={item === '/teacher/manage-schedule' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage-schedule')}>
+                                    <i className="fa-solid fa-calendar-days"></i>
+                                    <span>Lịch dạy</span>
+                                </div>
+                                <div className={item === '/teacher/manage-course' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage-course')}>
+                                    <i className="fa-solid fa-chalkboard-user"></i>
+                                    <span>Khóa học</span>
+                                </div>
+                                <div className={item === '/teacher/manage-exam' ? 'sidebar-item active' : 'sidebar-item'}
+                                    onClick={() => this.handleClickNavbarItem('teacher', 'manage-exam')}>
+                                    <i className="fas fa-book-open"></i>
+                                    <span>Đề luyện</span>
+                                </div>
+                            </>
+                    }
                 </nav>
             </>
         );

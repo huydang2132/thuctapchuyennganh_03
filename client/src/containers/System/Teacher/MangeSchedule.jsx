@@ -90,7 +90,7 @@ class ManageSchedule extends Component {
             toast.error('Chưa chọn ngày!');
             return;
         }
-        let formatedDate = new Date(currentDate).getTime();
+        let formatedDate = new Date(currentDate).getTime() - 25200000;
         if (rangeTime && rangeTime.length > 0) {
             let selectedTime = rangeTime.filter(item => item.isSelected === true);
             if (selectedTime && selectedTime.length > 0) {
@@ -112,6 +112,7 @@ class ManageSchedule extends Component {
             teacherId: selectedTeacher.value,
             date: formatedDate
         });
+        console.log(formatedDate);
         if (res.errCode === 0) {
             toast.success('Đặt lịch dạy thành công!')
         }
@@ -125,7 +126,6 @@ class ManageSchedule extends Component {
     render() {
         let { rangeTime } = this.state;
         let minDate = moment(new Date()).format('YYYY-MM-DD');
-        console.log(this.state.currentDate);
         return (
             <>
                 <div className='manage-schedule-container'>

@@ -1,8 +1,13 @@
 import bcrypt from 'bcryptjs';
 import db from '../models/index';
 import { reject } from 'lodash';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const salt = bcrypt.genSaltSync(10);
+const secretKey = process.env.SECRET_KEY;
 
 let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
@@ -11,17 +16,27 @@ let handleUserLogin = (email, password) => {
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['email', 'password'],
+                    attributes: ['id', 'email', 'password', 'roleId'],
                     where: { email: email },
                     raw: true
                 });
+
                 if (user) {
                     let check = await bcrypt.compareSync(password, user.password);
                     if (check) {
+                        const payload = {
+                            id: user.id,
+                            email: user.email,
+                            roleId: user.roleId
+                            // Các thông tin khác về người dùng có thể được thêm vào payload
+                        };
+                        // Tạo token với payload và khóa bí mật
+                        const token = jwt.sign(payload, secretKey, { expiresIn: '7d' });
                         userData.errCode = 0;
                         userData.errMessage = 'Success';
                         delete user.password;
-                        userData.user = user
+                        userData.user = token;
+                        userData.token = token;
                     }
                     else {
                         userData.errCode = 3;

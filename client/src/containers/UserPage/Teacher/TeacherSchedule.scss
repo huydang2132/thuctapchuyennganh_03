@@ -1,0 +1,97 @@
+.teacher-schedule-container {
+    border-right: 1px solid #ddd;
+    height: 100%;
+
+    .all-schedule {
+        .schedule-select {
+            text-transform: capitalize;
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+            color: #337ab7;
+            font-weight: 600;
+
+            option {
+                text-transform: capitalize;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .all-time {
+
+        .text-calender {
+            margin: 10px 0;
+
+            span {
+                text-transform: uppercase;
+                font-weight: 600;
+
+                i {
+                    padding-right: 5px;
+                }
+            }
+        }
+
+        .time-content {
+
+            .time-book-free {
+                margin-top: 15px;
+                position: relative;
+
+                .time-book-left {
+                    padding-right: 8px;
+                }
+
+                .time-book-right {
+                    padding-left: 20px;
+                }
+
+                i {
+                    position: absolute;
+                    font-size: 18px;
+                    top: -2px;
+                    animation: pointer 0.3s ease infinite;
+                }
+            }
+
+            @keyframes pointer {
+                from {
+                    top: -7px;
+                }
+
+                to {
+                    top: -2px;
+                }
+            }
+
+            .time-btn {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+
+                button {
+                    padding: 10px 5px;
+                    width: 160px;
+                    border: none;
+                    outline: none;
+                    background-color: #fff480;
+                    font-weight: 600;
+                    color: #333;
+                    border-radius: 3px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #33b0e3;
+                        color: #fff;
+                    }
+                }
+            }
+
+
+            span {
+                font-style: italic;
+            }
+        }
+    }
+}

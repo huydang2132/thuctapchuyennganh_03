@@ -12,6 +12,15 @@
             user-select: none;
             gap: 20px;
             padding-top: 20px;
+
+            .system-teacher {
+                .title-system {
+                    font-size: 4rem;
+                    text-align: center;
+                    color: red;
+                    padding-top: 10px;
+                }
+            }
         }
     }
 

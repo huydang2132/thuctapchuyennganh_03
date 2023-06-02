@@ -22,11 +22,7 @@ class ChangePassword extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-            if (this.props.isLoggedIn === false) {
-                this.props.history.push(`/login`);
-            }
-        }
+
     }
     handleOnChange = (event, id) => {
         if (id === 'prevPassword') {

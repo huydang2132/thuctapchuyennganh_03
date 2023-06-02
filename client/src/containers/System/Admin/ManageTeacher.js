@@ -122,6 +122,7 @@ class ManageTeacher extends Component {
                     return item && item.value === centerId;
                 })
             }
+            console.log(selectedOption.value);
             this.setState({
                 description: description,
                 selectedCenter: selectedCenter,

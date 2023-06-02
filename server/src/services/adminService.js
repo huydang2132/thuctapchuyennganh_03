@@ -53,7 +53,12 @@ const getAllCourse = (id) => {
                 if (id === 'ALL') {
                     data = await db.Course.findAll({
                         include: [
-                            { model: db.User, attributes: ['firstName', 'lastName'] }
+                            {
+                                model: db.User, attributes: ['firstName', 'lastName'],
+                                include: [
+                                    { model: db.Allcode, as: 'positionData', attributes: ['value'] },
+                                ],
+                            }
                         ],
                         raw: true,
                         nest: true
@@ -62,12 +67,22 @@ const getAllCourse = (id) => {
                 else {
                     data = await db.Course.findOne({
                         where: { id: id },
+                        include: [
+                            {
+                                model: db.User, attributes: ['firstName', 'lastName'],
+                                include: [
+                                    { model: db.Allcode, as: 'positionData', attributes: ['value'] },
+                                ],
+                            }
+                        ],
+                        raw: true,
+                        nest: true
                     })
                 }
                 resolve({
                     errCode: 0,
                     errMesage: 'Success...',
-                    data: data
+                    data
                 })
             }
         }

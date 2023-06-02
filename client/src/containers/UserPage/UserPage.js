@@ -10,6 +10,9 @@ import Exam from './Exam/Exam';
 import ComboSubject from './Subject/ComboSubject';
 import Teacher from './Teacher/Teacher';
 import MoreHandBook from './HandBook/MoreHandBook';
+import PlayList from './Course/PlayList';
+import Page404 from '../Page404/Page404';
+import { path } from '../../utils';
 
 class UserPage extends Component {
     constructor(props) {
@@ -34,9 +37,11 @@ class UserPage extends Component {
                             <Route path="/user/subject" component={Subject} />
                             <Route path="/user/combo-subject" component={ComboSubject} />
                             <Route path="/user/course" component={Course} />
+                            <Route path="/user/playlist/:id" component={PlayList} />
                             <Route path="/user/exam" component={Exam} />
                             <Route path="/user/teacher" component={Teacher} />
                             <Route path="/user/handbook" component={MoreHandBook} />
+                            <Route path="/user/*" component={Page404} />
                         </Switch>
                     </div>
                 </div>

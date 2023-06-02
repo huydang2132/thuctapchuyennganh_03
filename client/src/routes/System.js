@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as actions from '../store/actions';
+import { userCheckRoleR1, userCheckRoleR2 } from '../hoc/authentication';
 import AdminPage from '../containers/System/AdminPage';
 import ManageUser from '../containers/System/Admin/ManageUser';
 import ManageCourse from '../containers/System/Admin/ManageCourse/ManageCourse';
@@ -10,37 +11,21 @@ import ManageTeacher from '../containers/System/Admin/ManageTeacher';
 import ManageCenter from '../containers/System/Admin/ManageCenter/ManageCenter';
 import ManageHandbook from '../containers/System/Admin/ManageHandbook/ManageHandbook';
 import ManageSubject from '../containers/System/Admin/ManageSubject/ManageSubject';
+import Page404 from '../containers/Page404/Page404';
 
 class System extends Component {
     componentDidMount() {
-        let { userInfo, dataUser } = this.props;
-        if (userInfo) {
-            this.props.getRoleId(userInfo);
-        }
-        if (dataUser) {
-            if (dataUser.roleId === 'R3') {
-                this.props.history.replace('/home');
-            }
-        }
+
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let { dataUser, userInfo } = this.props;
-        if (prevProps.userInfo !== userInfo) {
-            if (userInfo) {
-                this.props.getRoleId(userInfo);
-            }
-        }
-        if (prevProps.dataUser !== dataUser) {
-            if (dataUser) {
-                if (dataUser.roleId === 'R3') {
-                    this.props.history.replace('/home');
-                }
+        let { dataUser } = this.props;
+        if (prevProps.dataUser !== this.props.dataUser) {
+            if (dataUser.roleId === 'R2') {
+                this.props.history.replace('/teacher/manage');
             }
         }
     }
     render() {
-        const { systemMenuPath } = this.props;
-
         return (
             <>
                 <div className="system-container">
@@ -54,7 +39,7 @@ class System extends Component {
                             <Route path="/system/manage-center" component={ManageCenter} />
                             <Route path="/system/manage-handbook" component={ManageHandbook} />
                             <Route path="/system/manage-subject" component={ManageSubject} />
-                            <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
+                            <Route path="/system/*" component={Page404} />
                         </Switch>
                     </div>
                 </div>

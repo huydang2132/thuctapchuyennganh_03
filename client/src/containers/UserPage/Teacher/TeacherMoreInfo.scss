@@ -1,0 +1,51 @@
+.teacher-more-info-container {
+    padding-left: 15px;
+    font-size: 15px;
+
+    .line-boder {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .more-info-content-up {
+        margin-bottom: 10px;
+
+        .text-address {
+            text-transform: uppercase;
+            color: #333;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .name-center {
+            font-weight: 600;
+        }
+
+        .detail-address {}
+    }
+
+    .more-info-content-down {
+        padding-top: 10px;
+
+        .detail-note {
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #f8f8f8;
+            margin-top: 5px;
+        }
+
+        .detail-payment {
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #eee;
+        }
+
+        .btn-detail-info {
+            padding-top: 5px;
+            color: #1E90FF;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+
+    }
+}

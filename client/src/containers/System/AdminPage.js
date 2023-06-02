@@ -22,7 +22,7 @@ class AdminPage extends Component {
         let imageBase64 = '';
         if (dataUser) {
             if (dataUser.image) {
-                imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
             }
             this.setState({
                 avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
@@ -40,7 +40,7 @@ class AdminPage extends Component {
         if (prevProps.dataUser !== dataUser) {
             if (dataUser) {
                 if (dataUser.image) {
-                    imageBase64 = new Buffer(dataUser.image, 'base64').toString('binary');
+                    imageBase64 = Buffer.from(dataUser.image, 'base64').toString('binary');
                 }
                 this.setState({
                     avatar: dataUser && isLoggedIn === true && imageBase64 ? imageBase64 : Avatar
@@ -50,6 +50,7 @@ class AdminPage extends Component {
     }
 
     render() {
+        let { dataUser } = this.props;
         return (
             <>
                 <div className='admin-page-container'>
@@ -57,9 +58,14 @@ class AdminPage extends Component {
                     <main className='admin-page-main'>
                         <Navbar getRoleId={this.getRoleId} />
                         <section className='admin-page-section'>
-                            <div className='statistic'>
-                                <Statistic />
-                            </div>
+                            {
+                                dataUser && dataUser.roleId === 'R1' &&
+                                <div className='statistic'>
+                                    <Statistic />
+                                </div>
+
+                            }
+
                         </section>
                     </main>
                     <footer className='system-footer'>
@@ -76,7 +82,7 @@ const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
         dataUser: state.user.dataUser,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
     };
 };
 
