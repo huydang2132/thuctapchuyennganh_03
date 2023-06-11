@@ -27,7 +27,7 @@ class ManageHandbook extends Component {
                     <main className='manage-handbook-main'>
                         <Navbar />
                         <section className='manage-handbook-section'>
-
+                            <h1 className='developing'>Chức năng đang được phát triển!</h1>
                         </section>
                     </main>
                     <footer className='system-footer'>

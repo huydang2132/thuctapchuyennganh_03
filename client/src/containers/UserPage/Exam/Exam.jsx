@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import * as actions from "../../../store/actions";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
+import { toast } from 'react-toastify';
 
 class Exam extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Exam extends Component {
         }
     }
     componentDidMount() {
-
+        toast.info('Chức năng đang phát triển!');
     }
     componentDidUpdate(prevProps, prevState) {
 

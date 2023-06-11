@@ -27,8 +27,8 @@ const verifyToken = (req, res, next) => {
         });
     }
     else {
-        res.status(401).json({
-            errCode: 401,
+        res.status(402).json({
+            errCode: 402,
             errMessage: 'Token not provided'
         });
     }
@@ -59,6 +59,27 @@ const verifyRoleAdmin = (req, res, next) => {
     });
 
 }
+const verifyTokenEmail = (req, res, next) => {
+    let authorization = req.headers['authorization'];
+    let token = authorization && authorization.split(" ")[1];
+    if (token) {
+        jwt.verify(token, secretKey, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({
+                    errCode: 1,
+                    errMessage: 'Token expired or invalid',
+                })
+            }
+            next();
+        });
+    }
+    else {
+        res.status(402).json({
+            errCode: 402,
+            errMessage: 'Token not provided'
+        });
+    }
+}
 module.exports = {
-    verifyToken, verifyRoleAdmin
+    verifyToken, verifyRoleAdmin, verifyTokenEmail
 }

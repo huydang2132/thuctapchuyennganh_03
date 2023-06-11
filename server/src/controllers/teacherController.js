@@ -121,6 +121,32 @@ const getCenterInfo = async (req, res) => {
         })
     }
 }
+const getAllBooking = async (req, res) => {
+    try {
+        let info = await teacherService.getAllBooking(req.query.teacherId);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
+const updateBooking = async (req, res) => {
+    try {
+        let info = await teacherService.updateBooking(req.body);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
 module.exports = {
     getTopTeacher: getTopTeacher,
     getAllTeacher: getAllTeacher,
@@ -131,4 +157,6 @@ module.exports = {
     getExtraInfoTeacher: getExtraInfoTeacher,
     getProfileTeacher: getProfileTeacher,
     getCenterInfo: getCenterInfo,
+    getAllBooking: getAllBooking,
+    updateBooking: updateBooking
 }

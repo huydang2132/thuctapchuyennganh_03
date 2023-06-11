@@ -19,12 +19,12 @@ class Page404 extends Component {
         return (
             <div className='page-not-found-container'>
                 <h1>404 Page not found</h1>
-                <section class="error-container">
-                    <span class="four"><span class="screen-reader-text">4</span></span>
-                    <span class="zero"><span class="screen-reader-text">0</span></span>
-                    <span class="four"><span class="screen-reader-text">4</span></span>
+                <section className="error-container">
+                    <span className="four"><span class="screen-reader-text">4</span></span>
+                    <span className="zero"><span class="screen-reader-text">0</span></span>
+                    <span className="four"><span class="screen-reader-text">4</span></span>
                 </section>
-                <div class="link-container">
+                <div className="link-container">
                     <Link to="/home" className='more-link'>Trở lại trang chủ</Link>
                 </div>
             </div>

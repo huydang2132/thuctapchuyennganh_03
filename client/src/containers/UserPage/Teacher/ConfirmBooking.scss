@@ -1,0 +1,29 @@
+.confirm-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    .link-container {
+        margin-top: 25px;
+
+        a {
+            background-color: #16e60b;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
+
+}

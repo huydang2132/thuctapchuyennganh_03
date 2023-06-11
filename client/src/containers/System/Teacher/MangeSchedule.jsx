@@ -19,11 +19,22 @@ class ManageSchedule extends Component {
             selectedTeacher: {},
             currentDate: '',
             rangeTime: [],
+            isTeacher: false
         }
     }
     componentDidMount() {
         this.props.allTeacherRedux();
         this.props.fetchScheduleTeacher();
+        let { dataUser } = this.props;
+        if (dataUser && dataUser.roleId === 'R2') {
+            let selectedTeacher = {};
+            selectedTeacher.label = `${dataUser.lastName} ${dataUser.firstName}`;
+            selectedTeacher.value = dataUser.id
+            this.setState({
+                selectedTeacher: selectedTeacher,
+                isTeacher: true
+            })
+        }
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.allTeacher !== this.props.allTeacher) {
@@ -44,6 +55,18 @@ class ManageSchedule extends Component {
                 rangeTime: data
             })
         }
+        let { dataUser } = this.props;
+        if (prevProps.dataUser !== dataUser) {
+            if (dataUser && dataUser.roleId === 'R2') {
+                let selectedTeacher = {};
+                selectedTeacher.label = `${dataUser.lastName} ${dataUser.firstName}`;
+                selectedTeacher.value = dataUser.id
+                this.setState({
+                    selectedTeacher: selectedTeacher,
+                    isTeacher: true
+                })
+            }
+        }
     }
     dataInputSelect = (data) => {
         let result = [];
@@ -60,6 +83,7 @@ class ManageSchedule extends Component {
     }
     handleChangeSelect = async (selectedTeacher) => {
         this.setState({ selectedTeacher });
+        console.log(selectedTeacher);
     }
     handleOnchangeDatePicker = (date) => {
         this.setState({
@@ -144,6 +168,7 @@ class ManageSchedule extends Component {
                                         onChange={this.handleChangeSelect}
                                         options={this.state.listTeacher}
                                         className={'input-select'}
+                                        isDisabled={this.state.isTeacher}
                                     />
                                 </div>
                                 <div className='select-date'>
@@ -188,6 +213,7 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         allTeacher: state.admin.allTeacher,
         scheduleTeacher: state.admin.scheduleTeacher,
+        dataUser: state.user.dataUser
     };
 };
 

@@ -27,7 +27,7 @@ class MoreHandBook extends Component {
                         <HomeHeader />
                     </header>
                     <section className='more-handbook-section'>
-                        Cẩm nang
+                        <h1 className='developing'>Chức năng đang được phát triển!</h1>
                     </section>
                     <footer>
                         <HomeFooter author={"Đặng Đình Huy"} />

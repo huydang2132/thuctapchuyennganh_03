@@ -8,6 +8,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            statusId: {
+                type: Sequelize.STRING
+            },
             teacherId: {
                 type: Sequelize.INTEGER
             },
@@ -15,7 +18,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             date: {
-                type: Sequelize.DATE
+                type: Sequelize.STRING
             },
             dateType: {
                 type: Sequelize.STRING

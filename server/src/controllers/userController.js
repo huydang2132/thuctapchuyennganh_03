@@ -105,6 +105,32 @@ const getRoleId = async (req, res) => {
         })
     }
 }
+const forgotPassword = async (req, res) => {
+    try {
+        let data = await userService.forgotPassword(req.query.email);
+        return res.status(200).json(data);
+    }
+    catch (e) {
+        console.log('Err: ', e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Err from server'
+        })
+    }
+}
+const resetPassword = async (req, res) => {
+    try {
+        let data = await userService.resetPassword(req.query.id, req.query.newPass);
+        return res.status(200).json(data);
+    }
+    catch (e) {
+        console.log('Err: ', e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Err from server'
+        })
+    }
+}
 module.exports = {
     handleLogin: handleLogin,
     handleRegister: handleRegister,
@@ -114,5 +140,7 @@ module.exports = {
     handleDeleteUser: handleDeleteUser,
     getAllCode: getAllCode,
     handleChangePassword: handleChangePassword,
-    getRoleId: getRoleId
+    getRoleId: getRoleId,
+    forgotPassword: forgotPassword,
+    resetPassword: resetPassword,
 }

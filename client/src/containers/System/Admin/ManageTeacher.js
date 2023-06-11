@@ -15,6 +15,7 @@ class ManageTeacher extends Component {
             description: '',
             listTeacher: [],
             hasOldData: false,
+            isTeacher: false,
 
             listPrice: [],
             listPayment: [],
@@ -29,7 +30,8 @@ class ManageTeacher extends Component {
         this.props.allTeacherRedux();
         this.props.getTeacherInfo();
     }
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidUpdate(prevProps, prevState) {
+        let { dataUser } = this.props;
         if (prevProps.allTeacher !== this.props.allTeacher) {
             let dataSelect = this.dataInputSelect(this.props.allTeacher, 'USERS');
             this.setState({
@@ -37,7 +39,7 @@ class ManageTeacher extends Component {
             })
         }
         if (prevProps.allTeacherInfo !== this.props.allTeacherInfo) {
-            let { resPayment, resPrice, resProvince, resCenter } = this.props.allTeacherInfo
+            let { resPayment, resPrice, resProvince, resCenter } = await this.props.allTeacherInfo
             let dataSelectPrice = this.dataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.dataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.dataInputSelect(resProvince, 'PROVINCE');
@@ -48,6 +50,18 @@ class ManageTeacher extends Component {
                 listProvince: dataSelectProvince,
                 listCenter: dataSelectCenter,
             })
+            this.handleGetInfo(this.state.selectedTeacher);
+        }
+        if (prevProps.dataUser !== this.props.dataUser) {
+            if (dataUser && dataUser.roleId === 'R2') {
+                let selectedOption = {};
+                selectedOption.label = `${dataUser.lastName} ${dataUser.firstName}`;
+                selectedOption.value = dataUser.id
+                this.setState({
+                    selectedTeacher: selectedOption,
+                    isTeacher: true
+                })
+            }
         }
     }
     dataInputSelect = (data, type) => {
@@ -122,7 +136,7 @@ class ManageTeacher extends Component {
                     return item && item.value === centerId;
                 })
             }
-            console.log(selectedOption.value);
+            console.log('listPrice', listPrice);
             this.setState({
                 description: description,
                 selectedCenter: selectedCenter,
@@ -158,6 +172,7 @@ class ManageTeacher extends Component {
         })
     }
     render() {
+        console.log('render', this.state.selectedTeacher);
         return (
             <div className='manage-teacher-container'>
                 <header>
@@ -180,6 +195,7 @@ class ManageTeacher extends Component {
                                             options={this.state.listTeacher}
                                             placeholder="Chọn giáo viên"
                                             className='select-input'
+                                            isDisabled={this.state.isTeacher}
                                         />
                                     </div>
                                     <div className='item-col'>
@@ -253,7 +269,8 @@ class ManageTeacher extends Component {
 const mapStateToProps = state => {
     return {
         allTeacher: state.admin.allTeacher,
-        allTeacherInfo: state.admin.allTeacherInfo
+        allTeacherInfo: state.admin.allTeacherInfo,
+        dataUser: state.user.dataUser
     };
 };
 

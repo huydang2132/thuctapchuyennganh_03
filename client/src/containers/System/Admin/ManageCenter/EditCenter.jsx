@@ -61,6 +61,7 @@ class EditCourse extends Component {
         })
     }
     handleEditCenter = async () => {
+        let { offset, perPage } = this.props;
         let { nameCenter, selectedProvince, address, description, image, id } = this.state;
         if (!nameCenter || !selectedProvince || !address || !description) {
             toast.error('Vui lòng nhập đầy đủ thông tin!');
@@ -74,7 +75,7 @@ class EditCourse extends Component {
                 address: address,
                 description: description,
                 image: image
-            })
+            }, offset, perPage)
             this.props.showEditCenter();
         }
     }
@@ -178,7 +179,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchEditCenter: (data) => dispatch(actions.fetchEditCenter(data)),
+        fetchEditCenter: (data, offset, limit) => dispatch(actions.fetchEditCenter(data, offset, limit)),
     };
 };
 

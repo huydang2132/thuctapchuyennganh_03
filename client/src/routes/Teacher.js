@@ -10,6 +10,15 @@ import MangeTutor from '../containers/System/Teacher/ManageTutor/MangeTutor';
 import Page404 from '../containers/Page404/Page404';
 
 class Teacher extends Component {
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let { dataUser } = this.props;
+        if (prevProps.dataUser !== this.props.dataUser) {
+            if (dataUser.roleId === 'R1') {
+                this.props.history.replace('/system/manage');
+            }
+        }
+    }
     render() {
         return (
             <>
@@ -34,7 +43,8 @@ class Teacher extends Component {
 const mapStateToProps = state => {
     return {
         TeacherMenuPath: state.app.TeacherMenuPath,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        dataUser: state.user.dataUser,
     };
 };
 

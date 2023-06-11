@@ -10,7 +10,6 @@ class TeacherMoreInfo extends Component {
         this.state = {
             isShowDetail: false,
             extraInfo: {},
-            centerInfo: {}
         }
     }
 
@@ -26,12 +25,6 @@ class TeacherMoreInfo extends Component {
                 })
             }
         }
-        if (prevProps.teacherInfor !== this.props.teacherInfor) {
-            let centerInfo = await this.props.teacherInfor;
-            this.setState({
-                centerInfo: centerInfo
-            })
-        }
     }
     showHideDetailInfo = () => {
         this.setState({
@@ -39,7 +32,7 @@ class TeacherMoreInfo extends Component {
         })
     }
     render() {
-        let { isShowDetail, extraInfo, centerInfo } = this.state;
+        let { isShowDetail, extraInfo } = this.state;
         let { teacherInfor } = this.props;
         let payment = "";
         if (extraInfo && extraInfo.paymentData && extraInfo.paymentId !== "PAY3") {
@@ -48,14 +41,14 @@ class TeacherMoreInfo extends Component {
         else {
             payment = "Tiền mặt hoặc Thẻ ATM";
         }
-        // console.log('extraInfo', centerInfo)
+        let nameCenter = teacherInfor && teacherInfor.Teacher_Info ? `${teacherInfor.Teacher_Info.Center.name} - ${teacherInfor.Teacher_Info.Center.provinceData.value}` : ''
         return (
             <>
                 <div className='teacher-more-info-container'>
                     <div className='more-info-content-up'>
                         <div className='text-address'>Địa chỉ dạy</div>
                         <div className='name-center'>
-                            Trung tâm {teacherInfor && teacherInfor.Center ? extraInfo.name : ''}
+                            Trung tâm {nameCenter}
                         </div>
                         <div className='detail-address'>
                             {extraInfo && extraInfo.addressCenter ? extraInfo.addressCenter : ''}
@@ -64,11 +57,11 @@ class TeacherMoreInfo extends Component {
                     <div className='line-boder'></div>
                     <div className='more-info-content-down'>
                         <div className='detail-info-price'>
-                            Giá giảng dạy: {extraInfo && extraInfo.priceData
+                            Học phí: {extraInfo && extraInfo.priceData
                                 && < NumericFormat
                                     value={extraInfo.priceData.value}
-                                    displayType={'text'} thousandSeparator={true}
-                                    suffix={'VND'} />}
+                                    displayType={'text'} thousandSeparator=","
+                                    suffix={' VND'} />}
                         </div>
 
                         {

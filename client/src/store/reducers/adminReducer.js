@@ -1,6 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
+    loading: false,
     genders: [],
     roles: [],
     positions: [],
@@ -14,7 +15,9 @@ const initialState = {
     allTeacherInfo: [],
 
     allCourse: [],
-    allCenter: []
+    allCenter: [],
+
+    allBooking: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -129,13 +132,45 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        case actionTypes.FETCH_ALL_COURSE_BY_TEACHER_SUCCESS:
+            state.allCourse = action.data
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_COURSE_BY_TEACHER_FAILED:
+            state.allCourse = []
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_CENTER_START:
+            state.loading = true
+            return {
+                ...state,
+            }
         case actionTypes.FETCH_ALL_CENTER_SUCCESS:
+            state.loading = false
             state.allCenter = action.data
             return {
                 ...state,
             }
         case actionTypes.FETCH_ALL_CENTER_FAILED:
             state.allCenter = []
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_BOOKING_START:
+            state.loading = true
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_BOOKING_SUCCESS:
+            state.loading = false
+            state.allBooking = action.data
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_BOOKING_FAILED:
+            state.allBooking = []
             return {
                 ...state,
             }

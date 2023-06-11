@@ -1,5 +1,5 @@
-.manage-center-list {
-    .manage-center-table {
+.manage-booking-list {
+    .manage-booking-table {
         border-collapse: collapse;
         background-color: #f8f8f8;
         border-radius: 10px;
@@ -26,11 +26,11 @@
                 border-top: 1px solid #ddd;
             }
 
-            .tr-add-center {
+            .tr-head {
                 height: 60px;
                 position: relative;
 
-                .title-table-center {
+                .title-table-booking {
                     position: absolute;
                     left: 20px;
                     top: 50%;
@@ -38,40 +38,6 @@
                     font-size: 1.6rem;
                 }
 
-                .btn-add-center {
-                    position: absolute;
-                    background-color: #6e00ff;
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    right: 25px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    color: #fff;
-                    font-size: 1rem;
-                }
-
-                .search-center {
-                    background-color: #fff;
-                    border: 1px solid #ddd;
-                    border-radius: 20px;
-                    padding: 5px 10px;
-                    margin: 10px;
-                    right: 15px;
-                    position: absolute;
-                    display: flex;
-                    align-items: center;
-
-                    input {
-                        outline: none;
-                        padding: 5px 10px;
-                        border: none;
-                    }
-
-                    i {
-                        color: #999;
-                    }
-                }
             }
         }
 
@@ -81,15 +47,39 @@
                 border-top: 1px solid #ddd;
                 max-width: 200px;
 
+                p {
+                    color: #fff;
+                    padding: 5px 8px;
+                    border-radius: 15px;
+                    text-align: center;
+                }
+
+                .confirm {
+                    background-color: green;
+                }
+
+                .wait {
+                    background-color: orange;
+                }
+
+                .done {
+                    background-color: blue;
+                }
+
+                .cancel {
+                    background-color: red;
+                }
+
                 &.course-full-with {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
 
-                .btn-edit {
-                    color: orange;
-                    padding: 0 15px;
+                .btn-done {
+                    color: green;
+                    padding: 0px 10px;
+                    font-size: 1.1rem;
                 }
 
                 .btn-delete {

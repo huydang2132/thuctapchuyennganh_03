@@ -6,7 +6,8 @@ import {
     getAllTeachers, saveDetailTeacherService,
     getAllCourseService, editCourseService,
     getCenterInfoService, postNewCenterService,
-    getAllCenterService, editCenterService
+    getAllCenterService, editCenterService,
+    getAllCourseByTeacherService, getAllBookingService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -245,7 +246,7 @@ export const editUserFailed = () => ({
 export const fetchTopTeacher = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getTopTeacherService('');
+            let res = await getTopTeacherService(8);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_TOP_TEACHER_SUCCESS,
@@ -414,7 +415,31 @@ export const fetchAllCourse = (id) => {
         }
     }
 }
-
+export const fetchAllCourseByTeacher = (teacherId) => {
+    return async (dispatch, getState) => {
+        try {
+            let resCourse = await getAllCourseByTeacherService(teacherId);
+            if (resCourse && resCourse.errCode === 0) {
+                let data = resCourse.data
+                dispatch({
+                    type: actionTypes.FETCH_ALL_COURSE_BY_TEACHER_SUCCESS,
+                    data: data
+                });
+            }
+            else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_COURSE_BY_TEACHER_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_COURSE_BY_TEACHER_FAILED
+            });
+            console.log('fetchAllCourseByTeacher error', e);
+        }
+    }
+}
 export const fetchEditCourse = (data) => {
     return async (dispatch, getState) => {
         try {
@@ -441,10 +466,13 @@ export const fetchEditCourse = (data) => {
         }
     }
 }
-export const fetchAllCenter = (id) => {
+export const fetchAllCenter = (id, offset, limit) => {
     return async (dispatch, getState) => {
         try {
-            let resCenter = await getAllCenterService(id);
+            dispatch({
+                type: actionTypes.FETCH_ALL_CENTER_START
+            })
+            let resCenter = await getAllCenterService(id, offset, limit);
             let resProvince = await getAllCodeService("PROVINCE");
             if (resCenter && resCenter.errCode === 0
                 && resProvince && resProvince.errCode === 0) {
@@ -504,7 +532,7 @@ export const fetchCreateCenter = (data) => {
         }
     }
 }
-export const fetchEditCenter = (data) => {
+export const fetchEditCenter = (data, offset, limit) => {
     return async (dispatch, getState) => {
         try {
             let resCenter = await editCenterService(data);
@@ -513,7 +541,7 @@ export const fetchEditCenter = (data) => {
                     type: actionTypes.FETCH_EDIT_CENTER_SUCCESS,
                 });
                 toast.success('Cập nhật trung tâm thành công!');
-                dispatch(fetchAllCenter('ALL'));
+                dispatch(fetchAllCenter('ALL', offset, limit));
             }
             else {
                 toast.error('Đã xảy ra lỗi, cập nhật thất bại!');
@@ -525,6 +553,33 @@ export const fetchEditCenter = (data) => {
         catch (e) {
             dispatch({
                 type: actionTypes.FETCH_EDIT_CENTER_FAILED
+            });
+            console.log('adminActions error', e);
+        }
+    }
+}
+export const fetchAllBooking = (teacherId) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({
+                type: actionTypes.FETCH_ALL_BOOKING_START,
+            });
+            let res = await getAllBookingService(teacherId);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_BOOKING_SUCCESS,
+                    data: res.data
+                });
+            }
+            else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_BOOKING_FAILED
+                });
+            }
+        }
+        catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_BOOKING_FAILED
             });
             console.log('adminActions error', e);
         }

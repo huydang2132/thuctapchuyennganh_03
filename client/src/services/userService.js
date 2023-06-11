@@ -75,8 +75,8 @@ const getCenterInfoService = (centerId) => {
 const postNewCenterService = (data) => {
     return axios.post('/api/post-new-center', data);
 }
-const getAllCenterService = (id) => {
-    return axios.get('/api/get-all-center', { params: { id } });
+const getAllCenterService = (id, offset, limit) => {
+    return axios.get('/api/get-all-center', { params: { id, offset, limit } });
 }
 const deleteCenterService = (id) => {
     return axios.delete('/api/delete-center', { params: { id } });
@@ -93,6 +93,39 @@ const getTotalUserByMonthService = (id) => {
 const searchCourseService = (name) => {
     return axios.get('/api/serach-course', { params: { name } });
 }
+const getAllCourseByTeacherService = (teacherId) => {
+    return axios.get('/api/get-all-course-by-teacher', { params: { teacherId } });
+}
+const createScheduleService = (data) => {
+    return axios.post('/api/create-schedule', data);
+}
+const deleteScheduleService = (id) => {
+    return axios.delete('/api/delete-schedule', { params: { id } });
+}
+const verifyScheduleService = (token, id) => {
+    return axios.put('/api/verify-schedule', null, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id }
+    });
+};
+const getAllBookingService = (teacherId) => {
+    return axios.get('/api/get-all-booking', { params: { teacherId } });
+}
+const updateBookingService = (data) => {
+    return axios.put('/api/update-booking', data);
+}
+const forgotPasswordService = (email) => {
+    return axios.get('/api/forgot-password', { params: { email } });
+}
+const resetPasswordService = (token, id, newPass) => {
+    return axios.put('/api/reset-password', null, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id, newPass }
+    });
+}
+const getAllTeacherLimitService = (offset, limit) => {
+    return axios.get('/api/get-all-teacher-limit', { params: { offset, limit } });
+}
 export {
     handleLoginApi, handleRegisterApi, getAllUserService,
     createNewUserService, deleteUserService, validateToken,
@@ -105,5 +138,8 @@ export {
     deleteCourseService, editCourseService, getCenterInfoService,
     postNewCenterService, getAllCenterService, deleteCenterService,
     editCenterService, getTotalService, getTotalUserByMonthService,
-    searchCourseService
+    searchCourseService, getAllCourseByTeacherService,
+    createScheduleService, deleteScheduleService, verifyScheduleService,
+    getAllBookingService, updateBookingService, forgotPasswordService,
+    resetPasswordService, getAllTeacherLimitService
 };

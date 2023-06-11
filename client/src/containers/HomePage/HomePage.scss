@@ -54,7 +54,17 @@
 
     .section-body {
         .section-customize {
-            padding: 0 8px;
+            margin: 0 8px;
+            cursor: pointer;
+            outline: none;
+
+            &:hover {
+                color: #49bce2;
+            }
+
+            .item-name {
+                padding-top: 10px;
+            }
 
             .bg-image {
                 background-position: center center;
@@ -63,17 +73,13 @@
                 background-color: #eee;
                 width: 300px;
                 height: 180px;
+                object-fit: cover;
 
                 &.bg-specialty {
                     background-image: url('../../assets/specialty/math.jpg');
                 }
 
-                &.bg-center {
-                    background-image: url('../../assets/teaching-center/math-center.jpg');
-                }
-
                 &.secion-outstanding-teacher {
-                    // background-image: url('../../assets/outstanding-teacher/avatar.jpg');
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;

@@ -1,15 +1,17 @@
 export const path = {
     HOME: '/',
     HOMEPAGE: '/home',
-    USER_PAGE: '/user',
+    USER_PAGE: '/user/',
     LOGIN: '/login',
     RESGISTER: '/register',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     TEACHER: '/teacher',
-    DETAIL_TEACHER: '/detail-teacher/:id',
     ACCOUNT: '/account/profile',
     CHANGE_PASSWORD: '/account/change-password',
+    FORGOT_PASSWORD: '/account/forgot-password',
+    CONFIRM_PASSWORD: '/reset-password/:token/:id/:newPass',
+    CONFIRM_BOOKING: '/verify-booking/:token/:id',
     PAGE_NOT_FOUND: '/*'
 };
 

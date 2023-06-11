@@ -3,7 +3,7 @@ import userController from "../controllers/userController";
 import teacherController from "../controllers/teacherController";
 import adminController from "../controllers/adminController";
 import homePageService from "../controllers/homePageController";
-import { verifyToken, verifyRoleAdmin } from "../Middleware/verifyToken";
+import { verifyToken, verifyTokenEmail } from "../middleware/verifyToken";
 
 let router = express.Router();
 
@@ -17,6 +17,8 @@ let initWebRoutes = (app) => {
     router.get('/allcode', userController.getAllCode);
     router.put('/api/account/change-password', userController.handleChangePassword);
     router.get('/api/get-roleid', userController.getRoleId);
+    router.get('/api/forgot-password', userController.forgotPassword);
+    router.put('/api/reset-password', verifyTokenEmail, userController.resetPassword);
 
     router.get('/api/validate-token', verifyToken);
 
@@ -29,9 +31,12 @@ let initWebRoutes = (app) => {
     router.get('/api/get-extra-info-teacher-by-id', teacherController.getExtraInfoTeacher);
     router.get('/api/get-profile-teacher-by-id', teacherController.getProfileTeacher);
     router.get('/api/get-center-info', teacherController.getCenterInfo);
+    router.get('/api/get-all-booking', teacherController.getAllBooking);
+    router.put('/api/update-booking', teacherController.updateBooking);
 
     router.post('/api/post-new-course', adminController.postNewCourse);
     router.get('/api/get-all-course', adminController.getAllCourse);
+    router.get('/api/get-all-course-by-teacher', adminController.getAllCourseByTeacher);
     router.put('/api/edit-course', adminController.editCourse);
     router.delete('/api/delete-course', adminController.deleteCourse);
     router.post('/api/post-new-center', adminController.postNewCenter);
@@ -42,6 +47,10 @@ let initWebRoutes = (app) => {
     router.get('/api/get-total-user-by-month', adminController.getTotalUserByMonth);
 
     router.get('/api/serach-course', homePageService.searchCourse);
+    router.post('/api/create-schedule', homePageService.createSchedule);
+    router.put('/api/verify-schedule', verifyTokenEmail, homePageService.verifySchedule);
+    router.delete('/api/delete-schedule', homePageService.deleteSchedule);
+    router.get('/api/get-all-teacher-limit', homePageService.getAllTeacherLimit);
 
     return app.use("/", router);
 }

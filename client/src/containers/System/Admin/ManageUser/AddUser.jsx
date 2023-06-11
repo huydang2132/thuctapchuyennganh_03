@@ -203,7 +203,7 @@ class AddUser extends Component {
                                             </select>
                                         </div>
                                         <div className='form-col'>
-                                            <label htmlFor='position'>Vị trí</label>
+                                            <label htmlFor='position'>Học hàm/học vị</label>
                                             <select className='form-select' type='text' id='position'
                                                 value={positionId ? positionId : ''}
                                                 disabled={roleId === 'R2' ? false : true}

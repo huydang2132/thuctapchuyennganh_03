@@ -13,7 +13,9 @@ class ManageCenter extends Component {
         this.state = {
             addCenter: false,
             centers: [],
-            editCenter: false
+            editCenter: false,
+            offset: 0,
+            perPage: 0
         }
     }
     componentDidMount() {
@@ -32,13 +34,15 @@ class ManageCenter extends Component {
             editCenter: !this.state.editCenter
         })
     }
-    currentCenter = (data) => {
+    currentCenter = (data, offset, perPage) => {
         this.setState({
-            centers: data
+            centers: data,
+            offset,
+            perPage
         })
     }
     render() {
-        let { addCenter, editCenter, centers } = this.state;
+        let { addCenter, editCenter, centers, offset, perPage } = this.state;
         return (
             <>
                 <div className='manage-center-container'>
@@ -75,6 +79,8 @@ class ManageCenter extends Component {
                                 editCenter={editCenter}
                                 showEditCenter={this.showEditCenter}
                                 currentCenter={centers}
+                                offset={offset}
+                                perPage={perPage}
                             />
                     }
                 </div>

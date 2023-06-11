@@ -6,12 +6,13 @@ import * as actions from "../../../store/actions";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import Img from '../../../assets/images/header-background.jpg';
+import { toast } from 'react-toastify';
 
 class Subject extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Anh:Img
+            Anh: Img
         }
     }
     componentDidMount() {
@@ -20,11 +21,11 @@ class Subject extends Component {
     componentDidUpdate(prevProps, prevState) {
 
     }
-    onClickSubject=()=>{
-        alert('MonHoc')
+    onClickSubject = () => {
+        toast.info('Chức năng đang phát triển!');
     }
     render() {
-        let {Anh} = this.state
+        let { Anh } = this.state
         return (
             <>
                 <div className='subject-container'>
@@ -35,7 +36,7 @@ class Subject extends Component {
                         <div className="modau">
                             <p>DANH SÁCH CÁC MÔN HỌC TRÊN HỆ THỐNG GIÁO DỤC ĐIỆN TỬ</p>
                         </div>
-                        <div onClick={()=>this.onClickSubject()} class="mon">
+                        <div onClick={() => this.onClickSubject()} class="mon">
                             <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
@@ -43,32 +44,32 @@ class Subject extends Component {
                                 HOÁ HỌC
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 VẬT LÝ
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 GIẢI TÍCH
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 TIẾNG ANH
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">

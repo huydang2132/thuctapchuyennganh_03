@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailTeacher.scss';
+import * as actions from '../../../store/actions';
 import { getDetailteacherService } from '../../../services/userService';
 import TeacherSchedule from './TeacherSchedule';
 import TeacherMoreInfo from './TeacherMoreInfor';
 import HomeFooter from '../../HomePage/HomeFooter';
+import ModalBooking from './ModalBooking';
 
 class DetailTeacher extends Component {
     constructor(props) {
@@ -13,6 +15,8 @@ class DetailTeacher extends Component {
         this.state = {
             detailTeacher: {},
             currentTeacherId: -1,
+            isOpenModal: false,
+            time: {}
         }
     }
     async componentDidMount() {
@@ -28,9 +32,17 @@ class DetailTeacher extends Component {
                 })
             }
         }
+        let { userInfo } = this.props;
+        this.props.getRoleId(userInfo);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
 
+    }
+    openModal = (time) => {
+        this.setState({
+            isOpenModal: !this.state.isOpenModal,
+            time
+        })
     }
     render() {
         let { detailTeacher } = this.state;
@@ -38,10 +50,9 @@ class DetailTeacher extends Component {
         if (detailTeacher && detailTeacher.positionData) {
             nameTeacher = `${detailTeacher.positionData.value}, ${detailTeacher.lastName} ${detailTeacher.firstName}`;
         }
-        console.log('detailTeacher', detailTeacher);
         return (
             <>
-                <HomeHeader isShowBanner={false} />
+                <HomeHeader />
                 <div className='teacher-detail-container'>
                     <div className='intro-teacher'>
                         <div className='content-left'>
@@ -67,11 +78,13 @@ class DetailTeacher extends Component {
                             <TeacherSchedule
                                 teacherIdFromParent={this.state.currentTeacherId}
                                 teacherInfor={this.state.detailTeacher}
+                                openModal={this.openModal}
                             />
                         </div>
                         <div className='schedule-right'>
                             <TeacherMoreInfo
                                 teacherIdFromParent={this.state.currentTeacherId}
+                                teacherInfor={this.state.detailTeacher}
                             />
                         </div>
                     </div>
@@ -84,6 +97,12 @@ class DetailTeacher extends Component {
                 <footer>
                     <HomeFooter author={"Đặng Đình Huy"} />
                 </footer>
+                <ModalBooking
+                    teacherInfor={this.state.detailTeacher}
+                    openModal={this.openModal}
+                    isOpenModal={this.state.isOpenModal}
+                    time={this.state.time}
+                />
             </>
         );
     }
@@ -91,12 +110,14 @@ class DetailTeacher extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        userInfo: state.user.userInfo,
+        dataUser: state.user.dataUser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getRoleId: (userInfo) => dispatch(actions.getRoleId(userInfo))
     };
 };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ManageCourse.scss';
+import * as actions from '../../../../store/actions';
 import Header from '../../Section/Header';
 import Navbar from '../../Section/Navbar';
 import AddCourse from './AddCourse';
@@ -18,10 +19,15 @@ class MangeCourse extends Component {
     }
 
     componentDidMount() {
-
+        let { dataUser, userInfo } = this.props;
+        this.props.getRoleId(userInfo);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        let { dataUser, userInfo } = this.props;
+        if (prevProps.dataUser !== this.props.dataUser) {
+            this.props.getRoleId(userInfo);
+        }
     }
     showAddCourse = () => {
         this.setState({
@@ -84,11 +90,14 @@ class MangeCourse extends Component {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo,
+        dataUser: state.user.dataUser,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getRoleId: (userInfo) => dispatch(actions.getRoleId(userInfo)),
     };
 };
 

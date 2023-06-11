@@ -91,6 +91,42 @@ const getAllCourse = (id) => {
         }
     })
 }
+const getAllCourseByTeacher = (teacherId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!teacherId) {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter'
+                })
+            }
+            else {
+                let data = {}
+                data = await db.Course.findAll({
+                    where: { teacherId: teacherId },
+                    include: [
+                        {
+                            model: db.User, attributes: ['firstName', 'lastName'],
+                            include: [
+                                { model: db.Allcode, as: 'positionData', attributes: ['value'] },
+                            ],
+                        }
+                    ],
+                    raw: true,
+                    nest: true
+                });
+                resolve({
+                    errCode: 0,
+                    errMesage: 'Success...',
+                    data
+                })
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 const deleteCourse = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -204,7 +240,7 @@ const postNewCenter = (data) => {
         }
     })
 }
-const getAllCenter = (id) => {
+const getAllCenter = (id, offset, limit) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!id) {
@@ -216,7 +252,11 @@ const getAllCenter = (id) => {
             else {
                 let data = {};
                 if (id === 'ALL') {
+                    const offsetInt = parseInt(offset, 10);
+                    const limitInt = parseInt(limit, 10);
                     data = await db.Center.findAll({
+                        offset: offsetInt,
+                        limit: limitInt,
                         include: [
                             { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
                         ],
@@ -384,6 +424,7 @@ const getTotalUserByMonth = (id) => {
 module.exports = {
     postNewCourse: postNewCourse,
     getAllCourse: getAllCourse,
+    getAllCourseByTeacher: getAllCourseByTeacher,
     editCourse: editCourse,
     deleteCourse: deleteCourse,
     postNewCenter: postNewCenter,

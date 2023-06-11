@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actions from "../../store/actions";
@@ -12,6 +12,7 @@ import Teacher from './Teacher/Teacher';
 import MoreHandBook from './HandBook/MoreHandBook';
 import PlayList from './Course/PlayList';
 import Page404 from '../Page404/Page404';
+import DetailTeacher from './Teacher/DetailTeacher';
 import { path } from '../../utils';
 
 class UserPage extends Component {
@@ -40,6 +41,7 @@ class UserPage extends Component {
                             <Route path="/user/playlist/:id" component={PlayList} />
                             <Route path="/user/exam" component={Exam} />
                             <Route path="/user/teacher" component={Teacher} />
+                            <Route path={"/user/detail-teacher/:id"} component={DetailTeacher} />
                             <Route path="/user/handbook" component={MoreHandBook} />
                             <Route path="/user/*" component={Page404} />
                         </Switch>
@@ -61,7 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         processLogout: () => dispatch(actions.processLogout()),
-        getRoleId: (email) => dispatch(actions.getRoleId(email))
+        getRoleId: (userInfo) => dispatch(actions.getRoleId(userInfo))
     };
 };
 

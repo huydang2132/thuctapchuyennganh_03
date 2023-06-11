@@ -10,7 +10,7 @@
         .form-col {
             display: flex;
             flex-direction: column;
-            min-width: 23rem;
+            width: 100%;
 
             .form-input {
                 margin-top: 5px;
@@ -170,6 +170,14 @@
                 padding-top: 20px;
 
                 @extend .account-form;
+
+                .account-form {
+                    .form-row {
+                        .form-col {
+                            min-width: 23rem;
+                        }
+                    }
+                }
             }
         }
     }
@@ -202,6 +210,10 @@
                 padding-top: 20px;
 
                 @extend .account-form;
+
+                .account-form {
+                    width: 400px;
+                }
             }
         }
     }

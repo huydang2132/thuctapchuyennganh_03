@@ -32,6 +32,7 @@ class ManageExam extends Component {
                             <h2 className='manage-exam-title'>
                                 Quản lý đề luyện
                             </h2>
+                            <h1 className='developing'>Chức năng đang được phát triển!</h1>
                             <div className='manage-exam-content'>
                             </div>
                         </section>

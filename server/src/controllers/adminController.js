@@ -26,6 +26,19 @@ const getAllCourse = async (req, res) => {
         })
     }
 }
+const getAllCourseByTeacher = async (req, res) => {
+    try {
+        let info = await adminService.getAllCourseByTeacher(req.query.teacherId);
+        return res.status(200).json(info);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
 const editCourse = async (req, res) => {
     try {
         let info = await adminService.editCourse(req.body);
@@ -67,7 +80,7 @@ const postNewCenter = async (req, res) => {
 }
 const getAllCenter = async (req, res) => {
     try {
-        let info = await adminService.getAllCenter(req.query.id);
+        let info = await adminService.getAllCenter(req.query.id, req.query.offset, req.query.limit);
         return res.status(200).json(info);
     }
     catch (e) {
@@ -133,6 +146,7 @@ const getTotalUserByMonth = async (req, res) => {
 module.exports = {
     postNewCourse: postNewCourse,
     getAllCourse: getAllCourse,
+    getAllCourseByTeacher: getAllCourseByTeacher,
     editCourse: editCourse,
     deleteCourse: deleteCourse,
     postNewCenter: postNewCenter,

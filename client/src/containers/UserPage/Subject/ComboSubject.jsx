@@ -6,12 +6,13 @@ import * as actions from "../../../store/actions";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import Img from '../../../assets/images/header-background.jpg';
+import { toast } from 'react-toastify';
 
 class ComboSubject extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Anh:Img
+            Anh: Img
         }
     }
     componentDidMount() {
@@ -20,11 +21,11 @@ class ComboSubject extends Component {
     componentDidUpdate(prevProps, prevState) {
 
     }
-    onClickComboSubject=()=>{
-        alert('MonToHop')
+    onClickComboSubject = () => {
+        toast.info('Chức năng đang phát triển!');
     }
     render() {
-        let {Anh} = this.state
+        let { Anh } = this.state
         return (
             <>
                 <div className='combo-subject-container'>
@@ -32,10 +33,10 @@ class ComboSubject extends Component {
                         <HomeHeader />
                     </header>
                     <section className='combo-subject-section'>
-                    <div className="modau">
+                        <div className="modau">
                             <p>HÃY TRỌN TỔ HỢP MÔN MÀ BẠN CẦN ÔN TẬP</p>
                         </div>
-                        <div onClick={()=>this.onClickComboSubject()} class="mon">
+                        <div onClick={() => this.onClickComboSubject()} class="mon">
                             <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
@@ -43,32 +44,32 @@ class ComboSubject extends Component {
                                 KHỐI A: TOÁN LÝ HOÁ
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickComboSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickComboSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 KHỐI A0: TOÁN LÝ ANH
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickComboSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickComboSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 KHỐI B: LÝ HOÁ SINH
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickComboSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickComboSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">
                                 KHỐI C: VĂN SỬ ĐỊA
                             </div>
                         </div>
-                        <div onClick={()=>this.onClickComboSubject()} class="mon">
-                        <div className="img">
+                        <div onClick={() => this.onClickComboSubject()} class="mon">
+                            <div className="img">
                                 <img src={Anh} alt="" />
                             </div>
                             <div className="text">

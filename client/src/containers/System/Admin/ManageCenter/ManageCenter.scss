@@ -17,6 +17,10 @@
                 box-shadow: 0 5px 10px #ccc;
                 font-size: 1.1rem;
 
+                .account-form {
+                    width: 660px;
+                }
+
                 .select-input {
                     margin-top: 6px;
                 }
@@ -117,6 +121,5 @@
                 }
             }
         }
-
     }
 }

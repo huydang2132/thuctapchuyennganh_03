@@ -22,7 +22,7 @@ class OutStandingTeacher extends Component {
         this.props.loadTopTeachers();
     }
     handleViewDetailTeacher = (teacher) => {
-        this.props.history.push(`/detail-teacher/${teacher.id}`);
+        this.props.history.push(`user/detail-teacher/${teacher.id}`);
     }
     nextPage = (id) => {
         this.props.history.push(`/user/${id}`);

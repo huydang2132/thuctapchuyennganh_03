@@ -11,9 +11,7 @@ class LoaddingPage extends Component {
         }
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.props.timeOutLoading();
-        }, 6000);
+
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
     }

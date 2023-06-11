@@ -1,5 +1,39 @@
 .teacher-container {
     .teacher-section {
-        height: 500px;
+        min-height: 500px;
+
+        .title {
+            padding: 20px 0;
+        }
+
+        .loading-teacher {
+            display: flex;
+            justify-content: center;
+        }
+
+        .detail-teacher {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            cursor: pointer;
+
+            &:hover {
+                color: #49bce2;
+            }
+
+            img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .teacher-info {
+                padding-left: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
     }
 }

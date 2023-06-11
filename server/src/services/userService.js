@@ -3,13 +3,15 @@ import db from '../models/index';
 import { reject } from 'lodash';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { emailRestPassword } from './emailService';
+import generateToken from '../config/generateToken';
 
 dotenv.config();
 
 const salt = bcrypt.genSaltSync(10);
 const secretKey = process.env.SECRET_KEY;
 
-let handleUserLogin = (email, password) => {
+const handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let userData = {};
@@ -343,6 +345,87 @@ const getRoleIdService = (email) => {
         }
     })
 }
+const forgotPassword = (email) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {}
+            if (!email) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter'
+                })
+            }
+            else {
+                let data = await db.User.findOne({
+                    attributes: ['id', 'firstName', 'lastName'],
+                    where: { email: email },
+                    raw: true
+                })
+                if (data) {
+                    let token = await generateToken.tokenSchedule(data.id)
+                    const newPass = Math.floor(Math.random() * 1000000);
+                    await emailRestPassword({
+                        receiversEmail: email,
+                        name: `${data.lastName} ${data.firstName}`,
+                        link: `${process.env.LINK_TOKEN_PASSWORD}${token.token}/${data.id}/${newPass}`,
+                        newPass: newPass
+                    });
+                    resolve({
+                        errCode: 0,
+                        errMessage: 'Success...',
+                        data
+                    });
+                }
+                resolve({
+                    errCode: 2,
+                    errMessage: 'User not found',
+                    data
+                });
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+const resetPassword = (id, newPass) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter'
+                })
+            }
+            else {
+                let user = await db.User.findOne({
+                    attributes: ['id', 'password'],
+                    where: { id: id },
+                    raw: false
+                })
+                let check = await bcrypt.compareSync(newPass, user.password);
+                if (check) {
+                    resolve({
+                        errCode: 3,
+                        errMessage: 'Password is changed'
+                    })
+                }
+                else {
+                    let hashPasswordBcrypt = await hashUserPassword(newPass);
+                    user.password = hashPasswordBcrypt;
+                    await user.save();
+                    resolve({
+                        errCode: 0,
+                        errMessage: 'Success...'
+                    });
+                }
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     handleUserLogin: handleUserLogin,
     handleRegister: handleRegister,
@@ -353,4 +436,6 @@ module.exports = {
     getAllCodeService: getAllCodeService,
     handleChangePassword: handleChangePassword,
     getRoleIdService: getRoleIdService,
+    forgotPassword: forgotPassword,
+    resetPassword: resetPassword,
 }

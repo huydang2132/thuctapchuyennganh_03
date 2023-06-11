@@ -22,11 +22,24 @@ class AddCourse extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllCourse('ALL');
+        let { dataUser, userInfo } = this.props;
+        this.props.getRoleId(userInfo);
+        if (dataUser && dataUser.roleId === 'R2') {
+            this.props.fetchAllCourseByTeacher(dataUser.id);
+        }
+        else {
+            this.props.getAllCourse('ALL');
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         let { dataCourse } = this.props;
+        let { dataUser } = this.props;
+        if (prevProps.dataUser !== this.props.dataUser) {
+            if (dataUser && dataUser.roleId === 'R2') {
+                this.props.fetchAllCourseByTeacher(dataUser.id);
+            }
+        }
         if (prevProps.dataCourse !== dataCourse) {
             const pageCount = Math.ceil(dataCourse.length / this.state.perPage);
             this.setState({
@@ -60,91 +73,76 @@ class AddCourse extends Component {
         const offset = selected * this.state.perPage;
         this.setState({ currentPage: selected, offset });
     }
-    timeOutCourse = () => {
-        let { courses } = this.state;
-        if (courses && courses.length > 0) {
-            return;
-        }
-        else {
-            this.props.showAddCourse();
-            toast.error('Không có dữ liệu về khóa học!');
-            return;
-        }
-    }
     render() {
         let { courses, pageCount, perPage } = this.state;
         return (
             <>
-                {
-                    courses && courses.length > 0 ?
-                        <>
-                            <div className='manage-course-list'>
-                                <table className='manage-course-table'>
-                                    <thead className='table-head'>
-                                        <tr className='tr-add-course'>
+                <div className='manage-course-list'>
+                    <table className='manage-course-table'>
+                        <thead className='table-head'>
+                            <tr className='tr-add-course'>
+                                <td>
+                                    <h2 className='title-table-center'>Danh sách khóa học</h2>
+                                </td>
+                                <td>
+                                    <button title='Thêm khóa học' className='btn-add-course'
+                                        onClick={() => this.clickAddCourse()}>
+                                        <i className="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tên khóa học</th>
+                                <th>Mã khóa học</th>
+                                <th>Người tạo</th>
+                                <th>Ngày tạo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody className='table-body'>
+                            {courses && courses.length > 0 ?
+                                courses.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
+                                    let day = moment(item.createdAt).format('DD/MM/YYYY, HH:mm:ss');
+                                    return (
+                                        <tr key={item.id}>
+                                            <td className='course-full-with'>{item.name}</td>
+                                            <td className='course-full-with'>{item.listId}</td>
+                                            <td>{item.User.lastName} {item.User.firstName}</td>
+                                            <td>{day}</td>
                                             <td>
-                                                <h2 className='title-table-center'>Danh sách khóa học</h2>
-                                            </td>
-                                            <td>
-                                                <button title='Thêm khóa học' className='btn-add-course'
-                                                    onClick={() => this.clickAddCourse()}>
-                                                    <i className="fa-solid fa-plus"></i>
+                                                <button title='Sửa khóa học' className='btn-edit' onClick={() => this.handleEditCourse(item)}>
+                                                    <i className="fas fa-pencil-alt"></i>
+                                                </button>
+                                                <button title='Xóa khóa học' className='btn-delete' onClick={() => this.handleDeleteCourse(item)}>
+                                                    <i className="fas fa-trash-alt"></i>
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>Tên khóa học</th>
-                                            <th>Mã khóa học</th>
-                                            <th>Người tạo</th>
-                                            <th>Ngày tạo</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className='table-body'>
-                                        {courses && courses.length > 0 &&
-                                            courses.slice(this.state.offset, this.state.offset + perPage).map((item, index) => {
-                                                let day = moment(item.createdAt).format('DD/MM/YYYY, HH:mm:ss');
-                                                return (
-                                                    <tr key={item.id}>
-                                                        <td className='course-full-with'>{item.name}</td>
-                                                        <td className='course-full-with'>{item.listId}</td>
-                                                        <td>{item.User.lastName} {item.User.firstName}</td>
-                                                        <td>{day}</td>
-                                                        <td>
-                                                            <button title='Sửa khóa học' className='btn-edit' onClick={() => this.handleEditCourse(item)}>
-                                                                <i className="fas fa-pencil-alt"></i>
-                                                            </button>
-                                                            <button title='Xóa khóa học' className='btn-delete' onClick={() => this.handleDeleteCourse(item)}>
-                                                                <i className="fas fa-trash-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
-                                    </tbody>
-                                </table>
-                                <div className='paging'>
-                                    <ReactPaginate
-                                        previousLabel={<i className="fa-solid fa-arrow-left"></i>}
-                                        nextLabel={<i className="fa-solid fa-arrow-right"></i>}
-                                        breakLabel={'...'}
-                                        breakClassName={'break-me'}
-                                        pageCount={pageCount}
-                                        marginPagesDisplayed={2}
-                                        pageRangeDisplayed={5}
-                                        onPageChange={this.handlePageClick}
-                                        containerClassName={'pagination'}
-                                        activeClassName={'active'}
-                                        pageClassName={'pageNumer'}
-                                    />
-                                </div>
-                            </div>
-                        </>
-                        :
-                        <LoadingPage
-                            timeOutLoading={this.timeOutCourse}
+                                    )
+                                })
+                                :
+                                <tr className='empty-course-row'>
+                                    <td className='empty-course'><LoadingPage /> </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div className='paging'>
+                        <ReactPaginate
+                            previousLabel={<i className="fa-solid fa-arrow-left"></i>}
+                            nextLabel={<i className="fa-solid fa-arrow-right"></i>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                            pageClassName={'pageNumer'}
                         />
-                }
+                    </div>
+                </div>
             </>
         )
     }
@@ -160,8 +158,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getRoleId: (email) => dispatch(actions.getRoleId(email)),
-        getAllCourse: (id) => dispatch(actions.fetchAllCourse(id))
+        getRoleId: (userInfo) => dispatch(actions.getRoleId(userInfo)),
+        getAllCourse: (id) => dispatch(actions.fetchAllCourse(id)),
+        fetchAllCourseByTeacher: (teacherId) => dispatch(actions.fetchAllCourseByTeacher(teacherId))
     };
 };
 

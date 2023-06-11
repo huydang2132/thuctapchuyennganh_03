@@ -121,7 +121,13 @@ let getDetailTeacherById = (id) => {
                             include: [
                                 { model: db.Allcode, as: 'priceData', attributes: ['value'] },
                                 { model: db.Allcode, as: 'paymentData', attributes: ['value'] },
-                                { model: db.Center, attributes: ['name'] }
+                                {
+                                    model: db.Center, attributes: ['name', 'provinceId'],
+                                    include: [
+                                        { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
+                                    ],
+                                },
+
                             ],
                         },
                         { model: db.Allcode, as: 'positionData', attributes: ['value'] },
@@ -356,6 +362,83 @@ let getProfileTeacher = (teacherId) => {
         }
     })
 }
+let getAllBooking = (teacherId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (teacherId) {
+                let data = await db.Booking.findAll({
+                    where: { teacherId },
+                    include: [
+                        { model: db.User, attributes: ['firstName', 'lastName', 'email', 'address'] },
+                        { model: db.Allcode, as: 'statusData', attributes: ['value'] },
+                        { model: db.Allcode, as: 'dateTypeBookingData', attributes: ['value'] },
+                    ],
+                    raw: true,
+                    nest: true
+                });
+                if (data) {
+                    resolve({
+                        errCode: 0,
+                        errMesage: 'Success...',
+                        data
+                    })
+                }
+                else {
+                    resolve({
+                        errCode: 2,
+                        errMesage: 'Booking is empty'
+                    })
+                }
+            }
+            else {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter'
+                })
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+let updateBooking = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data.id && data.statusId) {
+                let Schedule = await db.Booking.findOne({
+                    where: { id: data.id },
+                    raw: false
+                });
+                if (Schedule) {
+                    if (Schedule.statusId !== data.statusId) {
+                        Schedule.statusId = data.statusId;
+                        await Schedule.save();
+                        resolve({
+                            errCode: 0,
+                            errMesage: 'Success...',
+                        })
+                    }
+                }
+                else {
+                    resolve({
+                        errCode: 2,
+                        errMesage: 'Booking not found'
+                    })
+                }
+            }
+            else {
+                resolve({
+                    errCode: 1,
+                    errMesage: 'Missing parameter'
+                })
+            }
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     getTopTeacher: getTopTeacher,
     getAllTeacher: getAllTeacher,
@@ -366,4 +449,6 @@ module.exports = {
     getExtraInfoTeacher: getExtraInfoTeacher,
     getProfileTeacher: getProfileTeacher,
     getCenterInfo: getCenterInfo,
+    getAllBooking: getAllBooking,
+    updateBooking: updateBooking
 }

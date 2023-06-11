@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './ManageTutor.scss';
-import Select from 'react-select';
 import * as actions from '../../../../store/actions';
-import { toast } from 'react-toastify';
-import _ from 'lodash';
 import Header from '../../Section/Header';
 import Navbar from '../../Section/Navbar';
+import TableTutor from './TableTutor';
 
 class ManageTutor extends Component {
     constructor(props) {
@@ -16,10 +14,14 @@ class ManageTutor extends Component {
         }
     }
     componentDidMount() {
-
+        let { userInfo } = this.props;
+        this.props.getRoleId(userInfo);
     }
     componentDidUpdate(prevProps, prevState) {
-
+        if (prevProps.userInfo !== this.props.userInfo) {
+            let { userInfo } = this.props;
+            this.props.getRoleId(userInfo);
+        }
     }
     render() {
         return (
@@ -29,10 +31,8 @@ class ManageTutor extends Component {
                     <main className='manage-tutor-main'>
                         <Navbar />
                         <section className='manage-tutor-section'>
-                            <h2 className='manage-tutor-title'>
-                                Quản lý lịch sử dạy
-                            </h2>
                             <div className='manage-tutor-content'>
+                                <TableTutor />
                             </div>
                         </section>
                     </main>
@@ -47,16 +47,14 @@ class ManageTutor extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        allTeacher: state.admin.allTeacher,
-        scheduleTeacher: state.admin.scheduleTeacher,
+        userInfo: state.user.userInfo,
+        dataUser: state.user.dataUser,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        allTeacherRedux: () => dispatch(actions.fetchAllTeacher()),
-        fetchScheduleTeacher: () => dispatch(actions.fetchScheduleTeacher()),
+        getRoleId: (email) => dispatch(actions.getRoleId(email)),
     };
 };
 

@@ -47,7 +47,6 @@ class TeacherSchedule extends Component {
             this.setState({
                 allVailableTime: res.data ? res.data : []
             })
-            console.log(allDays);
         }
     }
     handleOnchangeSelect = async (event) => {
@@ -63,8 +62,8 @@ class TeacherSchedule extends Component {
         }
     }
     handleClickScheduleTime = (time) => {
+        this.props.openModal(time);
         this.setState({
-            isOpenModalBooking: true,
             dataScheduleTimeModal: time
         })
     }
@@ -75,7 +74,6 @@ class TeacherSchedule extends Component {
     }
     render() {
         let { allDays, allVailableTime } = this.state;
-        console.log('teacherIdFromParent', this.props.teacherIdFromParent);
         return (
             <>
                 <div className='teacher-schedule-container'>
@@ -129,7 +127,6 @@ class TeacherSchedule extends Component {
                         </div>
                     </div>
                 </div>
-
             </>
         );
     }
