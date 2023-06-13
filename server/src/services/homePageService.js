@@ -192,6 +192,7 @@ const getAllTeacherLimit = (offset, limit) => {
                     include: [
                         { model: db.Allcode, as: 'positionData', attributes: ['value'] },
                     ],
+                    order: [['id', 'ASC'],],
                     raw: true,
                     nest: true
                 });

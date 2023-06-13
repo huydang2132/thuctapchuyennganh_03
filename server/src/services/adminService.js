@@ -60,6 +60,7 @@ const getAllCourse = (id) => {
                                 ],
                             }
                         ],
+                        order: [['id', 'ASC'],],
                         raw: true,
                         nest: true
                     });
@@ -112,6 +113,7 @@ const getAllCourseByTeacher = (teacherId) => {
                             ],
                         }
                     ],
+                    order: [['id', 'ASC'],],
                     raw: true,
                     nest: true
                 });
@@ -260,6 +262,7 @@ const getAllCenter = (id, offset, limit) => {
                         include: [
                             { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
                         ],
+                        order: [['id', 'ASC'],],
                         raw: true,
                         nest: true
                     });

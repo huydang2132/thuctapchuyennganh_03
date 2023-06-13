@@ -79,7 +79,7 @@ const checkUserEmail = (userEmail) => {
         }
     });
 }
-let GetAllUser = (userId) => {
+const GetAllUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = '';
@@ -91,6 +91,7 @@ let GetAllUser = (userId) => {
                     include: [
                         { model: db.Allcode, as: 'roleData', attributes: ['value'] },
                     ],
+                    order: [['id', 'ASC'],],
                     raw: true,
                     nest: true
                 });
@@ -190,7 +191,7 @@ const handleChangePassword = (data) => {
         }
     })
 }
-let CreateUser = (data) => {
+const CreateUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let check = await checkUserEmail(data.email);
@@ -225,7 +226,7 @@ let CreateUser = (data) => {
         }
     })
 }
-let EditUser = (data) => {
+const EditUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
@@ -269,7 +270,7 @@ let EditUser = (data) => {
         }
     })
 }
-let DeleteUser = (id) => {
+const DeleteUser = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
@@ -294,7 +295,7 @@ let DeleteUser = (id) => {
         }
     })
 }
-let getAllCodeService = (type) => {
+const getAllCodeService = (type) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};

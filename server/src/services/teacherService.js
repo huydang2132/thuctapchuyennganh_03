@@ -6,7 +6,7 @@ import sequelize from 'sequelize';
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 
-let getTopTeacher = (limit) => {
+const getTopTeacher = (limit) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findAll({
@@ -33,14 +33,15 @@ let getTopTeacher = (limit) => {
         }
     })
 }
-let getAllTeacher = () => {
+const getAllTeacher = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let teachers = await db.User.findAll({
                 where: { roleId: 'R2' },
                 attributes: {
                     exclude: ['password', 'image']
-                }
+                },
+                order: [['id', 'ASC'],],
             })
             resolve({
                 errCode: 0,
@@ -52,7 +53,7 @@ let getAllTeacher = () => {
         }
     })
 }
-let saveInfoTeacher = (data) => {
+const saveInfoTeacher = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.teacherId || !data.description ||
@@ -98,7 +99,7 @@ let saveInfoTeacher = (data) => {
         }
     })
 }
-let getDetailTeacherById = (id) => {
+const getDetailTeacherById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!id) {
@@ -246,7 +247,7 @@ const bulkCreateSchedule = (data) => {
         }
     })
 }
-let getScheduleByDate = (teacherId, date) => {
+const getScheduleByDate = (teacherId, date) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!teacherId || !date) {
@@ -279,7 +280,7 @@ let getScheduleByDate = (teacherId, date) => {
         }
     })
 }
-let getExtraInfoTeacher = (teacherId) => {
+const getExtraInfoTeacher = (teacherId) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!teacherId) {
@@ -315,7 +316,7 @@ let getExtraInfoTeacher = (teacherId) => {
         }
     })
 }
-let getProfileTeacher = (teacherId) => {
+const getProfileTeacher = (teacherId) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!teacherId) {
@@ -363,7 +364,7 @@ let getProfileTeacher = (teacherId) => {
         }
     })
 }
-let getAllBooking = (teacherId) => {
+const getAllBooking = (teacherId) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (teacherId) {
@@ -374,6 +375,7 @@ let getAllBooking = (teacherId) => {
                         { model: db.Allcode, as: 'statusData', attributes: ['value'] },
                         { model: db.Allcode, as: 'dateTypeBookingData', attributes: ['value'] },
                     ],
+                    order: [['id', 'ASC'],],
                     raw: true,
                     nest: true
                 });
@@ -403,7 +405,7 @@ let getAllBooking = (teacherId) => {
         }
     })
 }
-let updateBooking = (data) => {
+const updateBooking = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (data.id && data.statusId) {
