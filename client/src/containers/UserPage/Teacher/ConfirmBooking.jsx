@@ -15,11 +15,8 @@ class ConfirmBooking extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.token && this.props.match.params.id) {
             let token = this.props.match.params.token;
             let id = this.props.match.params.id;
-            console.log('token:', token);
-            console.log('id', id);
             try {
                 let res = await verifyScheduleService(token, id);
-                console.log(res);
                 if (res && res.errCode === 0) {
                     this.setState({
                         notifi: 'Xác nhận lịch học thành công!'

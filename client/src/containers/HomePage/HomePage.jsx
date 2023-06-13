@@ -25,8 +25,8 @@ class HomaPage extends Component {
             <>
                 <HomeHeader />
                 <Banner />
-                <Specialty settings={settings} />
                 <TeachingCenter settings={settings} />
+                <Specialty settings={settings} />
                 <OutStandingTeacher settings={settings} />
                 <HandBook settings={settings} />
                 <HomeFooter author={"Đặng Đình Huy"} />

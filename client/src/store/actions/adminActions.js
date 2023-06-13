@@ -508,7 +508,7 @@ export const fetchCreateCenter = (data) => {
                     type: actionTypes.FETCH_CREATE_CENTER_SUCCESS,
                 });
                 toast.success('Thêm mới trung tâm thành công!');
-                dispatch(fetchAllCenter('ALL'));
+                dispatch(fetchAllCenter('ALL', 0, 8));
             }
             else if (resCenter && resCenter.errCode === 2) {
                 toast.error('Trung tâm đã tồn tại!');

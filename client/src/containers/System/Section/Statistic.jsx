@@ -21,7 +21,6 @@ class AdminPage extends Component {
         const User = await getTotalService('User');
         const resUser = await getTotalUserByMonthService('R3');
         const resTeacher = await getTotalUserByMonthService('R2');
-        console.log(resUser.dataUser);
         this.setState({
             totalCenter: Center.total,
             totalCourse: Course.total,

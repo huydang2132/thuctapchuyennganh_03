@@ -83,7 +83,6 @@ class ManageSchedule extends Component {
     }
     handleChangeSelect = async (selectedTeacher) => {
         this.setState({ selectedTeacher });
-        console.log(selectedTeacher);
     }
     handleOnchangeDatePicker = (date) => {
         this.setState({
@@ -136,7 +135,6 @@ class ManageSchedule extends Component {
             teacherId: selectedTeacher.value,
             date: formatedDate
         });
-        console.log(formatedDate);
         if (res.errCode === 0) {
             toast.success('Đặt lịch dạy thành công!')
         }

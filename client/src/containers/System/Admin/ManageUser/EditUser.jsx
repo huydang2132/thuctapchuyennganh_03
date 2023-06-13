@@ -35,7 +35,6 @@ class EditUser extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         let user = this.props.currentUser;
-        console.log('did update', user)
         if (prevProps.currentUser !== user) {
             let imageBase64 = '';
             if (user && !_.isEmpty(user)) {

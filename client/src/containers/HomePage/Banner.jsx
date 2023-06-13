@@ -28,7 +28,6 @@ class Banner extends Component {
                 listCourse: courses.data,
                 showSearch: true
             })
-            console.log(courses);
         }
         else {
             this.setState({

@@ -55,7 +55,6 @@ class Teacher extends Component {
     }
     render() {
         let { teachers, pageCount } = this.state;
-        console.log(teachers);
         return (
             <>
                 <div className='teacher-container'>

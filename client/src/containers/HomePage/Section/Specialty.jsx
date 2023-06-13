@@ -14,7 +14,7 @@ class Specialty extends Component {
     render() {
         return (
             <>
-                <div className='section-share section-specialty'>
+                <div className='section-share'>
                     <div className='section-container'>
                         <div className='section-header'>
                             <span className='title-section'>Môn học phổ biến</span>
