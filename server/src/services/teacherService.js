@@ -2,6 +2,7 @@ import db from '../models/index';
 require('dotenv').config();
 import _ from 'lodash';
 import { json } from 'body-parser';
+import sequelize from 'sequelize';
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 
@@ -64,7 +65,7 @@ let saveInfoTeacher = (data) => {
             }
             else {
                 //Teacher info
-                let teacherInfo = await db.Teacher_Info.findOne({
+                let teacherInfo = await db.Teacher_info.findOne({
                     where: { teacherId: data.teacherId, },
                     raw: false
                 })
@@ -77,7 +78,7 @@ let saveInfoTeacher = (data) => {
                     await teacherInfo.save();
                 }
                 else {
-                    await db.Teacher_Info.create({
+                    await db.Teacher_info.create({
                         priceId: data.selectedPrice,
                         teacherId: data.teacherId,
                         description: data.description,
@@ -114,7 +115,7 @@ let getDetailTeacherById = (id) => {
                     },
                     include: [
                         {
-                            model: db.Teacher_Info,
+                            model: db.Teacher_info,
                             attributes: {
                                 exclude: ['id', 'teacherId']
                             },
@@ -131,7 +132,6 @@ let getDetailTeacherById = (id) => {
                             ],
                         },
                         { model: db.Allcode, as: 'positionData', attributes: ['value'] },
-
                     ],
                     raw: true,
                     nest: true
@@ -165,6 +165,7 @@ const getCenterInfo = (id) => {
             else {
                 if (id === 'ALL') {
                     let data = await db.Center.findAll({
+                        attributes: ['id', 'name'],
                         include: [
                             { model: db.Allcode, as: 'provinceData', attributes: ['value'] },
                         ],
@@ -217,7 +218,7 @@ const bulkCreateSchedule = (data) => {
                     })
                 }
                 let existing = await db.Schedule.findAll({
-                    where: { teacherId: data.teacherId, date: data.date },
+                    where: { teacherId: data.teacherId, date: data.date.toString() },
                     attributes: ['dateType', 'date', 'teacherId', 'maxNumber'],
                     raw: true
                 });
@@ -288,7 +289,7 @@ let getExtraInfoTeacher = (teacherId) => {
                 })
             }
             else {
-                let data = await db.Teacher_Info.findOne({
+                let data = await db.Teacher_info.findOne({
                     where: {
                         teacherId: teacherId
                     },
@@ -331,7 +332,7 @@ let getProfileTeacher = (teacherId) => {
                     },
                     include: [
                         {
-                            model: db.Teacher_Info,
+                            model: db.Teacher_info,
                             attributes: {
                                 exclude: ['id', 'teacherId']
                             },

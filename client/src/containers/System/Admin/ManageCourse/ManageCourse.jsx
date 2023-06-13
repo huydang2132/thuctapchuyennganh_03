@@ -19,15 +19,12 @@ class MangeCourse extends Component {
     }
 
     componentDidMount() {
-        let { dataUser, userInfo } = this.props;
+        let { userInfo } = this.props;
         this.props.getRoleId(userInfo);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let { dataUser, userInfo } = this.props;
-        if (prevProps.dataUser !== this.props.dataUser) {
-            this.props.getRoleId(userInfo);
-        }
+
     }
     showAddCourse = () => {
         this.setState({

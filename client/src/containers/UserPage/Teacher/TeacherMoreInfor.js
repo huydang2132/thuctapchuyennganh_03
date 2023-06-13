@@ -41,7 +41,7 @@ class TeacherMoreInfo extends Component {
         else {
             payment = "Tiền mặt hoặc Thẻ ATM";
         }
-        let nameCenter = teacherInfor && teacherInfor.Teacher_Info ? `${teacherInfor.Teacher_Info.Center.name} - ${teacherInfor.Teacher_Info.Center.provinceData.value}` : ''
+        let nameCenter = teacherInfor && teacherInfor.Teacher_info ? `${teacherInfor.Teacher_info.Center.name} - ${teacherInfor.Teacher_info.Center.provinceData.value}` : ''
         return (
             <>
                 <div className='teacher-more-info-container'>

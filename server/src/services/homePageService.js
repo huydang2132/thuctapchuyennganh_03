@@ -11,7 +11,7 @@ const searchCourse = (name) => {
                 let data = await db.Course.findAll({
                     where: {
                         name: {
-                            [Op.like]: `${name}%`,
+                            [Op.iLike]: `${name}%`,
                         }
                     },
                     raw: true

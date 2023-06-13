@@ -31,7 +31,7 @@ const getAllCodeService = (type) => {
     return axios.get(`/allcode?type=${type}`);
 }
 const getTopTeacherService = (limit) => {
-    return axios.get(`/api/top-teacher-home?limit=${limit}`);
+    return axios.get(`/api/top-teacher-home`, { paramsP: { limit } });
 }
 const getAllTeachers = () => {
     return axios.get(`/api/get-all-teachers`);
@@ -40,7 +40,7 @@ const saveDetailTeacherService = (data) => {
     return axios.post(`/api/save-info-teachers`, data);
 }
 const getDetailteacherService = (id) => {
-    return axios.get(`/api/get-detail-teachers-by-id?id=${id}`);
+    return axios.get(`/api/get-detail-teachers-by-id`, { params: { id } });
 }
 const postScheduleTeacherService = (data) => {
     return axios.post(`/api/bulk-create-schedule`, data);
@@ -49,7 +49,7 @@ const getScheduleTeacherByDateService = (teacherId, date) => {
     return axios.get(`/api/get-schedule-teachers-by-date`, { params: { teacherId, date } });
 }
 const getExtraInfoTeacherByIdService = (teacherId) => {
-    return axios.get(`/api/get-extra-info-teacher-by-id?teacherId=${teacherId}`);
+    return axios.get(`/api/get-extra-info-teacher-by-id`, { params: { teacherId } });
 }
 const handleChangePasswordService = (data) => {
     return axios.put('/api/account/change-password', data);

@@ -18,7 +18,7 @@ class AddUser extends Component {
             phoneNumber: '',
             gender: '',
             roleId: '',
-            positionId: '',
+            positionId: 'P0',
             img: Avatar,
             avatar: '',
 

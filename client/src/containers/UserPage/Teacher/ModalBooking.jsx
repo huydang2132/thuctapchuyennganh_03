@@ -50,7 +50,7 @@ class ModalBooking extends Component {
             this.setState({
                 teacherId: teacherInfor.id,
                 teacherName: teacherInfor.positionData && `${teacherInfor.positionData.value}, ${teacherInfor.lastName} ${teacherInfor.firstName}`,
-                price: teacherInfor.Teacher_Info && teacherInfor.Teacher_Info && teacherInfor.Teacher_Info.priceData && teacherInfor.Teacher_Info.priceData.value
+                price: teacherInfor.Teacher_info && teacherInfor.Teacher_info && teacherInfor.Teacher_info.priceData && teacherInfor.Teacher_info.priceData.value
             })
         }
         if (time) {
@@ -108,10 +108,10 @@ class ModalBooking extends Component {
     render() {
         let { teacherInfor, isOpenModal, userId, time } = this.props;
         let nameTeacher = teacherInfor && teacherInfor.positionData ? `${teacherInfor.positionData.value}, ${teacherInfor.lastName} ${teacherInfor.firstName}` : '';
-        let nameCenter = teacherInfor && teacherInfor.Teacher_Info && teacherInfor.Teacher_Info.Center ?
-            `${teacherInfor.Teacher_Info.Center.name} - ${teacherInfor.Teacher_Info.Center.provinceData.value}` : '';
-        let price = teacherInfor && teacherInfor.Teacher_Info && teacherInfor.Teacher_Info.priceData ?
-            teacherInfor.Teacher_Info.priceData.value : 0;
+        let nameCenter = teacherInfor && teacherInfor.Teacher_info && teacherInfor.Teacher_info.Center ?
+            `${teacherInfor.Teacher_info.Center.name} - ${teacherInfor.Teacher_info.Center.provinceData.value}` : '';
+        let price = teacherInfor && teacherInfor.Teacher_info && teacherInfor.Teacher_info.priceData ?
+            teacherInfor.Teacher_info.priceData.value : 0;
         const timestamp = time && parseInt(time.date, 10);
         const date = moment(timestamp).format('dddd - DD/MM/YYYY');
         const timeType = time && time.dateTypeData ? time.dateTypeData.value : '';

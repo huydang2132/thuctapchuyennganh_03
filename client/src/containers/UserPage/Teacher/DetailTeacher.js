@@ -65,9 +65,9 @@ class DetailTeacher extends Component {
                                 {nameTeacher}
                             </div>
                             <div className='description-teacher'>
-                                {detailTeacher && detailTeacher.Teacher_Info && detailTeacher.Teacher_Info.description &&
+                                {detailTeacher && detailTeacher.Teacher_info && detailTeacher.Teacher_info.description &&
                                     <span>
-                                        {detailTeacher.Teacher_Info.description}
+                                        {detailTeacher.Teacher_info.description}
                                     </span>
                                 }
                             </div>

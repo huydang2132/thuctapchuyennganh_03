@@ -3,22 +3,22 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Teacher_Info extends Model {
+    class Teacher_info extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Teacher_Info.belongsTo(models.User, { foreignKey: 'teacherId', })
+            Teacher_info.belongsTo(models.User, { foreignKey: 'teacherId', })
 
-            Teacher_Info.belongsTo(models.Allcode, { foreignKey: 'priceId', targetKey: 'keyMap', as: 'priceData' })
-            Teacher_Info.belongsTo(models.Allcode, { foreignKey: 'paymentId', targetKey: 'keyMap', as: 'paymentData' })
+            Teacher_info.belongsTo(models.Allcode, { foreignKey: 'priceId', targetKey: 'keyMap', as: 'priceData' })
+            Teacher_info.belongsTo(models.Allcode, { foreignKey: 'paymentId', targetKey: 'keyMap', as: 'paymentData' })
 
-            Teacher_Info.belongsTo(models.Center, { foreignKey: 'centerId' })
+            Teacher_info.belongsTo(models.Center, { foreignKey: 'centerId' })
         }
     };
-    Teacher_Info.init({
+    Teacher_info.init({
         teacherId: DataTypes.INTEGER,
         priceId: DataTypes.STRING,
         description: DataTypes.STRING,
@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         rate: DataTypes.INTEGER,
     }, {
         sequelize,
-        modelName: 'Teacher_Info',
+        modelName: 'Teacher_info',
         freezeTableName: true
     });
-    return Teacher_Info;
+    return Teacher_info;
 };

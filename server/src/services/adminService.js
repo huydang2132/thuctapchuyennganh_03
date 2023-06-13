@@ -349,6 +349,12 @@ const deleteCenter = (id) => {
                         errMesage: 'Success...'
                     })
                 }
+                else {
+                    resolve({
+                        errCode: 3,
+                        errMesage: 'Not found'
+                    })
+                }
             }
         }
         catch (e) {
@@ -366,7 +372,7 @@ const getTotal = (id) => {
                 })
             }
             else {
-                let total
+                let total = 0;
                 if (id === 'Center') {
                     total = await db.Center.count();
                 }
@@ -376,13 +382,11 @@ const getTotal = (id) => {
                 else if (id === 'Course') {
                     total = await db.Course.count();
                 }
-                if (total) {
-                    resolve({
-                        errCode: 0,
-                        errMesage: 'Success...',
-                        total: total
-                    })
-                }
+                resolve({
+                    errCode: 0,
+                    errMesage: 'Success...',
+                    total: total
+                })
             }
         }
         catch (e) {
@@ -391,36 +395,52 @@ const getTotal = (id) => {
     })
 }
 
-const getTotalUserByMonth = (id) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            if (!id) {
-                resolve({
-                    errCode: 1,
-                    errMesage: 'Missing parameter...'
-                })
-            }
-            else {
-                let dataUser = await db.User.findAll({
-                    where: { roleId: id },
-                    attributes: [
-                        [sequelize.fn('COUNT', sequelize.literal('id')), 'userCount'],
-                        [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month']
+
+const getTotalUserByMonth = async (id) => {
+    try {
+        if (!id) {
+            return {
+                errCode: 1,
+                errMessage: "Missing parameter...",
+            };
+        } else {
+            const dataUser = await db.User.findAll({
+                where: {
+                    roleId: id,
+                },
+                attributes: [
+                    [
+                        sequelize.fn("COUNT", sequelize.col("id")),
+                        "userCount",
                     ],
-                    group: sequelize.fn('MONTH', sequelize.col('createdAt')),
-                })
-                resolve({
+                    [
+                        sequelize.literal("EXTRACT(MONTH FROM \"createdAt\")"),
+                        "month",
+                    ],
+                ],
+                group: [
+                    sequelize.literal("EXTRACT(MONTH FROM \"createdAt\")"),
+                ],
+            });
+
+            if (dataUser.length > 0) {
+                return {
                     errCode: 0,
-                    errMesage: 'Success...',
-                    dataUser
-                })
+                    errMessage: "Success...",
+                    dataUser,
+                };
+            } else {
+                return {
+                    errCode: 3,
+                    errMessage: "Not found",
+                    dataUser: [],
+                };
             }
         }
-        catch (e) {
-            reject(e);
-        }
-    })
-}
+    } catch (e) {
+        throw e;
+    }
+};
 module.exports = {
     postNewCourse: postNewCourse,
     getAllCourse: getAllCourse,

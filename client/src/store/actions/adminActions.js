@@ -486,7 +486,6 @@ export const fetchAllCenter = (id, offset, limit) => {
 
             }
             else {
-                toast.error('Đã xảy ra lỗi, không thể lấy danh sách trung tâm!');
                 dispatch({
                     type: actionTypes.FETCH_ALL_CENTER_FAILED
                 });
