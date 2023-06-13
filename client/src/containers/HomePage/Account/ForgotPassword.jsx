@@ -30,18 +30,26 @@ class ForgotPassword extends Component {
         let { email } = this.state;
         if (email && email.trim() !== "") {
             this.setState({
-                loading: true,
-                disabled: true,
-                countDown: 60
+                loading: true
             })
-            this.countDownTimeOut();
-            this.waitReSendEmail();
             let res = await forgotPasswordService(email);
             if (res && res.errCode === 0) {
+                this.setState({
+                    disabled: true,
+                    countDown: 60
+                })
+                this.countDownTimeOut();
+                this.waitReSendEmail();
                 this.setState({
                     loading: false
                 })
                 toast.info('Yêu cầu đặt lại mật khẩu đã được gửi tới email!');
+            }
+            else if (res && res.errCode === 2) {
+                this.setState({
+                    loading: false
+                })
+                toast.error('Email không tồn tại!');
             }
         }
         else {
