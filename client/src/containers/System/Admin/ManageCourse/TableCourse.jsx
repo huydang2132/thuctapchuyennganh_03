@@ -61,7 +61,7 @@ class AddCourse extends Component {
             let res = await deleteCourseService(data.id);
             if (res && res.errCode === 0) {
                 toast.success('Xóa khóa học thành công!');
-                this.props.getAllCourse();
+                this.props.getAllCourse('ALL');
             }
         }
         else {

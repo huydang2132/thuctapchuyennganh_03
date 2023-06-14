@@ -18,7 +18,7 @@ class AddUser extends Component {
             phoneNumber: '',
             gender: '',
             roleId: '',
-            positionId: 'P0',
+            positionId: '',
             img: Avatar,
             avatar: '',
 
@@ -85,7 +85,7 @@ class AddUser extends Component {
         let { email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, avatar } = this.state;
         if (this.checkValidateInput() === true) {
             this.props.createNewUserRedux({
-                email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, avatar
+                email, password, firstName, lastName, phoneNumber, address, gender, positionId: positionId ? positionId : 'P0', roleId, avatar
             });
             this.props.viewUsers();
         }
@@ -207,7 +207,7 @@ class AddUser extends Component {
                                             <select className='form-select' type='text' id='position'
                                                 value={positionId ? positionId : ''}
                                                 disabled={roleId === 'R2' ? false : true}
-                                                onChange={(event) => this.handleOnchangeInput(event, 'position')}>
+                                                onChange={(event) => this.handleOnchangeInput(event, 'positionId')}>
                                                 {arrPositions && arrPositions.length > 0 &&
                                                     arrPositions.map((item, index) => {
                                                         return (

@@ -9,30 +9,34 @@ const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 const getTopTeacher = (limit) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findAll({
+            const user = await db.User.findAll({
+                offset: 0,
                 limit: limit,
                 where: { roleId: 'R2' },
-                order: [['createdAt', 'DESC']],
                 attributes: {
                     exclude: ['password']
                 },
                 include: [
                     { model: db.Allcode, as: 'positionData', attributes: ['value'] },
-                    { model: db.Allcode, as: 'genderData', attributes: ['value'] }
+                    { model: db.Allcode, as: 'genderData', attributes: ['value'] },
+                ],
+                order: [
+                    [sequelize.literal('(SELECT COUNT(*) FROM "Bookings" as "Booking" WHERE "Booking"."teacherId" = "User"."id")'), 'DESC'],
+                    ['createdAt', 'DESC']
                 ],
                 raw: true,
                 nest: true
-            })
+            });
+
             resolve({
                 errCode: 0,
                 data: user
-            })
-        }
-        catch (e) {
+            });
+        } catch (e) {
             reject(e);
         }
-    })
-}
+    });
+};
 const getAllTeacher = () => {
     return new Promise(async (resolve, reject) => {
         try {

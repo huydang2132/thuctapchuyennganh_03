@@ -449,7 +449,7 @@ export const fetchEditCourse = (data) => {
                     type: actionTypes.FETCH_EDIT_COURSE_SUCCESS,
                 });
                 toast.success('Cập nhật khóa học thành công!');
-                dispatch(fetchAllCourse());
+                dispatch(fetchAllCourse('ALL'));
             }
             else {
                 toast.error('Đã xảy ra lỗi, cập nhật thất bại!');

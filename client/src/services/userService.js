@@ -31,7 +31,7 @@ const getAllCodeService = (type) => {
     return axios.get(`/allcode?type=${type}`);
 }
 const getTopTeacherService = (limit) => {
-    return axios.get(`/api/top-teacher-home`, { paramsP: { limit } });
+    return axios.get(`/api/top-teacher-home`, { params: { limit } });
 }
 const getAllTeachers = () => {
     return axios.get(`/api/get-all-teachers`);
