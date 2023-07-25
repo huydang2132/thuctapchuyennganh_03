@@ -18,31 +18,49 @@ class Teacher extends Component {
             perPage: 8,
             currentPage: 0,
             pageCount: 0,
-            totalTeacher: 0
+            totalTeacher: 0,
+            loadding: false
         }
     }
     async componentDidMount() {
         let { offset, perPage } = this.state;
+        this.setState({
+            loadding: true
+        })
         let res = await getAllTeacherLimitService(offset, perPage);
         const pageCount = Math.ceil(res.data.count / this.state.perPage);
         this.setState({
+            totalTeacher: res.data.count,
             teachers: res.data.teacher,
             pageCount: pageCount
         })
+        if (res.errCode === 0) {
+            this.setState({
+                loadding: false
+            })
+        }
     }
     async componentDidUpdate(prevProps, prevState) {
-        let { offset, perPage, teachers } = this.state;
-        let res = await getAllTeacherLimitService(offset, perPage);
+        let { offset, perPage, teachers, totalTeacher } = this.state;
         if (prevState.teachers !== teachers) {
-            const pageCount = Math.ceil(res.data.count / this.state.perPage);
+            const pageCount = Math.ceil(totalTeacher / this.state.perPage);
             this.setState({
                 pageCount: pageCount
             })
         }
         if (prevState.currentPage !== this.state.currentPage) {
             this.setState({
+                loadding: true
+            })
+            let res = await getAllTeacherLimitService(offset, perPage);
+            this.setState({
                 teachers: res.data.teacher,
             })
+            if (res.errCode === 0) {
+                this.setState({
+                    loadding: false
+                })
+            }
         }
     }
     handlePageClick = (data) => {
@@ -54,7 +72,7 @@ class Teacher extends Component {
         this.props.history.push(`/user/detail-teacher/${item.id}`)
     }
     render() {
-        let { teachers, pageCount } = this.state;
+        let { teachers, pageCount, loadding } = this.state;
         return (
             <>
                 <div className='teacher-container'>
@@ -66,7 +84,8 @@ class Teacher extends Component {
                             <h3>Danh sách các giáo viên</h3>
                         </div>
                         {
-                            teachers && teachers.length > 0 ?
+                            loadding === false ?
+                                teachers && teachers.length > 0 &&
                                 teachers.map((item, index) => {
                                     let imageBase64 = '';
                                     if (item.image) {
