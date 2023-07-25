@@ -20,7 +20,8 @@ let sendSimpleEmail = async (dataSend) => {
         subject: "Thông tin đăng ký lịch học", // Subject line
         html: `
         <h3>Xin chào ${dataSend.studentName}!</h3>
-        <p>Chúng tôi gửi email này để xác nhận một số thông tin về việc đăng ký lịch học trên website Education của chúng tôi. Xin vui lòng xác nhận rằng các thông tin sau là chính xác!</p>
+        <p>Chúng tôi gửi email này để xác nhận một số thông tin về việc đăng ký lịch học trên website Education của chúng tôi. 
+        <br/>Xin vui lòng xác nhận rằng các thông tin sau là chính xác!</p>
         <p style="font-size: 16px;
         font-weight: 600">Thông tin học viên:</p>
         <span>
@@ -33,10 +34,10 @@ let sendSimpleEmail = async (dataSend) => {
         <span>
         1. Họ và tên: ${dataSend.teacherName}<br/>
         2. Lịch giảng dạy: <b>${dataSend.schedule}</b><br/>
-        3. Học phí: ${dataSend.price} VND
+        3. Học phí: ${new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(dataSend.price)}
         </span>
         <p>Xin vui lòng kiểm tra thông tin trên và thông báo cho chúng tôi ngay nếu có bất kỳ sai sót nào hoặc cung cấp các thông tin bổ sung nếu cần thiết.</p>
-        <p>Nếu các thông tin đã chính xác. Vui lòng kích vào nút bên dưới để xác nhận!</p><br/>
+        <p>Nếu các thông tin đã chính xác. Vui lòng kích vào nút bên dưới để xác nhận! Link xác nhận sẽ hết hạn sau 5 phút</p><br/>
         <div>
         <a href=${dataSend.link} target="_blank" style="background-color: #16e60b;
             color: #fff;
@@ -69,7 +70,8 @@ let emailRestPassword = async (dataSend) => {
         html: `
         <h3>Xin chào ${dataSend.name}!</h3>
         <p>Bấm vào nút phía dưới để đặt lại mật khẩu!</p>
-        <p>Mật khẩu sau khi đặt lại của bạn là: ${dataSend.newPass}</p><br/>
+        <p>Mật khẩu sau khi đặt lại của bạn là: ${dataSend.newPass}</p>
+        <p>Link xác nhận sẽ hết hạn sau 5 phút</p><br/>
         <div>
         <a href=${dataSend.link} target="_blank" style="background-color: #16e60b;
             color: #fff;

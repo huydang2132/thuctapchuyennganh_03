@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './TeacherMoreInfo.scss';
 import { getExtraInfoTeacherByIdService } from '../../../services/userService';
-import { NumericFormat } from 'react-number-format';
 
 class TeacherMoreInfo extends Component {
     constructor(props) {
@@ -57,11 +56,8 @@ class TeacherMoreInfo extends Component {
                     <div className='line-boder'></div>
                     <div className='more-info-content-down'>
                         <div className='detail-info-price'>
-                            Học phí: {extraInfo && extraInfo.priceData
-                                && < NumericFormat
-                                    value={extraInfo.priceData.value}
-                                    displayType={'text'} thousandSeparator=","
-                                    suffix={' VND'} />}
+                            Học phí: {extraInfo && extraInfo.priceData &&
+                                new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(extraInfo.priceData.value)}
                         </div>
 
                         {

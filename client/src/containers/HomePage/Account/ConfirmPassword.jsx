@@ -17,11 +17,8 @@ class ConfirmPassword extends Component {
             let token = this.props.match.params.token;
             let id = this.props.match.params.id;
             let newPass = this.props.match.params.newPass
-            console.log('token:', token);
-            console.log('id', id);
             try {
                 let res = await resetPasswordService(token, id, newPass);
-                console.log(res);
                 if (res && res.errCode === 0) {
                     this.setState({
                         notifi: 'Đặt lại mật khẩu thành công!'

@@ -15,7 +15,7 @@ class ManageCenter extends Component {
             centers: [],
             editCenter: false,
             offset: 0,
-            perPage: 0
+            perPage: 8
         }
     }
     componentDidMount() {

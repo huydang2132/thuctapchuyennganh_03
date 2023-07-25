@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import './ModalBooking.scss';
 import * as actions from '../../../store/actions';
 import { toast } from 'react-toastify';
-import { NumericFormat } from 'react-number-format';
 import moment from 'moment';
 import { createScheduleService } from '../../../services/userService';
 import LoadingPage from '../../LoadingPage/LoadingPage';
@@ -133,11 +132,8 @@ class ModalBooking extends Component {
                                         <p>Giáo viên: {nameTeacher}</p>
                                         <p>Lịch giảng dạy: {`${timeType ? timeType : ''} | ${date ? date : ''}`}</p>
                                         <p>Trung tâm: {nameCenter}</p>
-                                        <p>Học phí: {price
-                                            && < NumericFormat
-                                                value={price}
-                                                displayType={'text'} thousandSeparator=","
-                                                suffix={' VND'} />}
+                                        <p>Học phí: {price &&
+                                            new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(price)}
                                         </p>
                                     </div>
                                     <div className='account-form'>

@@ -9,7 +9,6 @@ import HomeFooter from './HomeFooter';
 import './HomePage.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import * as actions from '../../store/actions';
 import Banner from './Banner';
 
 class HomaPage extends Component {

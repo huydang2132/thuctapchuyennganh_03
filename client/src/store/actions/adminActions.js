@@ -449,7 +449,12 @@ export const fetchEditCourse = (data) => {
                     type: actionTypes.FETCH_EDIT_COURSE_SUCCESS,
                 });
                 toast.success('Cập nhật khóa học thành công!');
-                dispatch(fetchAllCourse());
+                if (data.dataUser.roleId === 'R2') {
+                    dispatch(fetchAllCourseByTeacher(data.dataUser.id));
+                }
+                else {
+                    dispatch(fetchAllCourse('ALL'));
+                }
             }
             else {
                 toast.error('Đã xảy ra lỗi, cập nhật thất bại!');
@@ -509,7 +514,7 @@ export const fetchCreateCenter = (data) => {
                     type: actionTypes.FETCH_CREATE_CENTER_SUCCESS,
                 });
                 toast.success('Thêm mới trung tâm thành công!');
-                dispatch(fetchAllCenter('ALL'));
+                dispatch(fetchAllCenter('ALL', 0, 8));
             }
             else if (resCenter && resCenter.errCode === 2) {
                 toast.error('Trung tâm đã tồn tại!');

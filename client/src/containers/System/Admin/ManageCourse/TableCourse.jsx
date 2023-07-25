@@ -56,12 +56,21 @@ class AddCourse extends Component {
         this.props.currentCourse(data);
     }
     handleDeleteCourse = async (data) => {
+
         let confirm = window.confirm(`Xác nhận xóa khóa học "${data.name}"`);
         if (confirm) {
             let res = await deleteCourseService(data.id);
             if (res && res.errCode === 0) {
                 toast.success('Xóa khóa học thành công!');
-                this.props.getAllCourse();
+                let { dataUser, userInfo } = this.props;
+                this.props.getRoleId(userInfo);
+                if (dataUser.roleId === 'R2') {
+                    this.props.fetchAllCourseByTeacher(dataUser.id);
+                }
+                else {
+                    this.props.getAllCourse('ALL');
+                }
+                this.props.getAllCourse('ALL');
             }
         }
         else {

@@ -60,7 +60,10 @@ class EditCourse extends Component {
             return;
         }
         else {
+            let { dataUser, userInfo } = this.props;
+            this.props.getRoleId(userInfo);
             await this.props.editCourseRedux({
+                dataUser: dataUser,
                 id: id,
                 name: nameCourse,
                 listId: listId
@@ -115,12 +118,14 @@ class EditCourse extends Component {
 const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
+        dataUser: state.user.dataUser,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        editCourseRedux: (data) => dispatch(actions.fetchEditCourse(data))
+        editCourseRedux: (data) => dispatch(actions.fetchEditCourse(data)),
+        getRoleId: (email) => dispatch(actions.getRoleId(email))
     };
 };
 

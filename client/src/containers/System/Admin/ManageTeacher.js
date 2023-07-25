@@ -39,7 +39,7 @@ class ManageTeacher extends Component {
             })
         }
         if (prevProps.allTeacherInfo !== this.props.allTeacherInfo) {
-            let { resPayment, resPrice, resProvince, resCenter } = await this.props.allTeacherInfo
+            const { resPayment, resPrice, resProvince, resCenter } = await this.props.allTeacherInfo
             let dataSelectPrice = this.dataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.dataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.dataInputSelect(resProvince, 'PROVINCE');
@@ -118,14 +118,13 @@ class ManageTeacher extends Component {
             let note = '', centerId = '',
                 paymentId = '', priceId = '', description = '';
             let selectedPayment = '', selectedCenter = '', selectedPrice = '';
-            if (res.data.Teacher_Info && res.data.Teacher_Info.description
-                && res.data.Teacher_Info.note) {
-                selectedCenter = res.data.Teacher_Info.centerId;
-                note = res.data.Teacher_Info.note;
-                description = res.data.Teacher_Info.description;
-                paymentId = res.data.Teacher_Info.paymentId;
-                priceId = res.data.Teacher_Info.priceId;
-                centerId = res.data.Teacher_Info.centerId;
+            if (res.data.Teacher_info && res.data.Teacher_info.description
+                && res.data.Teacher_info.note) {
+                note = res.data.Teacher_info.note;
+                description = res.data.Teacher_info.description;
+                paymentId = res.data.Teacher_info.paymentId;
+                priceId = res.data.Teacher_info.priceId;
+                centerId = res.data.Teacher_info.centerId;
                 selectedPrice = listPrice.find(item => {
                     return item && item.value === priceId;
                 })
@@ -136,7 +135,6 @@ class ManageTeacher extends Component {
                     return item && item.value === centerId;
                 })
             }
-            console.log('listPrice', listPrice);
             this.setState({
                 description: description,
                 selectedCenter: selectedCenter,
@@ -172,7 +170,6 @@ class ManageTeacher extends Component {
         })
     }
     render() {
-        console.log('render', this.state.selectedTeacher);
         return (
             <div className='manage-teacher-container'>
                 <header>

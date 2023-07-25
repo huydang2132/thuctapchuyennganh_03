@@ -43,7 +43,6 @@ class ForgotPassword extends Component {
                 })
                 toast.info('Yêu cầu đặt lại mật khẩu đã được gửi tới email!');
             }
-            console.log(res);
         }
         else {
             toast.error('Vui lòng nhập email để đặt lại mật khẩu!');

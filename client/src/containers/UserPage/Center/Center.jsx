@@ -62,7 +62,6 @@ class Center extends Component {
         let { Anh } = this.state
         let { centers, pageCount } = this.state;
         let { loading } = this.props;
-        console.log(centers);
         return (
             <>
                 <div className='center-container'>

@@ -55,15 +55,19 @@ class Banner extends Component {
                                 <ul className={`list-course scroll ${showSearch === true ? 'active' : ''}`}>
                                     {
                                         listCourse && listCourse.length > 0
-                                        && listCourse.map((item, index) => {
-                                            return (
-                                                <li className='course-item'
-                                                    key={item.id}
-                                                    onClick={() => this.onClickCourse(item)}>
-                                                    {item.name}
-                                                </li>
-                                            )
-                                        })
+                                            ? listCourse.map((item, index) => {
+                                                return (
+                                                    <li className='course-item'
+                                                        key={item.id}
+                                                        onClick={() => this.onClickCourse(item)}>
+                                                        {item.name}
+                                                    </li>
+                                                )
+                                            })
+                                            :
+                                            <li className='course-item'>
+                                                Không có dữ liệu về khóa học
+                                            </li>
                                     }
                                 </ul>
                             </div>

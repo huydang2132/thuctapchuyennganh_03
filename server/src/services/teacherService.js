@@ -2,37 +2,41 @@ import db from '../models/index';
 require('dotenv').config();
 import _ from 'lodash';
 import { json } from 'body-parser';
+import sequelize from 'sequelize';
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 
-let getTopTeacher = (limit) => {
+const getTopTeacher = (limit) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findAll({
+            const user = await db.User.findAll({
+                offset: 0,
                 limit: limit,
                 where: { roleId: 'R2' },
-                order: [['createdAt', 'DESC']],
                 attributes: {
                     exclude: ['password']
                 },
                 include: [
                     { model: db.Allcode, as: 'positionData', attributes: ['value'] },
-                    { model: db.Allcode, as: 'genderData', attributes: ['value'] }
+                    { model: db.Allcode, as: 'genderData', attributes: ['value'] },
+                ],
+                order: [
+                    [sequelize.literal('(SELECT COUNT(*) FROM Bookings as Booking WHERE Booking.teacherId = User.id)'), 'DESC'],
+                    ['createdAt', 'DESC']
                 ],
                 raw: true,
                 nest: true
-            })
+            });
             resolve({
                 errCode: 0,
                 data: user
-            })
-        }
-        catch (e) {
+            });
+        } catch (e) {
             reject(e);
         }
-    })
-}
-let getAllTeacher = () => {
+    });
+};
+const getAllTeacher = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let teachers = await db.User.findAll({
@@ -51,7 +55,7 @@ let getAllTeacher = () => {
         }
     })
 }
-let saveInfoTeacher = (data) => {
+const saveInfoTeacher = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.teacherId || !data.description ||
@@ -97,7 +101,7 @@ let saveInfoTeacher = (data) => {
         }
     })
 }
-let getDetailTeacherById = (id) => {
+const getDetailTeacherById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!id) {
@@ -217,7 +221,7 @@ const bulkCreateSchedule = (data) => {
                     })
                 }
                 let existing = await db.Schedule.findAll({
-                    where: { teacherId: data.teacherId, date: data.date },
+                    where: { teacherId: data.teacherId, date: data.date.toString() },
                     attributes: ['dateType', 'date', 'teacherId', 'maxNumber'],
                     raw: true
                 });

@@ -57,7 +57,6 @@ class TableTutor extends Component {
                 toast.success('Hủy lịch dạy thành công!');
                 this.props.fetchAllBooking(data.teacherId);
             }
-            console.log(res);
         }
     }
     handlePageClick = (data) => {
@@ -75,7 +74,7 @@ class TableTutor extends Component {
                         <thead className='table-head'>
                             <tr className='tr-head'>
                                 <td>
-                                    <h2 className='title-table-booking'>Danh sách lịch dạy</h2>
+                                    <h2 className='title-table-booking'>Danh sách học viên</h2>
                                 </td>
                             </tr>
                             <tr>

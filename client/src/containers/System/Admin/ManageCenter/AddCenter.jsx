@@ -31,9 +31,6 @@ class AddCourse extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
-    handleGetInfo = (selectedOption) => {
-
-    }
     handleOnchangeInput = (event, id) => {
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
